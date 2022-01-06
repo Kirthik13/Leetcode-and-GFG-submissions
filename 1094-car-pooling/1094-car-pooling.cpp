@@ -5,7 +5,8 @@ public:
  vector<int>res;
  for(int i=0;i<trips.size();i++){
     
- res.insert(res.end(),trips[i][2]);
+ // res.insert(res.end(),trips[i][2]);
+     res.emplace_back(trips[i][2]);
    
  }
  
