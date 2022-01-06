@@ -2,15 +2,19 @@ class Solution {
 public:
     bool carPooling(vector<vector<int>>& trips, int capacity) {
 
- vector<int>res;
+ // vector<int>res;
+        int max=INT_MIN;
  for(int i=0;i<trips.size();i++){
     
  // res.insert(res.end(),trips[i][2]);
-     res.emplace_back(trips[i][2]);
-   
+     // res.emplace_back(trips[i][2]);
+   if(max<trips[i][2])
+   {
+       max=trips[i][2];
+   }
  }
  
-int max=*max_element(res.begin(),res.end());
+// int max=*max_element(res.begin(),res.end());
 
 vector<int>r(max+1,0);
 
