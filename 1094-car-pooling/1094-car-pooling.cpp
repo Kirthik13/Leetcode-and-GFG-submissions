@@ -1,37 +1,49 @@
 class Solution {
 public:
-    bool carPooling(vector<vector<int>>& v, int cap) {
-     
+    bool carPooling(vector<vector<int>>& trips, int capacity) {
+
+ vector<int>res;
+ for(int i=0;i<trips.size();i++){
+    
+ res.insert(res.end(),trips[i][2]);
    
-    vector<pair<int,int>>tp;
+ }
+ 
+int max=*max_element(res.begin(),res.end());
 
-    for(auto i:v)
-    {
-      tp.push_back({i[1],i[0]});
-      tp.push_back({i[2],-i[0]});
+vector<int>r(max+1,0);
+
+for(int i=0;i<trips.size();i++){
+   
+
+        r[trips[i][2]]-=trips[i][0];
+    r[trips[i][1]]+=trips[i][0];
+
+    
+
+}
+
+
+ int current=0;
+
+
+
+    
+   
+    
+
+
+for(int i=0;i<r.size();i++){
+    if(current<=capacity){
+current+=r[i];
     }
-    sort(begin(tp),end(tp));
-
-    int filled{};
-
-    for(auto i:tp)
-    {
-        filled+=i.second;
-        if(filled>cap)
-        {
-            // cout<<"false"<<endl;
-         
-    
-                return 0;
-                // cout<<"false";
-                // f=1;
-                // break;
-        }
-            }
+    else{
         
+        return false;
+    }
+}
 
-    
-    
-    return 1;
+return true;
+        
     }
 };
