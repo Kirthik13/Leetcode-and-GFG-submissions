@@ -9,21 +9,42 @@
  * };
  */
 class Solution {
+private:
+    ListNode* head;
+    
 public:
-    vector<int>v;
+    // vector<int>v;
     Solution(ListNode* head) {
-        ListNode* h=head;
-        while(h!=NULL)
-        {
-            int k=h->val;
-            v.emplace_back(k);
-            h=h->next;
-        }
+//         ListNode* h=head;
+//         while(h!=NULL)
+//         {
+//             int k=h->val;
+//             v.emplace_back(k);
+//             h=h->next;
+//         }
         
+        this->head=head;
     }
     
     int getRandom() {
-        return v[rand()%v.size()];
+        int res=head->val;
+        int i=2;
+        ListNode* node=head->next;
+        while(node)
+        {
+            int j=rand()%i;
+            if(j==0)
+            {
+                res=node->val;
+            }
+                i++;
+            
+            
+            node=node->next;
+        }
+        return res;
+    
+        // return v[rand()%v.size()];
     }
 };
 
