@@ -28,8 +28,8 @@ public:
     
     int getRandom() {
         int res=head->val;
-        int i=2;
-        ListNode* node=head->next;
+        int i=1;
+        ListNode* node=head;
         while(node)
         {
             int j=rand()%i;
