@@ -33,7 +33,7 @@ public:
         while(node)
         {
             int j=rand()%i;
-            if(j==1)
+            if(j==0)
             {
                 res=node->val;
             }
