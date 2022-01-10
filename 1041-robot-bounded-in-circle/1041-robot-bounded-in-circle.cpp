@@ -51,7 +51,8 @@ public:
             y+=dir[j][1];
         }
         else if(s[i]=='L'){
-        j=(j+3)%4;
+            j--;
+        j=(j+4)%4;
         }   
         else {
             j=(j+1)%4;
