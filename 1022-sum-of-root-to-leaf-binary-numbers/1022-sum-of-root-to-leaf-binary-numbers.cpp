@@ -11,56 +11,23 @@
  */
 class Solution {
 public:
-    int ans{};
-    vector<string>v;
-    void fn(TreeNode* node,string &s)
+    int fn(TreeNode* node,int sum)
     {
-        if(node==NULL)
+        if(!node)
         {
-            
-            // v.push_back(s);
-            return;
+            return 0;
         }
-        char c=(node->val)+48;
-        s.push_back(c);
-        fn(node->left,s);
-        fn(node->right,s);
-        if(!node->right and !node->left){
-         v.push_back(s);
+        
+        sum=(sum<<1)|node->val;
+        if(!node->left and !node->right)
+        {
+            return sum;
         }
-        s.pop_back();
-        
-
-        
+        return fn(node->left,sum)+fn(node->right,sum);
     }
     int sumRootToLeaf(TreeNode* root) {
-        string s="";
-        fn(root,s);
-        for(int i=0;i<v.size();i++)
-        {
-            string k=v[i];
-            // cout<<" k : "<<k<<endl; 
-            int p=0;
-            int j=k.size()-1;
-            int cnt{};
-            while(j>=0)
-            {
-                if(k[j]=='1')
-                {
-                    cnt=cnt+pow(2,p);
-                }
-                p++;
-                j--;
-            }
-            ans+=cnt;
-            // cout<<" cnt : "<<cnt<<endl;
-            // cout<<"ans : "<<ans<<endl;
-            
-        }
-        // for(auto i:v)
-        // {
-            // cout<<i<<" ";
-        // }
-        return ans;
+        // int sum=0;
+        return fn(root,0);
+        
     }
 };
