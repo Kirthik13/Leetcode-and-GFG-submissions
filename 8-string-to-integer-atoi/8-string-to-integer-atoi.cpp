@@ -1,26 +1,40 @@
 class Solution {
 public:
+    
     int myAtoi(string s) {
-        long long res{};
-     int i=s.find_first_not_of(' ');
+        
+       long long  int n=s.size(),f=1,ans=0,p=0;
+        // string k;
+        int i=0;
+        while(i<n and s[i]==' ')
+        {
+            i++;
+        }
         if(i>=s.size())
         {
             return 0;
         }
         
-        int c=(s[i]=='-')?-1:1;
-        if(s[i]=='-' or s[i]=='+')
+         if(s[i]=='-' or s[i]=='+')
         {
+                     f=(s[i]=='-')?-1:1;
+
             i++;
         }
-        while(i<s.size() and isdigit(s[i]))
-        {
-            res=res*10+(s[i]-48);
-            if(res*c>=INT_MAX) return INT_MAX;
-                if(res*c<=INT_MIN) return INT_MIN;
-            // if(res)
-            i++;
-        }
-        return c*res;
+        // i++;
+       for(;i<n and isdigit(s[i])==1;i++)
+       {
+                ans=ans*10+(s[i]-48);   
+
+       
+               if(ans*f<=INT_MIN or ans*f>=INT_MAX)
+               {
+                   return f==1?INT_MAX:INT_MIN;
+               }
+             
+                 
+         
+       }
+        return ans*f;
     }
 };
