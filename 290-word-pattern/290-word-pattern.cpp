@@ -1,42 +1,26 @@
 class Solution {
 public:
     bool wordPattern(string pat, string s) {
-        stringstream st(s);
-string sam;
-vector<string>v;
-while(st>>sam)
-{
-    v.push_back(sam);
-}
-if(v.size()!=pat.size())
-{
-    // cout<<"false";
-    return 0;
-}
-unordered_map<char,string>m;
-set<string>s1;
-for(int i=0;i<pat.size();i++)
-{
-    char c=pat[i];
-    if(m.find(c)==m.end())
-    {
-        if(s1.find(v[i])!=s1.end())
+        stringstream ss(s);
+        vector<int>v(26,0);
+        string sam;
+        unordered_map<string,int>m;
+        int cnt{};
+        int i{};
+        while(ss>>sam)
         {
-            // cout<<"false";
-            return 0;
+            if(i>=pat.size() or m[sam]!=v[pat[i]-'a']) return 0;
+                
+            m[sam]=i+1;
+            v[pat[i]-'a']=i+1;
+            
+            i++;
         }
-        m[c]=v[i];
-        s1.insert(v[i]);
-    }
-    else{
-        if(m[c]!=v[i])
+        
+        if(i==pat.size())
         {
-            // cout<<"false";
-            return 0;
+            return 1;
         }
-    }
-}
-// cout<<"true";
-        return 1;
+        return 0;
     }
 };
