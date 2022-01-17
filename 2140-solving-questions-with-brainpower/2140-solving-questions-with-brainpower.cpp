@@ -3,10 +3,11 @@ class Solution {
 public:
     long long mostPoints(vector<vector<int>>& v) {
           int n=v.size();
-    vector<long long int>dp(n+1,-1);
+    vector<long long int>dp(n,-1);
    ll int m=v[0].size();
     // memset(dp,-1,sizeof(dp));
-    for(int i=n-1;i>=0;i--)
+        dp[n-1]=v[n-1][0];
+    for(int i=n-2;i>=0;i--)
     {
         ll take=v[i][0];
         if(i+v[i][1]+1 <n)
