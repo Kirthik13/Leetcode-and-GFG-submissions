@@ -2,17 +2,27 @@
 class Solution {
 public:
     int largestAltitude(vector<int>& v) {
-    v.insert(v.begin(),0);
-    int n=v.size();        
+//     v.insert(v.begin(),0);
+//     int n=v.size();        
 
-    for(int i=1;i<n;i++)
-    {
-        v[i]=v[i]+v[i-1];
-    }
+//     for(int i=1;i<n;i++)
+//     {
+//         v[i]=v[i]+v[i-1];
+//     }
     // for(auto i:v)
     // {
     //     cout<<i<<" ";
     // }
-    return *max_element(all(v));
+    // return *max_element(all(v));
+        
+        
+        
+    int curr{},ans{};
+    for(auto &i:v)
+    {
+        curr+=i;
+        ans=max(ans,curr);
+    }
+        return ans;
     }
 };
