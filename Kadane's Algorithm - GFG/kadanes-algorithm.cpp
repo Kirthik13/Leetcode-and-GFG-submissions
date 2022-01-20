@@ -34,7 +34,7 @@ class Solution{
         {
             curr+=v[i];
             // ans=max(ans,curr);
-            if(curr<=0)
+            if(curr<0)
             {
                 curr=0;
             }
