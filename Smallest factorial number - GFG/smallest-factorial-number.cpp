@@ -24,7 +24,7 @@ class Solution
                 return 5;
             }
             int ans=INT_MAX;
-    int l=1,r=5*n;
+    int l=1,r=10*n;
     while(l<=r)
     {
         int mid=l+((r-l)/2);
