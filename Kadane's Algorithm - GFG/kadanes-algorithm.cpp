@@ -14,29 +14,31 @@ class Solution{
         // Your code here
         long long int ans=INT_MIN;
         long long int curr{};
-        int f=0;
+        // int f=0;
+        // for(int i=0;i<n;i++)
+        // {
+        //     if(v[i]>0)
+        //     {
+        //         f=1;
+        //         break;
+        //     }
+        //     else{
+        //         ans=max(ans,1LL*v[i]);
+        //     }
+        // }
+        // if(!f)
+        // {
+        //     return ans;
+        // }
         for(int i=0;i<n;i++)
         {
-            if(v[i]>0)
-            {
-                f=1;
-                break;
-            }
-            else{
-                ans=max(ans,1LL*v[i]);
-            }
-        }
-        if(!f)
-        {
-            return ans;
-        }
-        for(int i=0;i<n;i++)
-        {
+            if(curr+v[i]>v[i]){
             curr+=v[i];
+            }
             // ans=max(ans,curr);
-            if(curr<0)
+            else
             {
-                curr=0;
+                curr=v[i];
             }
             ans=max(ans,curr);
         }
