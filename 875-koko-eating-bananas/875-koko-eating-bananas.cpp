@@ -1,16 +1,33 @@
 #define all(v) v.begin(),v.end()
 class Solution {
 public:
-    int caneat(vector<int> v,int &k,int &h)
+    int caneat(vector<int>& v,int &k,int &h)
     {
-        int n=v.size(),cnt{};
-         for(int i=0; i<n; i++) {
-            cnt += ceil(1.0 * v[i]/k);
-            if(cnt > h) return false;
+        
+        int n=v.size();
+     
+        int nh=0;
+
+      
+        int i=0;
+        
+        while(i<n)
+        {
+         
+
+           nh=nh+ceil(1.0*v[i]/k);
+            if(nh>h)
+            {
+                return 0;
+            }
+            i++;
         }
-        return 1;
+     
+        return nh<=h;
             
     }
+            
+    // }
     int minEatingSpeed(vector<int>& v, int h) {
          int n=v.size();
         int r=*max_element(all(v));
