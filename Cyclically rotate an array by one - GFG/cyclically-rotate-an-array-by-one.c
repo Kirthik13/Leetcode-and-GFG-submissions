@@ -29,7 +29,7 @@ void rotate(int v[], int n)
     int t=v[0];
     int i=n-1;
     
- while(i>=1)
+ while(i>=0)
  {
      
  
