@@ -8,9 +8,9 @@ int tank{};
 int ans{};
 for(int i=0;i<n;i++)
 {
-    int curr=gas[i]-cost[i];
-    tank+=curr;
-    totf+=curr;
+    tank+=gas[i]-cost[i];
+    // tank+=curr;
+    totf+=gas[i]-cost[i];
     if(tank<0)
     {
         ans=i+1;
