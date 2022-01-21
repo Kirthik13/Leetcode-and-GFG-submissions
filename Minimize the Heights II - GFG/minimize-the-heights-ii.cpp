@@ -14,12 +14,12 @@ class Solution {
 
     
     int ans=v[n-1]-v[0];
-    int mi=v[0]+k;
-    int ma=v[n-1]-k;
+    // int mi=;
+    // int ma=v[n-1]-k;
     for(int i=0;i<n-1;i++)
     {
-        int mi1=min(mi,v[i+1]-k);
-        int ma1=max(ma,v[i]+k);
+        int mi1=min(v[0]+k,v[i+1]-k);
+        int ma1=max(v[n-1]-k,v[i]+k);
         if(mi1<0) continue;
         ans=min(ans,ma1-mi1);
     }
