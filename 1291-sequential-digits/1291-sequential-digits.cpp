@@ -15,6 +15,10 @@ public:
                 // }
                 string g=s.substr(j,i);
                 int ans=stoi(g);
+                if(ans>high)
+                {
+                    break;
+                }
                 if(ans<=high and ans>=low)
                 {
                     // break;
