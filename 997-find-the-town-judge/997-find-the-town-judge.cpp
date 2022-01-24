@@ -45,7 +45,7 @@ public:
             }
         }
         
-        if(c!=1 or town[ans]!=n-1)
+        if(ans==-1 or town[ans]!=n-1)
         {
             return -1;
         }
