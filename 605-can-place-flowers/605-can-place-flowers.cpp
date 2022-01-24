@@ -5,7 +5,8 @@ public:
         {
             return 1;
         }
-        for(int i=0;i<v.size();i++)
+        int i=0;
+        while(i<v.size())
     {
         // deb2(v[i],v[i-1]);
         // deb(v[i+1]);
@@ -51,6 +52,7 @@ public:
         {
             return 1;
         }
+            i++;
     }
         return n==0?1:0;
     }
