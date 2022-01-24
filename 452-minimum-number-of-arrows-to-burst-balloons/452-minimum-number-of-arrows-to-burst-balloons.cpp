@@ -1,45 +1,28 @@
-#define all(x) x.begin(),x.end()
 class Solution {
 public:
-    int findMinArrowShots(vector<vector<int>>& v) {
-         
-    sort(all(v),[](auto &a,auto &b)
-    {
-        // if(a[0]==b[0])
-        // {
-            return a[1]<b[1];
-        // }
-        // return a[0]<b[0] ;
-    }
-    );
-        // sort(all(v));
-
-   int cnt=1;
-    int end=v[0][1],st=v[0][0];
-
- for(auto i:v)
- {
-     if(i[0]<=end)
+ int findMinArrowShots(vector<vector<int>>& p) {
+  
+    if (p.size() <= 1)
+      return p.size();
+    
+   
+    sort(p.begin(), p.end());
+    
+     int en=p[0][1];
+     int c=1;
+     for(auto i:p)
      {
-         continue;
+         int st=i[0];
+         en=min(en,i[1]);
+         if(st<=en) continue;
+         c++;
+         en=i[1];
+         // en=min(i[1];
      }
-     else{
-         cnt++;
-         end=i[1];
-     }
- }
-//         for(auto i:v)
-//         {
-//             if(i[0]<=end)
-//             {
-//                 end=min(i[1],end);
-//             }
-//             else{
-//                 cnt++;
-//                 end=i[1];
-//             }
-            
-//         }
-        return cnt;
-    }
+
+
+	
+    return c;
+  }
+
 };
