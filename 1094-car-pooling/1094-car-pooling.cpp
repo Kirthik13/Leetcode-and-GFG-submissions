@@ -14,14 +14,21 @@ public:
                 pre[v[i][2]]-=v[i][0];
 
         }
+         
+        for(int i=1;i<pre.size();i++)
+        {
+            pre[i]+=pre[i-1];
+                // pre[v[i][2]]-=v[i][0];
+
+        }
         int curr{};
         for(int i=0;i<pre.size();i++)
         {
-            if(curr+pre[i]>cap)
+            if(pre[i]>cap)
             {
                 return 0;
             }
-            curr+=pre[i];
+            // curr+=pre[i];
         }
         return 1;
     }
