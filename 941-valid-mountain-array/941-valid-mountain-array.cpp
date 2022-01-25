@@ -1,37 +1,20 @@
 class Solution {
 public:
     bool validMountainArray(vector<int>& v) {
-        int i=0,n=v.size();
+        int i=0,n=v.size(),j=n-1;
         if(n==1)
         {
             return 0;
         }
-        
-        while(i<n-1 )
+        while(i<n-1 and v[i]<v[i+1])
         {
-            if( v[i]<v[i+1]){
             i++;
-            }
-            else if(v[i]==v[i+1]){
-                return 0;
-            }
-            else{
-                break;
-            }
         }
-        int j=i;
-        if(i==0 or i==n-1)
+       
+         while(j>0 and v[j]<v[j-1])
         {
-           return 0; 
+            j--;
         }
-        while(j<n-1 and v[j]>v[j+1])
-        {
-            j++;
-        }
-        if(j==n-1)
-        {
-            return 1;
-        }
-        return 0;
+        return i>0 and i==j and j<n-1;
     }
 };
