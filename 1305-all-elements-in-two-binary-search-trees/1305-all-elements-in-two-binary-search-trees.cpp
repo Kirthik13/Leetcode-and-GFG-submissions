@@ -11,16 +11,16 @@
  */
 class Solution {
 public:
-    void fn(TreeNode* node,multiset<int>&v)
+    void fn(TreeNode* node,stack<TreeNode*>&v)
     {
         if(!node)
         {
             return;
         }
-                fn(node->left,v);
+   
 
-        v.insert(node->val);
-        fn(node->right,v);
+        v.push(node);
+        fn(node->left,v);
         
     }
     vector<int> getAllElements(TreeNode* root1, TreeNode* root2) {
@@ -28,11 +28,42 @@ public:
         {
             return {};
         }
-        multiset<int>v;
-        fn(root1,v);
-        fn(root2,v);
+
         
-        vector<int>ans(v.begin(),v.end());
+        vector<int>ans;
+        stack<TreeNode*>s1;
+        stack<TreeNode*>s2;
+     
+        fn(root1,s1);
+        fn(root2,s2);
+        while(s1.size()>0 and s2.size()>0)
+        {
+            TreeNode* r1=s1.top();
+            TreeNode* r2=s2.top();
+         
+            if(r1->val<r2->val)
+            {
+                ans.emplace_back(r1->val);
+                s1.pop();
+                fn(r1->right,s1);
+            }
+            else{
+                ans.emplace_back(r2->val);
+                s2.pop();
+                fn(r2->right,s2);
+            }
+            
+
+        }
+        stack<TreeNode*>s=s1.empty()?s2:s1;
+      
+        while(s.size()>0)
+        {
+            TreeNode* r1=s.top();
+            s.pop();
+            ans.emplace_back(r1->val);
+            fn(r1->right,s);
+        }
         return ans;
         
     }
