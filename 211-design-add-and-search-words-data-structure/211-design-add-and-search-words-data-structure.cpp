@@ -7,7 +7,7 @@ public:
         int n=s.size();
         for(int i=0;i<n;i++)
         {
-            if(s[i]=='.' or word[i]=='.') continue;
+            if( word[i]=='.') continue;
             
             if(s[i]!=word[i]) return 0;
                 
