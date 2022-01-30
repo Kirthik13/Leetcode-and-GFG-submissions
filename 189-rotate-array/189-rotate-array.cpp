@@ -6,15 +6,20 @@ public:
             return ;
         }
         int n=v.size();
-      k=k%n;   
-        vector<int>ans(n,0);
-        for(int i=0;i<n;i++)
-        {
-            ans[(i+k)%n]=v[i];
-        }
-        for(int i=0;i<n;i++)
-        {
-            v[i]=ans[i];
-        }
+      k=k%n;
+        reverse(v.end()-k,v.end());
+               reverse(v.begin(),v.end()-k);
+                reverse(v.begin(),v.end());
+
+ 
+      //   vector<int>ans(n,0);
+      //   for(int i=0;i<n;i++)
+      //   {
+      //       ans[(i+k)%n]=v[i];
+      //   }
+      //   for(int i=0;i<n;i++)
+      //   {
+      //       v[i]=ans[i];
+      //   }
     }
 };
