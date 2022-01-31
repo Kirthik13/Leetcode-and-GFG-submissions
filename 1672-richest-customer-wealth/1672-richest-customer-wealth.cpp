@@ -12,8 +12,9 @@ public:
      //        ans=max(ans,c);
      //    }
      //    return ans;
-        return accumulate(cbegin(v),cend(v),0,[](auto sum,const auto &money)
+        return accumulate(cbegin(v),cend(v),0,[](auto& sum,const auto &money)
                           {
+                              // cout<<"sum : "<<sum<<endl;
                               return max(sum,reduce(cbegin(money),cend(money),0));
                           });
     }
