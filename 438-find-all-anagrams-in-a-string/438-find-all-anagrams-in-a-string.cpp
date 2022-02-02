@@ -17,26 +17,28 @@ public:
         }
         
         vector<int>ans;
-        vector<int>h1(26);
-               vector<int>h2(26);
-        for(int i=0;i<n;i++)
+        unordered_map<char,int>m;
+        for(auto &i:p)
         {
-            h1[s[i]-'a']++;
-            h2[p[i]-'a']++;
+            m[i]--;
         }
-        if(h1==h2)
+        for(int i=0;i<p.size();i++)
+        {
+            m[s[i]]++;
+            if(m[s[i]]==0) m.erase(s[i]);
+        }
+        if(m.size()==0)
         {
             ans.push_back(0);
         }
-        for(int i=p.size();i<s.size();i++)
+        for(int i=p.size(),j=0;i<s.size() and j<s.size();i++,j++)
         {
-            h1[s[i]-'a']++;
-            h1[s[i-p.size()]-'a']--;
-           
-            if(h1==h2)
-            {
-                ans.push_back(i-p.size()+1);
-            }
+            m[s[i]]++;
+            m[s[j]]--;
+            if(m[s[i]]==0) m.erase(s[i]);
+            if(m[s[j]]==0) m.erase(s[j]);
+            if(m.size()==0) ans.push_back(j+1);
+
         }
         return ans;
     }
