@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
-        vector<int>ans(nums2.size(),-1);
+    
         stack<int>s;
         map<int,int>m;
         for(auto &i:nums1)
@@ -23,9 +23,7 @@ public:
                 {
                     s.pop();
                 }
-                if(!s.empty()){
-                    ans[i]=s.top();
-                }
+               
                 if(m.find(c)!=m.end())
                 {
                     if(!s.empty()){
