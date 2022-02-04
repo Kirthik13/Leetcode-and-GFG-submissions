@@ -7,7 +7,7 @@ public:
         }
         int c{};
         unordered_map<int,int>m;
-        m[0]=0;
+        // m[0]=0;
         int sum{};
         for(int i=0;i<v.size();i++)
         {
@@ -17,16 +17,17 @@ public:
            // {
            //     cout<<"ASd"<<endl;
            // }
-             if(m.find(sum)!=m.end())
+            if(sum==0)
             {
-                 if(sum==0)
-                 {
                      c=i+1;
-                 }
-                 else{
+            }
+                 // else{
+            else if(m.find(sum)!=m.end())
+            {
+                 // 
                 // cout<<sum<<" "<<m[sum]<<" a"<<endl;
                 c=max(i-m[sum],c);
-                 }
+                 // }
             }
             else{
             // cout<<sum<<" "<<m[sum]<<" b"<<endl;
