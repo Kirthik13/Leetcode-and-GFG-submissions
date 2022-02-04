@@ -1,10 +1,10 @@
 struct node{
-  node* links[26]={0};
+  node* links[26];
     bool end=false;
     
     bool contains(char ch)
     {
-        return links[ch-'a']!=NULL;
+        return links[ch-'a'];
     }
     void set(char ch,node* h)
     {
