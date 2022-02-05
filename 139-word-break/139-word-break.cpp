@@ -74,18 +74,23 @@ class Trie{
 class Solution {
 public:
      int dp[300];
+    unordered_map<string,int>m;
    bool fn(string &s,Trie& h)
     {
         if(s.size()==0)
         {
-            return dp[s.size()]=1;
+            // return dp[s.size()]=1;
+            return m[s]=1;
+
         }
             
-       if(dp[s.size()]!=-1)
+       // if(dp[s.size()]!=-1)
+       if(m.find(s)!=m.end())
        {
-           return dp[s.size()];
+           // return dp[s.size()];
+            return m[s];
        }
-        int ch=1;
+        
         string k;
        // cout<<"S : "<<s<<endl;
         for(int i=0;i<s.size();i++)
@@ -97,7 +102,8 @@ public:
                 string g=s.substr(i+1);
                 if(fn(g,h))
                 {
-                    return dp[s.size()]=1;
+                    // return dp[s.size()]=1;
+                    return m[s]=1;
                 }
             }
             // else{
@@ -105,7 +111,8 @@ public:
             // }
             
         }
-        return dp[s.size()]=0;
+        // return dp[s.size()]=0;
+    return m[s]=0;
     }
     bool wordBreak(string s, vector<string>& v) {
         Trie h;
@@ -113,7 +120,7 @@ public:
         {
             h.insert(v[i]);
         }
-        memset(dp,-1,sizeof(dp));
+        // memset(dp,-1,sizeof(dp));
         return fn(s,h);
     }
 };
