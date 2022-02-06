@@ -27,8 +27,26 @@ public:
         root=new node();
 
   }
+     void fn(string &s,int k)
+    {
+        node* h=root;
+        int n=s.size();
+        for(int i=0;i<n;i++)
+        {
+            // if(!h->contains(s[i]))
+            // {
+            //     h->put(s[i],new node());
+            // }
+            h=h->get(s[i]);
+           h->val+=k;
+            cout<<"h->val : "<<h->val<<endl;
+        }
+        
+        h->end=true;
+       
+    }
    
-    void insert(string &s)
+    void insert(string &s,int k)
     {
         node* h=root;
         int n=s.size();
@@ -39,17 +57,17 @@ public:
                 h->put(s[i],new node());
             }
             h=h->get(s[i]);
-           
+           h->val+=k;
+            // cout<<"h->val : "<<h->val<<endl;
         }
         
         h->end=true;
        
     }
-    int search(string &s,int n)
+    int search(string &s)
     {
         node* h=root;
-        // cout<<" n : "<<n<<endl;
-        // cout<<"s : "<<s<<endl;
+        int n=s.size();
         for(int i=0;i<n;i++)
         {
             
@@ -60,38 +78,33 @@ public:
             }
             h=h->get(s[i]);
         }  
-        return 1;
+        return h->val;
     }
 };
-
 class MapSum {
 public:
-    map<string,int>m;
+    unordered_map<string,int>m;
+    Trie h;
     MapSum() {
-
+        
     }
     
     void insert(string key, int val) {
-        m[key]=val;
+        // if(m.find(key)!=m.end()){
+        
+            int g=val;
+        
+        val=val-m[key];
+        // cout<<"key : "<<key<<" val : "<<val<<endl;
+        //     h.fn(key,val);
+        //     m[key]=g;
+        // }
+        h.insert(key,val);
+        m[key]=g;
     }
     
-    int sum(string p) {
-                        Trie h;
-
-        h.insert(p);
-        int c{};
-        for(auto &i:m)
-        {
-            string k=i.first;
-            int n=p.size();
-            if(k.size()>=n){
-            if(h.search(k,n))
-            {
-                c+=i.second;
-            }
-            }
-        }
-        return c;
+    int sum(string prefix) {
+        return h.search(prefix);
     }
 };
 
