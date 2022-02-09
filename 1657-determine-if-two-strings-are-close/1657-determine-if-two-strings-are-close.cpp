@@ -16,11 +16,11 @@ public:
 
         }
         
-        if(!equal(begin(m1),end(m1),begin(m2),end(m2),[](auto a,auto b)
+        if(equal(begin(m1),end(m1),begin(m2),end(m2),[](auto a,auto b)
            {
                return (bool)a==(bool)b;
            }
-          ))
+          )==false)
         {
             return 0;
         }
