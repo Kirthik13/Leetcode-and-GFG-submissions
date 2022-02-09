@@ -10,7 +10,7 @@ public:
         }
         for(auto &i:m)
         {
-            if((k>0 and m.find(i.first+k)!=m.end()) or (k==0 and m[i.first]>=2))
+            if((k>0 and m.find(i.first+k)!=m.end()) or (k==0 and m[i.first]>1))
             {
                 c++;
             }
