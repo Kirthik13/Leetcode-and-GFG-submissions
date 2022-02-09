@@ -13,7 +13,7 @@ public:
         {
             m[i-'a']++;
         }
-                vector<int>m2=m;
+                // vector<int>m2=m;
 
        
         int i=0;
