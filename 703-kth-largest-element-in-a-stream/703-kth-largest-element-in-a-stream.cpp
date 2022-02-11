@@ -1,8 +1,8 @@
-// static int pr = []() { 
-//     std::ios::sync_with_stdio(false); 
-//     cin.tie(NULL);  
-//     return 0; 
-// }();
+static int pr = []() { 
+    std::ios::sync_with_stdio(false); 
+    cin.tie(NULL);  
+    return 0; 
+}();
 class KthLargest {
 public:
     priority_queue<int,vector<int>,greater<int>>pq;
