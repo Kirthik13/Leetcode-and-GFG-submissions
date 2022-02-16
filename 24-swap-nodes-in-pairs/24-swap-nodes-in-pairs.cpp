@@ -10,21 +10,35 @@
  */
 class Solution {
 public:
-    ListNode* fn(ListNode* h)
-    {
-        if(!h or !h->next) return h;
-        ListNode* p=h;
-        ListNode* ns=h->next;
-                p->next=ns->next;
-        
-        ns->next=p;
-        p->next=fn(p->next);
-        return ns;
-    }
     ListNode* swapPairs(ListNode* head) {
-        ListNode* h=head;
-        return fn(h);
+         ListNode *dummy = new ListNode(0), *node;
+    node = dummy;
+    dummy->next = head;
       
-        
+    while (head && head->next) {
+        ListNode *nxt = head->next;
+        head->next = nxt->next;
+        nxt->next = head;
+        node->next = nxt;
+        node = head;
+        head = head->next;
+
+    }
+    return dummy->next;
+//         ListNode* h=head;
+//         ListNode* dum=new ListNode(0);
+//                 ListNode* node;
+
+//         dum->next=h;
+//         while(!h and !h->next)
+//         {
+//             ListNode* nxt=h->next;
+//             h->next=nxt->next;
+//             nxt->next=h;
+//             node->next=nxt;
+//             node=h;
+//             h=node->next;
+//         }
+//         return dum->next;
     }
 };
