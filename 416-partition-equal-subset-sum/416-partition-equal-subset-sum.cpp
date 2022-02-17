@@ -21,8 +21,29 @@ public:
     }
     bool fn(vector<int>&v,int sum)
     {
-     vector<vector<int>>dp(v.size(),vector<int>(sum+1,-1));
-        return fn2(v,sum,0,0,dp);
+     vector<vector<int>>dp(v.size(),vector<int>(sum+1,0));
+        
+        for(int i=0;i<v.size();i++)
+        {
+            dp[i][0]=1;
+        }
+        for(int ind = 1; ind<v.size(); ind++)
+        {
+            for(int target= 1; target<=sum; target++){
+
+                bool notTaken = dp[ind-1][target];
+
+                bool taken = false;
+                    if(v[ind]<=target)
+                        taken = dp[ind-1][target-v[ind]];
+
+                dp[ind][target]= notTaken||taken;
+            }
+     }
+    
+    return dp[v.size()-1][sum];
+        
+        // return fn2(v,sum,0,0,dp);
     }
     bool canPartition(vector<int>& v) {
         int sum=accumulate(begin(v),end(v),0);
