@@ -5,9 +5,10 @@ public:
 
     void fn(vector<vector<char>>& v,int i,int j,  vector<vector<int>>&vis)
     {
-        if(i==v.size()) return;
-        if(j==v[0].size()) return;
-        if(i<0 or j<0) return;
+        // if(i==v.size()) return;
+        // if(j==v[0].size()) return;
+        // if(i<0 or j<0) return;
+        if(v[i][j]=='0') return;
         vis[i][j]=1;
         if(v[i][j]=='1')
         {
