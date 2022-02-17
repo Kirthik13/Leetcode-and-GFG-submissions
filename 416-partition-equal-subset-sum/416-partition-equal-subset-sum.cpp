@@ -21,18 +21,8 @@ public:
     }
     bool fn(vector<int>&v,int sum)
     {
-        vector<int>dp(sum+1,0);
-       dp[0]=1;
-          for(auto &i:v)
-          {
-              for(int j=sum;j>=i;j--){
-                  if(dp[j-i])
-                  {
-                      dp[j]=1;
-                  }
-              }
-          }
-        return dp[sum];
+        vector<int>dp(sum+1,-1);
+       return fn2(v,sum,0,0,dp);
     }
     bool canPartition(vector<int>& v) {
         int sum=accumulate(begin(v),end(v),0);
