@@ -48,6 +48,7 @@ public:
                         int i1=q.front().first;
                         int j1=q.front().second;
                         q.pop();
+
                         for(int s=0;s<4;s++)
                         {
                             int x=i1+dx[s],y=j1+dy[s];
