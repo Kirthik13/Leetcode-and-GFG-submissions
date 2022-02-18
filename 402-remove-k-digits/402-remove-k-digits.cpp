@@ -20,6 +20,6 @@ public:
         while (i<(int)res.size()-1 && res[i]=='0')  i++;
         res.erase(0, i);
         
-        return res=="" ? "0" : res;
+        return res;
     }
 };
