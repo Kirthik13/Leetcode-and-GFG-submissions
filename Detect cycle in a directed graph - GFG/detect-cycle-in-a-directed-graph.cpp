@@ -6,42 +6,45 @@ using namespace std;
 class Solution {
   public:
     // Function to detect cycle in a directed graph.
-   	bool dfs(int node, vector<int>&vis,vector<int>&dvis,vector<int> adj[])
-	{
-	    vis[node]=1;
-	    dvis[node]=1;
-	    for(auto it:adj[node])
-	    {
-	        if(vis[it]==-1)
-	        {
-	            if(dfs(it,vis,dvis,adj))
-	            {
-	                return 1;
-	            }
-	        }
-	        else if(vis[it]==1 and dvis[it]==1){
-	            return 1;
-	        }
-	    }
-	    dvis[node]=-1;
-	    return 0;
-	}
-	bool isCyclic(int n, vector<int> adj[]) 
-	{
-	    vector<int>vis(n,-1);
-	    vector<int>dvis(n,-1);
-	    for(int i=0;i<n;i++){
-	        if(vis[i]==-1)
-	        {
-	            if(dfs(i,vis,dvis,adj))
-	            {
-	                return 1;
-	            }
-	        }
-	    }
-	    return 0;
-	   	// code here
-	}
+    bool isCyclic(int n, vector<int> adj[]) {
+        // code here
+        vector<int>vis(n,-1);
+        stack<int>st;
+        for(int k=0;k<n;k++)
+        {
+            if(vis[k]==-1)
+            {
+                st.push(k);
+                vis[k]=0;
+                while(!st.empty())
+                {
+                    int node=st.top();
+                    int f=0;
+                    for(auto &i:adj[node])
+                    {
+                        if(vis[i]==-1 )
+                        {
+                            st.push(i);
+                            vis[i]=0;
+                            f=1;
+                            break;
+                        }
+                        else if(vis[i]==0)
+                        {
+                            return 1;
+                            
+                        }
+                    }
+                    if(!f)
+                    {
+                        vis[st.top()]=1;
+                        st.pop();
+                    }
+                }
+            }
+        }
+        return 0;
+    }
 };
 
 // { Driver Code Starts.
