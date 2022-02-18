@@ -20,6 +20,8 @@ class Solution {
                 {
                     int node=st.front();
                     int f=0;
+                        vis[st.front()]=1;
+                        st.pop();
                     for(auto &i:adj[node])
                     {
                         if(vis[i]==-1 )
@@ -37,8 +39,6 @@ class Solution {
                     }
                     // if(!f)
                     // {
-                        vis[st.front()]=1;
-                        st.pop();
                     // }
                 }
             }
