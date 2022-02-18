@@ -20,12 +20,12 @@ class Solution {
                 {
                     int node=st.top();
                     int f=0;
+                    vis[node]=0;
                     for(auto &i:adj[node])
                     {
                         if(vis[i]==-1 )
                         {
                             st.push(i);
-                            vis[i]=0;
                             f=1;
                             break;
                         }
