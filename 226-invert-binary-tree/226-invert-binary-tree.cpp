@@ -25,9 +25,19 @@ public:
         // r1->left=fn(r1->left,r2->right);
         // r=fn(r1->right,r2->left);
     }
-    TreeNode* invertTree(TreeNode* root) {
-        if(!root or (!root->left and !root->right)) return root;
-        fn(root);
-        return root;
+    TreeNode* invertTree(TreeNode* r1) {
+        // if(!root or (!root->left and !root->right)) return root;
+        // fn(root);
+        // return root;
+         if(!r1)
+        {
+            
+            return r1;
+        }
+        
+        invertTree(r1->left);
+        invertTree(r1->right);
+        swap(r1->left,r1->right);
+        return r1;
     }
 };
