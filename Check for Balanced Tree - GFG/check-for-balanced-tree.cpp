@@ -107,10 +107,11 @@ class Solution{
     int ht(Node *root,bool &ch)
     {
         if(!root) return 0;
-        
+        if(!ch) return 0;
         int l=ht(root->left,ch);int r=ht(root->right,ch);
         if(abs(l-r)>1){
             ch=0;
+            return 0;
         }
          return 1+max(l,r);
     }
