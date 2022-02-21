@@ -140,15 +140,15 @@ void fn(Node* root,int &ans)
     {
         return ;
     }
-    fn(root->left,ans);
-    fn(root->right,ans);
     if(root->left){
     if(!root->left->left and !root->left->right)
     {
         ans+=root->left->data;
-        return;
+        // return;
     }
     }
+    fn(root->left,ans);
+    fn(root->right,ans);
     
 }
 int leftLeavesSum(Node *root)
