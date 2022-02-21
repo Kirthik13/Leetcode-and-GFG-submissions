@@ -95,44 +95,30 @@ public:
     int ans=INT_MIN;
     int fn(Node* root)
     {
-        // if(!root) return 0;
+       if(!root) return 0;
        
-       
-        // int l=fn(root->left);
-        // int r=fn(root->right);
-        // // if(root->right and root->left){
-        // // }
-        // if(!root->right)
-        // {
-        // return root->data+l;
-            
-        // }
-        
-        // if( !root->left)
-        // {
-        // return root->data+r;
-            
-        // }
-        
-        // ans=max(ans,root->data+l+r);
-        // return root->data+max(l,r);
-        
-         if(!root) return 0;
-       
+        if(!root->left and !root->right)
+        {
+            return root->data;
+        }
         int l=fn(root->left);
         int r=fn(root->right);
-        if(!root->left)
-        {
-            return root->data+r;
+        if(root->right and root->left){
+        ans=max(ans,root->data+l+r);
         }
-        if(!root->right)
+        if(root->left and !root->right)
         {
-            return root->data+l;
+        return root->data+l;
+            
         }
-        int cur=root->data+l+r;
-        ans=max(cur,ans);
         
-        return max(l,r)+root->data;
+        if(root->right and !root->left)
+        {
+        return root->data+r;
+            
+        }
+        
+        return root->data+max(l,r);
     }
     int maxPathSum(Node* root)
     {
