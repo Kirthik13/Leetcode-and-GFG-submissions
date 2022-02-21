@@ -20,7 +20,9 @@ public:
         int r=fn(root->right);
         if (l < 0) l = 0;
         if (r < 0) r = 0;
+        // ans=max(ans,max(max(max(root->val+l,root->val+r),root->val+l+r),root->val));
         ans=max(ans,root->val+l+r);
+
         return root->val+max(l,r);
 
     }
