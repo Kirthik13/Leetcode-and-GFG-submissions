@@ -22,12 +22,14 @@ public:
         while(!q.empty())
         {
             int n=q.size();
-            vector<int>sam;
+            vector<int>sam(n);
             for(int i=0;i<n;i++){
                 TreeNode* t=q.front();
 
                 q.pop();
-                sam.push_back(t->val);
+                // int idx;
+                int idx=(f==1)?n-1-i:i;
+                sam[idx]=t->val;
                 
                     if(t->left)
                     {
@@ -40,13 +42,7 @@ public:
                    
                 
             }
-            if(f){
-                reverse(begin(sam),end(sam));
-                f=0;
-            }
-            else{
-                f=1;
-            }
+           f=!f;
             tot.push_back(sam);
             
         }
