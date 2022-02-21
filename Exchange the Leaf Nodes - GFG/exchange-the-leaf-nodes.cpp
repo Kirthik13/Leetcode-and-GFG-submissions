@@ -141,16 +141,15 @@ public:
     //     dfs(root->right,v,j);
         
     // }
-    int f=0;
-    Node* v=NULL;
-    void dfs(Node* &root)
+   
+    void dfs(Node* &root,Node* &v)
     {
         if(!root) return;
         if(!root->left and !root->right)
         {
             // if(j<v.size()){
             if(v){
-            f=0;
+            
             swap(v->data,root->data);
             v=NULL;
             }
@@ -163,8 +162,8 @@ public:
             // }
             return;    
         }
-        dfs(root->left);
-        dfs(root->right);
+        dfs(root->left,v);
+        dfs(root->right,v);
         
     }
     void pairwiseSwap(Node *root)
@@ -191,8 +190,9 @@ public:
         // cout<<endl;
         //  q.push(root);
         //  int j{};
-        // Node* v=NULL;
-         dfs(root);
+        
+    Node* v=NULL;
+         dfs(root,v);
         //  dfs(root,v,j);
        
     }
