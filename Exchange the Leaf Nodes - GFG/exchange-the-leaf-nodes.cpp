@@ -113,59 +113,87 @@ struct Node
 class Solution
 {
 public:
-    void fn(Node* root,vector<Node*>&v)
-    {
-        if(!root) return;
-        if(!root->left and !root->right)
-        {
-            v.push_back(root);
-            return;
-        }
-        fn(root->left,v);
-        fn(root->right,v);
+    // void fn(Node* root,vector<Node*>&v)
+    // {
+    //     if(!root) return;
+    //     if(!root->left and !root->right)
+    //     {
+    //         v.push_back(root);
+    //         return;
+    //     }
+    //     fn(root->left,v);
+    //     fn(root->right,v);
         
-    }
-    void dfs(Node* &root,vector<Node*>&v,int &j)
+    // }
+    // void dfs(Node* &root,vector<Node*>v,int &j)
+    // {
+    //     if(!root) return;
+    //     if(!root->left and !root->right)
+    //     {
+    //         // if(j<v.size()){
+    //         Node* t=v[j];
+    //         root=t;
+    //         j++;
+    //         // }
+    //         return;    
+    //     }
+    //     dfs(root->left,v,j);
+    //     dfs(root->right,v,j);
+        
+    // }
+    int f=0;
+    Node* v=NULL;
+    void dfs(Node* &root)
     {
         if(!root) return;
         if(!root->left and !root->right)
         {
             // if(j<v.size()){
-            Node* t=v[j];
-            root=t;
-            j++;
+            if(v){
+            f=0;
+            swap(v->data,root->data);
+            v=NULL;
+            }
+            else{
+                // f=1;
+                v=root;
+                
+            }
+            // j++;
             // }
             return;    
         }
-        dfs(root->left,v,j);
-        dfs(root->right,v,j);
+        dfs(root->left);
+        dfs(root->right);
         
     }
     void pairwiseSwap(Node *root)
     {
         // code here
-        vector<Node*>v;
+        // vector<Node*>v;
         // queue<Node*>q;
-        fn(root,v);
-        // for(auto i:v)
+        // fn(root,v);
+        // // for(auto i:v)
+        // // {
+        // //     cout<<i->data<<" ";
+        // // }
+        // // cout<<endl;
+        // for(int i=1;i<v.size();i+=2)
         // {
-        //     cout<<i->data<<" ";
+        //     swap(v[i],v[i-1]);
         // }
-        // cout<<endl;
-        for(int i=1;i<v.size();i+=2)
-        {
-            swap(v[i],v[i-1]);
-        }
-        // for(auto i:v)
-        // {
-        //     cout<<i->data<<" ";
-        // }
-        // cout<<endl;
+        // // for(auto i:v)
+        // // {
+        // //     cout<<i->data<<" ";
+        // // }
+        // // cout<<endl;
         
         // cout<<endl;
         //  q.push(root);
-         int j{};
-         dfs(root,v,j);
+        //  int j{};
+        // Node* v=NULL;
+         dfs(root);
+        //  dfs(root,v,j);
        
     }
 };
