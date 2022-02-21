@@ -18,9 +18,10 @@ public:
         
         int l=fn(root->left);
         int r=fn(root->right);
-        
-        ans=max(ans,max(max(max(root->val+l,root->val+r),root->val+l+r),root->val));
-        return max(root->val+max(l,r),root->val);
+        if (l < 0) l = 0;
+        if (r < 0) r = 0;
+        ans=max(ans,root->val+l+r);
+        return root->val+max(l,r);
 
     }
     int maxPathSum(TreeNode* root) {
