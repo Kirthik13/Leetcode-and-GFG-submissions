@@ -17,14 +17,14 @@ public:
         TreeNode* node=root;
         while(1)
         {
-            if(node){
-            while(node)
+            if(node)
+            // while(node)
             {
                 
                 st.push(node);
                 node=node->left;
             }
-            }
+            // }
             else{
                 if(st.empty()) break;
                 node=st.top();
