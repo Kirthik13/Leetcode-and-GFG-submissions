@@ -52,7 +52,9 @@ public:
             {
                 if(m.find(it->val)==m.end())
                 {
-                    m[it->val] = new Node(it->val);
+                    Node* newnode=new Node(it->val);
+                    m[newnode->val] = newnode;
+
                     q.push(it);
                 }
                 m[curr->val]->neighbors.push_back(m[it->val]);
