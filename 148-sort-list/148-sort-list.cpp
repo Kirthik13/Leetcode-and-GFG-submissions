@@ -10,24 +10,48 @@
  */
 class Solution {
 public:
+    ListNode* midpoint(ListNode* head)
+    {
+        ListNode* s=head;
+       ListNode*  f=head->next;
+        // s=head;
+        // f=head;
+        
+        while(f and f->next)
+        {
+            f=f->next->next;
+            s=s->next;
+        }
+        return s;
+        
+        
+    }
+    ListNode* mergesort(ListNode* a,ListNode* b)
+    {
+        if(!b) return a;
+        if(!a) return b;
+        ListNode* temp;
+        if(a->val<=b->val)
+        {
+            temp=a;
+            temp->next=mergesort(a->next,b);
+        }
+        else{
+            temp=b;
+            temp->next=mergesort(a,b->next);
+        }
+       return temp;
+        // mergesort()
+    }
     ListNode* sortList(ListNode* head) {
         if(!head or (!head->next)) return head;
-        multiset<int>ms;
-        ListNode* dum=new ListNode(0);
-        ListNode* p=dum;
-        ListNode* h=head;
-        while(h)
-        {
-            ms.insert(h->val);
-            h=h->next;
-        }
-        for(auto &i:ms)
-        {
-            ListNode* node=new ListNode(i);
-            p->next=node;
-            p=p->next;
-        }
-        p->next=NULL;
-        return dum->next;
+        ListNode* a=head;
+        ListNode* mid=midpoint(head);
+        ListNode* b=mid->next;
+        mid->next=NULL;
+        a=sortList(a);
+        b=sortList(b);
+
+        return mergesort(a,b);
     }
 };
