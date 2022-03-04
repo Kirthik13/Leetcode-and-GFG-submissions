@@ -3,16 +3,11 @@ public:
     double champagneTower(int n, int row, int col) {
         vector<vector<double>>v(101,vector<double>(101,0.0));
         v[0][0]=n;
-        for(int i=0;i<=row;i++)
+        for(int i=0;i<row;i++)
         {
             for(int j=0;j<=col;j++)
             {
-                if(i==row and j==col)
-                {
-                                    v[i][j]=min(v[i][j],1.0);
-
-                    // cout<<"asd : "<<v[i][j]<<endl;
-                }
+               
                 double rem=max(v[i][j]-1.0,0.0);
                 v[i+1][j]+=rem/2.0;
                         v[i+1][j+1]+=rem/2.0;
@@ -20,8 +15,8 @@ public:
             }
         }
         
-        // return min(v[row][col],1.0);
-        return v[row][col];
+        return min(v[row][col],1.0);
+        // return v[row][col];
 
        
     }
