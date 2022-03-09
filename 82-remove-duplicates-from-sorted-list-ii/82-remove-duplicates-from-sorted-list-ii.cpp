@@ -21,19 +21,43 @@ public:
             m[p->val]++;
             p=p->next;
         }
-        ListNode* dum=new ListNode();
-        ListNode* t=dum;
+        // ListNode* dum=new ListNode();
+        // ListNode* t=dum;
+        // while(h)
+        // {
+        //     if(m[h->val]==1)
+        //     {
+        //       t->next=h;
+        //         t=t->next;
+        //     }
+        //     h=h->next;
+        // }
+        // t->next=NULL;
+        // return dum->next;
+        
+        
+        
+         p=head;
+        int f=1;
         while(h)
         {
             if(m[h->val]==1)
             {
-              t->next=h;
-                t=t->next;
+                if(f)
+                {
+                    ans=h;
+                    f=0;
+                }
+                if(p!=h){
+            
+                p->next=h;
+                p=p->next;
+                }
             }
             h=h->next;
         }
-        t->next=NULL;
-        return dum->next;
+        p->next=NULL;
+        return f==1?NULL:ans;
         
         
     }
