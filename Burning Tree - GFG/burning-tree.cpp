@@ -85,29 +85,49 @@ Node *buildTree(string str) {
 class Solution {
   public:
  
+    // Node* parent(Node* root,unordered_map<Node*,Node*>&m,int target)
+    // {
+    //     Node* res;
+    //     queue<Node*>q;
+    //     q.push(root);
+    //     while(!q.empty())
+    //     {
+    //         Node* t=q.front();
+    //         q.pop();
+    //         if(target==t->data) res=t;
+    //         if(t->left)
+    //         {
+    //             m[t->left]=t;
+    //             q.push(t->left);
+    //         }
+    //         if(t->right)
+    //         {
+    //             m[t->right]=t;
+    //             q.push(t->right);
+    //         }
+            
+    //     }
+    //     return res;
+    // }
+    
     Node* parent(Node* root,unordered_map<Node*,Node*>&m,int target)
     {
-        Node* res;
-        queue<Node*>q;
-        q.push(root);
-        while(!q.empty())
+        if(!root) return NULL;
+        
+        if(root->left)
         {
-            Node* t=q.front();
-            q.pop();
-            if(target==t->data) res=t;
-            if(t->left)
-            {
-                m[t->left]=t;
-                q.push(t->left);
-            }
-            if(t->right)
-            {
-                m[t->right]=t;
-                q.push(t->right);
-            }
-            
+            m[root->left]=root;
+            Node* l=parent(root->left,m,target);
+            if(l) return l;
         }
-        return res;
+        if(root->right)
+        {
+            m[root->right]=root;
+            Node* r=parent(root->right,m,target);
+            if(r) return r;
+        }
+        if(root->data==target) return root;
+        return NULL;
     }
     int minTime(Node* root, int target) 
     {
