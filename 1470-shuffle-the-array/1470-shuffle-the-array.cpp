@@ -1,18 +1,16 @@
 class Solution {
 public:
     vector<int> shuffle(vector<int>& v, int n) {
-       for(int i=n;i<v.size();i++)
-       {
-           v[i]=(v[i]*1001)+v[i-n];
-       }
-       int idx=0;
-        for(int i=n;i<v.size();i++)
+        int i=0;
+        int j=n;
+        vector<int>tot;
+        while(i<n and j<2*n)
         {
-            v[idx]=v[i]%1001;
-            v[idx+1]=v[i]/1001;
-            
-            idx+=2;
+            tot.emplace_back(v[i]);
+                tot.emplace_back(v[j]);
+            i++;
+            j++;
         }
-        return v;
+        return tot;
     }
 };
