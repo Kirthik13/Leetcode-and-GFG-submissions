@@ -30,7 +30,7 @@ public:
             }
             else if(st.top()=='R' and s[i]=='S')
             {
-                s[i]='S';
+                // s[i]='S';
                 c++;
                 st.pop();
                 i--;
