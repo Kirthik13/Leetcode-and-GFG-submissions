@@ -16,28 +16,39 @@ public:
         //     }
         // }
         
-        stack<char>st;
-        for(int i=0;i<n;i++)
+        // stack<char>st;
+        // for(int i=0;i<n;i++)
+        // {
+        //     if(st.empty()) st.push(s[i]);
+        //     else if(st.top()=='S' and s[i]=='L') c++;
+        //     else if(st.top()=='R' and s[i]=='L')
+        //     {
+        //         s[i]='S';
+        //         c+=2;
+        //         st.pop();
+        //         i--;
+        //     }
+        //     else if(st.top()=='R' and s[i]=='S')
+        //     {
+        //         s[i]='S';
+        //         c++;
+        //         st.pop();
+        //         i--;
+        //     }
+        //     else{
+        //         st.push(s[i]);
+        //     }
+        // }
+        
+        
+        while(s.size() and s.back()=='R') s.pop_back();
+        std::reverse(begin(s),end(s));
+        while(s.size() and s.back()=='L') s.pop_back();
+        c=s.size();
+        
+        for(int i=0;i<s.size();i++)
         {
-            if(st.empty()) st.push(s[i]);
-            else if(st.top()=='S' and s[i]=='L') c++;
-            else if(st.top()=='R' and s[i]=='L')
-            {
-                s[i]='S';
-                c+=2;
-                st.pop();
-                i--;
-            }
-            else if(st.top()=='R' and s[i]=='S')
-            {
-                // s[i]='S';
-                c++;
-                st.pop();
-                i--;
-            }
-            else{
-                st.push(s[i]);
-            }
+            if(s[i]=='S') c--;
         }
         return c;
         
