@@ -8,11 +8,10 @@ public:
         
         while(sum>=target)
         {
-            // if(i!=k-1){
-            // cout<<" i : "<<i<<endl;
-            // }
-            // cout<<" sum : "<<sum<<endl;
+          
+            // if(sum==target){
             ans=min(ans,i-st+1);
+            // }
             sum-=v[st];
             st++;
         }
