@@ -55,19 +55,19 @@ public:
         int f=0;
         while(h1)
         {
-               // ans2 = ans2 == nullptr ? nullptr :ans2->next;
+               ans2 = ans2 == nullptr ? nullptr :ans2->next;
             if(--k==0)
             {
                 ans1=h1;
                 ans2=head;
-                f=1;
+                // f=1;
             }
             
             h1=h1->next;
-            if(!f){
-            ans2=ans2->next;
-            }
-            f=0;
+            // if(!f){
+            // ans2=ans2->next;
+            // }
+            // f=0;
             
         }
         swap(ans1->val,ans2->val);
