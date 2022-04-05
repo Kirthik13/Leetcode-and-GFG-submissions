@@ -44,20 +44,20 @@ public:
         
         for(auto &i:dictionary)
         {
-            string sam;
-            int f=1;
-            for(auto &j:i){
-                // dic.insert(i);
-                if(m1.count(j)==0)
-                {
-                    f=0;
-                    break;
-                }
-                sam+=(m1[j]);
-            }
-            if(f){
+            string sam=encrypt(i);
+            // int f=1;
+            // for(auto &j:i){
+            //     // dic.insert(i);
+            //     if(m1.count(j)==0)
+            //     {
+            //         f=0;
+            //         break;
+            //     }
+            //     sam+=(m1[j]);
+            // }
+            // if(f){
             dic[sam]++;
-            }
+            // }
             // cout<<"Sam : "<<sam<<endl;
         }
     }
@@ -66,6 +66,9 @@ public:
         string ans;
         for(auto &i:s1)
         {
+            if(m1.count(i)==0){
+                return "";
+            }
             ans+=(m1[i]);
         }
         return ans;
