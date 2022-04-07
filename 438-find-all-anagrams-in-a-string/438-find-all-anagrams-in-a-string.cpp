@@ -1,45 +1,49 @@
 class Solution {
 public:
- 
-    vector<int> findAnagrams(string s, string p) {
-        int m1=s.size();
-        int n=p.size();
-         if(s.size() < p.size())
-           return {};
-        if(m1==1 )
+    bool check(unordered_map<char,int>&m1,unordered_map<char,int>&m2)
+    {
+        if(m1==m2) return 1;
+        return 0;
+    }
+    vector<int> findAnagrams(string s2, string s1) {
+         if(s2.size()<s1.size()) return {};
+        
+        unordered_map<char,int>m1;
+            unordered_map<char,int>m2;
+        
+        for(auto &i:s1)
         {
-            if(p.front()==s[0]){
-            return {0};
-                }
-            else{
-                return {};
-            }
+            m1[i]++;
         }
         
-        vector<int>ans;
-        unordered_map<char,int>m;
-        for(auto &i:p)
+     
+        int win=s1.size();
+//         for(int i=0;i<win;i++)
+//         {
+//             m2[s2[i]]++;
+//         }
+        
+//         if(check(m1,m2)) return 1;
+        vector<int>v;
+        for(int i=0;i<s2.size();i++)
         {
-            m[i]--;
+            if(i>=win){
+                if(m2[s2[i-win]]==1) 
+                {
+                    m2.erase(s2[i-win]);
+                }
+                else{
+                    m2[s2[i-win]]--;
+                }
+            }
+            m2[s2[i]]++;
+            
+            if(check(m1,m2))
+            {
+                v.emplace_back(i-win+1);
+                // return 1;
+            }
         }
-        for(int i=0;i<p.size();i++)
-        {
-            m[s[i]]++;
-            if(m[s[i]]==0) m.erase(s[i]);
-        }
-        if(m.size()==0)
-        {
-            ans.push_back(0);
-        }
-        for(int i=p.size(),j=0;i<s.size() and j<s.size();i++,j++)
-        {
-            m[s[i]]++;
-            m[s[j]]--;
-            if(m[s[i]]==0) m.erase(s[i]);
-            if(m[s[j]]==0) m.erase(s[j]);
-            if(m.size()==0) ans.push_back(j+1);
-
-        }
-        return ans;
+        return v;
     }
 };
