@@ -18,21 +18,23 @@ public:
         
      
         int win=s1.size();
-        for(int i=0;i<win;i++)
-        {
-            m2[s2[i]]++;
-        }
+//         for(int i=0;i<win;i++)
+//         {
+//             m2[s2[i]]++;
+//         }
         
-        if(check(m1,m2)) return 1;
+//         if(check(m1,m2)) return 1;
         
-        for(int i=win;i<s2.size();i++)
+        for(int i=0;i<s2.size();i++)
         {
-            if(m2[s2[i-win]]==1) 
-            {
-                m2.erase(s2[i-win]);
-            }
-            else{
-                m2[s2[i-win]]--;
+            if(i>=win){
+                if(m2[s2[i-win]]==1) 
+                {
+                    m2.erase(s2[i-win]);
+                }
+                else{
+                    m2[s2[i-win]]--;
+                }
             }
             m2[s2[i]]++;
             
