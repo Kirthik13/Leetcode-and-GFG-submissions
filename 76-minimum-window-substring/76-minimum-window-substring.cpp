@@ -62,7 +62,7 @@ public:
                     head=l;
                     minlen=r-l+1;
                 }
-                                if(m1[s[l]]>=0) count++;
+                                if(m1.count(s[l]) and m1[s[l]]>=0) count++;
                 m1[s[l]]++;
 
                 l++;
