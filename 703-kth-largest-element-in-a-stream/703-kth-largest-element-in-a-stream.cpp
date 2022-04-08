@@ -1,21 +1,14 @@
-static int pr = []() { 
-    std::ios::sync_with_stdio(false); 
-    cin.tie(NULL);  
-    return 0; 
-}();
 class KthLargest {
 public:
     priority_queue<int,vector<int>,greater<int>>pq;
     int k;
-    KthLargest(int gk, vector<int>& v) {
-        k=gk;
-        for(auto &i:v)
-            
-        {
-            pq.push(i);
-            if(pq.size()>k) pq.pop();
-        }
-        
+    KthLargest(int k2, vector<int>& v) {
+          this->k=k2;
+            for(auto &i:v)
+            {
+                pq.push(i);
+                if(pq.size()>k) pq.pop();
+            }
     }
     
     int add(int val) {
