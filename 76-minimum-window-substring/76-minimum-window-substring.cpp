@@ -21,13 +21,12 @@ public:
             }
             m1[s[r]]--;
 
-            r++;
             while(count==0 )
             {
-                if(minlen>r-l)
+                if(minlen>r-l+1)
                 {
                     head=l;
-                    minlen=r-l;
+                    minlen=r-l+1;
                 }
                 m1[s[l]]++;
 
@@ -35,6 +34,8 @@ public:
 
                 l++;
             }
+                        r++;
+
             
             
         }
