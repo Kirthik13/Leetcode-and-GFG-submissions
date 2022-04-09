@@ -7,17 +7,35 @@ public:
             m[i]++;
         }
         
-        priority_queue<pair<int,int>>pq;
+        // priority_queue<pair<int,int>>pq;
+        // for(auto &i:m)
+        // {
+        //     pq.push({i.second,i.first});
+        // }
+        // vector<int>v1;
+        // while(k--)
+        // {
+        //     v1.emplace_back(pq.top().second);
+        //     pq.pop();
+        // }
+        // return v1;
+        
+        int n=v.size();
+        vector<vector<int>>bucket(n+1);
+        
         for(auto &i:m)
         {
-            pq.push({i.second,i.first});
+            bucket[i.second].emplace_back(i.first);
         }
-        vector<int>v1;
-        while(k--)
+        
+        vector<int>ans;
+        for(int i=n;i>=0 and ans.size()<k;i--)
         {
-            v1.emplace_back(pq.top().second);
-            pq.pop();
+            if(!bucket[i].empty())
+            {
+                ans.insert(ans.end(),bucket[i].begin(),bucket[i].end());
+            }
         }
-        return v1;
+        return ans;
     }
 };
