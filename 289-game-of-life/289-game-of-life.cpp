@@ -16,7 +16,7 @@ public:
                     if(j-1>=0)
                     {
                         if(v[i-1][j-1]==1 or v[i-1][j-1]==-2) l++;
-                        if(v[i-1][j-1]==0 or  v[i-1][j-1]==3) d++;
+                        if(v[i-1][j-1]==0 or v[i-1][j-1]==3) d++;
                     }
                     if(j+1<n)
                     {
@@ -51,14 +51,14 @@ public:
                         if(v[i+1][j+1]==0 or v[i+1][j+1]==3) d++;
                     }
                 }
-                if(v[i][j]==1)
+                if(v[i][j]==1 )
                 {
                     if(l<2) v[i][j]=-2;
-                    // else if(l==2 or l==3) v[i][j]=1;
+                    // else if(l==2 or l==3) v[i][j]=3;
                     else if(l>3) v[i][j]=-2;
                         
                 }
-                else if(v[i][j]==0){
+                else if(v[i][j]==0 ){
                     if(l==3) v[i][j]=3;
                 }
                 // cout<<" l : "<<l<<" d : "<<d<<endl;
@@ -68,10 +68,11 @@ public:
         {
             for(auto &j:i)
             {
+                // cout<<j<<" ";
                 if(j==3) j=1;
-                else if(j==-2) j=0;
-                    
+                else if(j==-2)j=0;
             }
+            // cout<<endl;
         }
         // return v; 
     }
