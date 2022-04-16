@@ -26,18 +26,24 @@ public:
         swap(v[pidx],v[r]);
         return pidx;
     }
+    int rand_partition(vector<int>&v,int l,int r)
+    {
+         int pI = l + rand() % (r - l);
+        swap(v[pI],v[r]);
+        return partition(v,l,r);
+    }
     void quicksort(vector<int>&v,int l,int r)
     {
         if(l<r)
         {
-            int pidx=partition(v,l,r);
+            int pidx=rand_partition(v,l,r);
             quicksort(v,l,pidx-1);
             quicksort(v,pidx+1,r);
 
         }
     }
     vector<int> sortArray(vector<int>& v) {
-        rand_shuf(v);
+        // rand_shuf(v);
         quicksort(v,0,v.size()-1);
         return v;
     }
