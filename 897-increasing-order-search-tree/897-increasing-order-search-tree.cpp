@@ -27,22 +27,39 @@ public:
     TreeNode* increasingBST(TreeNode* root) {
         if(!root ) return root;
         
-        fn(root);
-        // vector<TreeNode*>v2;
-       
-//         for(int i=0;i<v.size();i++)
+//         fn(root);
+
+//         for(int i=0;i<v2.size()-1;i++)
 //         {
-     
-//             TreeNode* g=new TreeNode(v[i]);
-//             v2.push_back(g);
-            
+//             if(i==0) root=v2[i];
+//             v2[i]->right=v2[i+1];
 //         }
-        for(int i=0;i<v2.size()-1;i++)
+       stack<TreeNode*>st;
+        TreeNode* curr=root;
+        TreeNode* prev=NULL;
+        TreeNode* head=NULL;
+  
+
+        while(curr or !st.empty())
         {
-            if(i==0) root=v2[i];
-            v2[i]->right=v2[i+1];
+            while(curr){
+                st.push(curr);
+                curr=curr->left;
+            }
+            TreeNode* top=st.top();
+            top->left=NULL;
+            st.pop();
+           if(!head){
+               head=top;
+           }
+            if(prev)
+            {
+                prev->right=top;
+            }
+            prev=top;
+            curr=top->right;
+            
         }
-       
-       return root;
+       return head;
     }
 };
