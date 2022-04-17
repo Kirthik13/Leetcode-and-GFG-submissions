@@ -38,28 +38,26 @@ public:
         TreeNode* curr=root;
         TreeNode* prev=NULL;
         TreeNode* head=NULL;
-  
-
+            
         while(curr or !st.empty())
         {
-            while(curr){
+            while(curr)
+            {
                 st.push(curr);
                 curr=curr->left;
             }
-            TreeNode* top=st.top();
-            top->left=NULL;
+            
+            TreeNode* t=st.top();
+            t->left=NULL;
             st.pop();
-           if(!head){
-               head=top;
-           }
-            if(prev)
-            {
-                prev->right=top;
-            }
-            prev=top;
-            curr=top->right;
+            if(!head) head=t;
+            if(prev) prev->right=t;
+            
+            prev=t;
+            curr=t->right;
             
         }
-       return head;
+       
+        return head;
     }
 };
