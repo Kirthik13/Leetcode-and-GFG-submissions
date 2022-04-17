@@ -11,22 +11,16 @@
  */
 class Solution {
 public:
-    vector<int>v;
+    vector<TreeNode*>v2;
     void fn(TreeNode* root)
     {
         if(!root) return;
         
         fn(root->left);
-        // TreeNode* g=root;
-//         TreeNode* l=root->left;
-//         TreeNode* r=root->right;
 
-//         g->left=NULL;
-//         g->right=NULL;
-
-        v.push_back(root->val);
-        // g->left=l;
-        // g->right=r;
+        TreeNode* g=new TreeNode(root->val);
+        v2.push_back(g);
+  
         fn(root->right);
             
     }
@@ -34,15 +28,15 @@ public:
         if(!root ) return root;
         
         fn(root);
-        vector<TreeNode*>v2;
+        // vector<TreeNode*>v2;
        
-        for(int i=0;i<v.size();i++)
-        {
+//         for(int i=0;i<v.size();i++)
+//         {
      
-            TreeNode* g=new TreeNode(v[i]);
-            v2.push_back(g);
+//             TreeNode* g=new TreeNode(v[i]);
+//             v2.push_back(g);
             
-        }
+//         }
         for(int i=0;i<v2.size()-1;i++)
         {
             if(i==0) root=v2[i];
