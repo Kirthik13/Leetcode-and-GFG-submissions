@@ -1,22 +1,31 @@
 class MyHashSet {
 public:
-    vector<int>m;
+    vector<list<int>>v;
     MyHashSet() {
-        m.resize(1000001,0);
+        v.resize(1500);
     }
-    
+    int gethash(int key)
+    {
+        return key%1500;
+    }
     void add(int key) {
-        m[key]++;
+        int hashidx=gethash(key);
+        v[hashidx].push_back(key);
     }
     
     void remove(int key) {
-        if(m[key]==0) return;
-        m[key]=0;
+        int hashidx=gethash(key);
+        auto it=find(v[hashidx].begin(),v[hashidx].end(),key);
+        if(it==v[hashidx].end()) return;
+        v[hashidx].remove(key);
     }
     
     bool contains(int key) {
-        if(m[key]>0) return 1;
-        return 0;
+        
+    int hashidx=gethash(key);
+       auto it=find(v[hashidx].begin(),v[hashidx].end(),key);
+        if(it==v[hashidx].end()) return 0;
+        return 1;
     }
 };
 
