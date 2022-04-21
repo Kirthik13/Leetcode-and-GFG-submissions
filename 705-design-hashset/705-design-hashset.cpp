@@ -1,8 +1,8 @@
 class MyHashSet {
 public:
-    unordered_map<int,int>m;
+    vector<int>m;
     MyHashSet() {
-        
+        m.resize(1000001,0);
     }
     
     void add(int key) {
@@ -10,12 +10,12 @@ public:
     }
     
     void remove(int key) {
-        if(m.find(key)==m.end()) return;
-        m.erase(key);
+        if(m[key]==0) return;
+        m[key]=0;
     }
     
     bool contains(int key) {
-        if(m.count(key)>0) return 1;
+        if(m[key]>0) return 1;
         return 0;
     }
 };
