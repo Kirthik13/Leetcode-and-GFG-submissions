@@ -1,9 +1,9 @@
 class MyHashMap {
 public:
     vector<list<pair<int,int>>>v;
-    int hashidx=1500;
+    int hashidx=1507;
     MyHashMap() {
-        v.resize(1500);
+        v.resize(1507);
     }
     
     void put(int key, int value) {
