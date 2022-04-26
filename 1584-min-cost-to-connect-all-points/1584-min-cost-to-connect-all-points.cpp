@@ -14,19 +14,19 @@ public:
         priority_queue<pair<int,pair<int,int>>,vector<pair<int,pair<int,int>>>,greater<pair<int,pair<int,int>>>>pq;
         vector<int>vis(graph.size(),0);
         pq.push({0,{0,0}});
-        int cost{};
-        while(!pq.empty())
+        int cost{},nos{};
+        while(nos<vis.size())
         {
                 int curr_node=pq.top().second.second;
-                int g=accumulate(begin(vis),end(vis),0);
-            if(g==vis.size()) break;
+                // int g=accumulate(begin(vis),end(vis),0);
+            // if(g==vis.size()) break;
                 if(vis[curr_node]==0)
                 {
                     cost+=pq.top().first;
                     // cout<<pq.top().first<<" "<<pq.top().second.first<<" " <<pq.top().second.second<<endl;
                     vis[curr_node]=1;
                     pq.pop();
-
+                    nos++;
                     for(auto &i:dist[curr_node])
                     {
                         pq.push({i.second,{curr_node,i.first}});
