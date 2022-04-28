@@ -31,7 +31,6 @@ public:
     }
     bool isok(vector<vector<int>>&v,int mid)
     {
-        vis.assign(m,vector<int>(n,0));
         // for(auto i:vis)
         // {
         //     for(auto j:i)
@@ -50,7 +49,9 @@ public:
         while(l<=r)
         {
             int mid=l+((r-l)/2);
-            if(isok(v,mid))
+                vis.assign(m,vector<int>(n,0));
+
+            if(dfs(v,0,0,mid))
             {
                 r=mid-1;
                 ans=min(ans,mid);
@@ -58,6 +59,7 @@ public:
             else{
                 l=mid+1;
             }
+            
         }
         return ans==INT_MAX?0:ans;
         // return l;
