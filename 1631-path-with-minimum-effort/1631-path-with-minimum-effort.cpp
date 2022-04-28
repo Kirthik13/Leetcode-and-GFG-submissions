@@ -1,100 +1,65 @@
-// class Solution {
-// private:
-//     vector<int>x_points={-1,0,1,0};
-//     vector<int>y_points={0,1,0,-1};
-//     vector<vector<bool>>visited;
-//     int n,m;
-// public:
-//     bool isValid(vector<vector<int>>& h, int x, int y) {
-//         return x < n and x >= 0 and y < m and y >= 0;
-//     }
-	
-//     bool recDFS(vector<vector<int>>& h, int k, int x, int y) {
-//         visited[x][y] = true;
-//         if (x == n-1 && y == m-1)
-//             return true;
-            
-//         for (int i = 0; i < 4; i++) {
-//             int x_curr = x + x_points[i];
-//             int y_curr = y + y_points[i];
-//             if (isValid(h, x_curr, y_curr) && !visited[x_curr][y_curr] && abs(h[x_curr][y_curr] - h[x][y]) <= k)
-//                 if (recDFS(h, k, x_curr, y_curr)) return true;
-//         }
-
-//         return false;
-//     }
-    
-//     bool possibleLessEqK(vector<vector<int>>& h, int k) {
-//         visited.assign(n,vector<bool> (m, false));
-//         return recDFS(h, k, 0, 0);
-//     }
-//     int minimumEffortPath(vector<vector<int>>& v) {
-//         int n=v.size(),m=v[0].size();
-//         int l=0;int r=1e6;
-//         int ans=INT_MAX;
-//         while(l<r)
-//         {
-//             int mid=l+((r-l)/2);
-//             if(possibleLessEqK(v,mid))
-//             {
-//                 r=mid-1;
-//                 ans=min(ans,mid);
-//             }
-//             else{
-//                 l=mid+1;
-//             }
-//         }
-//         return ans==INT_MAX?0:ans;
-//     }
-// };
 class Solution {
 private:
-    vector<vector<bool>> visited;
-    vector<int> x_points = {1, 0, -1, 0};
-    vector<int> y_points = {0, 1, 0, -1};
-    int n;
-    int m;
+      vector<vector<int>>vis;
+    vector<int>dirx={-1,0,1,0};
+    vector<int>diry={0,1,0,-1};
+
+    int m,n;
 public:
-    bool isValid(vector<vector<int>>& h, int x, int y) {
-        return x < n and x >= 0 and y < m and y >= 0;
-    }
-	
-    bool recDFS(vector<vector<int>>& h, int k, int x, int y) {
-        visited[x][y] = true;
-        if (x == n-1 && y == m-1)
-            return true;
-            
-        for (int i = 0; i < 4; i++) {
-            int x_curr = x + x_points[i];
-            int y_curr = y + y_points[i];
-            if (isValid(h, x_curr, y_curr) && !visited[x_curr][y_curr] && abs(h[x_curr][y_curr] - h[x][y]) <= k)
-                if (recDFS(h, k, x_curr, y_curr)) return true;
-        }
-
-        return false;
-    }
-    
-    bool possibleLessEqK(vector<vector<int>>& h, int k) {
-        visited.assign(n,vector<bool> (m, false));
-        return recDFS(h, k, 0, 0);
-    }
-    
-    int minimumEffortPath(vector<vector<int>>& heights) {
-        n = heights.size();
-        m = heights[0].size();
+  
+    bool isvalid(int x,int y)
+    {
+        return x>=0 and x<m and y>=0 and y<n;
         
-        int lo = 0, hi = 1e6, mid;
-        while (lo < hi) {
-            mid = lo + (hi - lo) / 2;
-            
-            if (possibleLessEqK(heights, mid))
-                hi = mid;
-            else 
-                lo = mid + 1;
-        }
-        
-        return lo;
     }
-    
+    bool dfs( vector<vector<int>>&v,int x,int y,int mid)
+    {
+        vis[x][y]=1;
 
+        if(x==m-1 and y==n-1) return 1;
+
+        for(int i=0;i<4;i++)
+        {
+            int dx=x+dirx[i],dy=y+diry[i];
+            if(isvalid(dx,dy) and vis[dx][dy]==0 and abs(v[x][y]-v[dx][dy])<=mid)
+            {
+                if(dfs(v,dx,dy,mid)) return 1;
+                    
+            }
+        }
+        return 0;
+    }
+    bool isok(vector<vector<int>>&v,int mid)
+    {
+        vis.assign(m,vector<int>(n,0));
+        // for(auto i:vis)
+        // {
+        //     for(auto j:i)
+        //     {
+        //         cout<<j<<" ";
+        //     }
+        //     cout<<endl;
+        // }
+        return dfs(v,0,0,mid);
+    }
+    int minimumEffortPath(vector<vector<int>>& v) {
+        int l=0,r=(1e6);
+        int ans=INT_MAX;
+        m=v.size();
+        n=v[0].size();
+        while(l<=r)
+        {
+            int mid=l+((r-l)/2);
+            if(isok(v,mid))
+            {
+                r=mid-1;
+                ans=min(ans,mid);
+            }
+            else{
+                l=mid+1;
+            }
+        }
+        return ans==INT_MAX?0:ans;
+        // return l;
+    }
 };
