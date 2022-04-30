@@ -11,6 +11,8 @@ public:
                 vis.insert(source);
 
 
+                int fl=0;
+                double cat=0.0;
                for(auto &i:m[source])
                {
 
@@ -20,16 +22,18 @@ public:
 
                                 if(res!=-1.0)
                                 {
-                                                vis.erase(source);
-
-                                    return res*i.second;
+                                    // vis.erase(source);
+                                    fl=1;
+                                    cat=res*i.second;
+                                    break;
                                 }
                            }
 
                }
 
             vis.erase(source);
-            return -1.0;
+            
+            return fl==0?-1.0:cat;
     
     }
 
