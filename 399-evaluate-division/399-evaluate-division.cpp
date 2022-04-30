@@ -1,6 +1,6 @@
 class Solution {
 public:
-    void dfs(string source,string dest, map<string,vector<pair<string,double>>>m,set<string>&vis,double &ans,double tmp)
+    void dfs(string source,string dest, map<string,vector<pair<string,double>>>m,set<string>vis,double &ans,double tmp)
     {
                 if(source==dest)
                 {
@@ -14,13 +14,14 @@ public:
                for(auto &i:m[source])
                {
 
-                           if(vis.find(i.first)==vis.end()){
+                           if(vis.find(i.first)==vis.end())
+                           {
 
-                       dfs(i.first,dest,m,vis,ans,tmp*i.second);
+                                dfs(i.first,dest,m,vis,ans,tmp*i.second);
                            }
 
                }
-            vis.erase(source);
+            // vis.erase(source);
     
     }
     vector<double> calcEquation(vector<vector<string>>& eq, vector<double>& val, vector<vector<string>>& q) {
