@@ -1,6 +1,6 @@
 class Solution {
 public:
-    double dfs(string source,string dest, map<string,vector<pair<string,double>>>m,set<string>vis)
+    double dfs(string source,string dest, map<string,vector<pair<string,double>>>m,set<string>&vis)
     {
                 if(source==dest)
                 {
@@ -18,12 +18,17 @@ public:
                            {
                                 double res=dfs(i.first,dest,m,vis);
 
-                                if(res!=-1.0) return res*i.second;
+                                if(res!=-1.0)
+                                {
+                                                vis.erase(source);
+
+                                    return res*i.second;
+                                }
                            }
 
                }
 
-            // vis.erase(source);
+            vis.erase(source);
             return -1.0;
     
     }
