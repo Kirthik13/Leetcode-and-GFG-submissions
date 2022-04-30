@@ -1,12 +1,11 @@
 class Solution {
 public:
-    void dfs(string source,string dest, map<string,vector<pair<string,double>>>m,set<string>&vis,double &ans,double tmp)
+    double dfs(string source,string dest, map<string,vector<pair<string,double>>>m,set<string>vis)
     {
                 if(source==dest)
                 {
-                    ans=tmp; 
 
-                     return;
+                     return 1.0;
                 }
 
                 vis.insert(source);
@@ -17,32 +16,18 @@ public:
 
                            if(vis.find(i.first)==vis.end())
                            {
+                                double res=dfs(i.first,dest,m,vis);
 
-                                dfs(i.first,dest,m,vis,ans,tmp*i.second);
+                                if(res!=-1.0) return res*i.second;
                            }
 
                }
 
-            vis.erase(source);
+            // vis.erase(source);
+            return -1.0;
     
     }
-//     void fn(set<int>&vis,int i)
-//     {
-//         if(i==3) return;
-        
-//         vis.insert(i);
-//         for(auto &i:vis)
-//         {
-//            cout<<i<<" "; 
-//         }
-//         cout<<endl;
-//         fn(vis,++i);
-//          for(auto &i:vis)
-//         {
-//            cout<<i<<" "; 
-//         }
-//         cout<<endl;
-//     }
+
     vector<double> calcEquation(vector<vector<string>>& eq, vector<double>& val, vector<vector<string>>& q) {
         map<string,vector<pair<string,double>>>m;
         for(int i=0;i<eq.size();i++)
@@ -64,7 +49,7 @@ public:
             string new_d=q[i][1];
             double ans=-1.0;
             if(m.find(new_f)!=m.end()){
-            dfs(new_f,new_d,m,vis,ans,1.0);
+            ans= dfs(new_f,new_d,m,vis);
             }
             tot.push_back(ans);
 
