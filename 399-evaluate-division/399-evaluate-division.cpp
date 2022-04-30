@@ -1,6 +1,6 @@
 class Solution {
 public:
-    void dfs(string source,string dest, map<string,vector<pair<string,double>>>m,set<string>vis,double &ans,double tmp)
+    void dfs(string source,string dest, map<string,vector<pair<string,double>>>m,set<string>&vis,double &ans,double tmp)
     {
                 if(source==dest)
                 {
@@ -10,6 +10,7 @@ public:
                 }
 
                 vis.insert(source);
+
 
                for(auto &i:m[source])
                {
@@ -21,9 +22,27 @@ public:
                            }
 
                }
-            // vis.erase(source);
+
+            vis.erase(source);
     
     }
+//     void fn(set<int>&vis,int i)
+//     {
+//         if(i==3) return;
+        
+//         vis.insert(i);
+//         for(auto &i:vis)
+//         {
+//            cout<<i<<" "; 
+//         }
+//         cout<<endl;
+//         fn(vis,++i);
+//          for(auto &i:vis)
+//         {
+//            cout<<i<<" "; 
+//         }
+//         cout<<endl;
+//     }
     vector<double> calcEquation(vector<vector<string>>& eq, vector<double>& val, vector<vector<string>>& q) {
         map<string,vector<pair<string,double>>>m;
         for(int i=0;i<eq.size();i++)
@@ -37,7 +56,8 @@ public:
         }
       
         vector<double>tot;
-        set<string>vis;
+        set<string>vis;        set<int>vi;
+
         for(int i=0;i<q.size();i++)
         {
             string new_f=q[i][0];
@@ -49,6 +69,7 @@ public:
             tot.push_back(ans);
 
         }
+        // fn(vi,0);
         return tot;
     }
 };
