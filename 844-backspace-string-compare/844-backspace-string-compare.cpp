@@ -24,27 +24,30 @@ public:
 //         return 0;
         
         int i=s.size()-1,j=t.size()-1;
-      while(1)
-      {
-           int back = 0;
-            while (i >= 0 && (back > 0 || s[i] == '#')) {
-                back += s[i] == '#' ? 1 : -1;
+        while(1)
+        {
+            int back{};
+            while(i>=0 and (back>0 or s[i]=='#'))
+            {
+                back+=s[i]=='#'?1:-1;
                 i--;
             }
-            back = 0;
-            while (j >= 0 && (back > 0 || t[j] == '#')) {
-                back += t[j] == '#' ? 1 : -1;
+             back=0;
+            while(j>=0 and (back>0 or t[j]=='#'))
+            {
+                back+=t[j]=='#'?1:-1;
                 j--;
             }
-             if (i >= 0 && j >= 0 && s[i] == t[j]) {
+            
+            if(i>=0 and j>=0 and s[i]==t[j])
+            {
                 i--;
                 j--;
-            } else {
+            }
+            else{
                 break;
             }
-          
-      }
-        
+        }
         return i==-1 and j==-1;
 
     }
