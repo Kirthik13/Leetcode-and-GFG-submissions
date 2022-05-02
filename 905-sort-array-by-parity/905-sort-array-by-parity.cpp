@@ -2,26 +2,28 @@ class Solution {
 public:
     vector<int> sortArrayByParity(vector<int>& v) {
         int n=v.size();
-        int odd=n-1,even=0;
-        while(even<odd )
+//         int odd=n-1,even=0;
+//         while(even<odd )
+//         {
+//             if(v[even]%2==0)
+//             {
+//                 even++;
+//             }
+//             else{
+//                 swap(v[even],v[odd]);
+//                 odd--;
+               
+//             }
+//         }
+        int i=0,j=0;
+        while(j<n)
         {
-            if(v[even]%2==0)
+            if(v[j]%2==0)
             {
-                even++;
+                swap(v[i],v[j]);
+                i++;
             }
-            else{
-                // if(v[odd]%2==0){
-                swap(v[even],v[odd]);
-                // }
-                odd--;
-                // even++;
-            }
-            // for(auto &i:v)
-            // {
-            //     cout<<i<<" ";
-            // }
-            // cout<<endl;
-            
+            j++;
         }
         return v;
         
