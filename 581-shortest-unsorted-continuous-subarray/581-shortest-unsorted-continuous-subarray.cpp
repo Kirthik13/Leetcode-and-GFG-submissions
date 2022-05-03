@@ -25,6 +25,7 @@ public:
         {
             minr[i]=min_sf=min(min_sf,v[i]);
         }
+      
         
         int i=0,j=n-1;
        while (i < n && v[i] <= minr[i]) i++;
