@@ -15,13 +15,16 @@ public:
             {
                 if(ele==new_ele and m[ele]>1)
                 {
-                                        m[ele]-=2;
+                    m[ele]-=2;
+                    if(m[new_ele]==0) m.erase(new_ele);
 
                     c++;
                 }
                 else if(ele!=new_ele){
                     m[new_ele]--;
                     m[ele]--;
+                    if(m[new_ele]==0) m.erase(new_ele);
+                    if(m[ele]==0) m.erase(ele);
                     c++;
                 }
                 
