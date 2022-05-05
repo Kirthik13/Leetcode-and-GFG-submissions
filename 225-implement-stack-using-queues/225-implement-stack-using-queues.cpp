@@ -7,16 +7,17 @@ public:
     }
     
     void push(int x) {
-        q1.push(x);
+            q1.push(x);
+       
         int z=q1.size();
         z--;
         while(z--)
         {
-            int val=q1.front();
+            int v=q1.front();
             q1.pop();
-            q1.push(val);
+            q1.push(v);
         }
-        
+      
     }
     
     int pop() {
