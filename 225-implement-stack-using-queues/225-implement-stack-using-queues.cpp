@@ -1,41 +1,33 @@
 class MyStack {
 public:
     queue<int>q1;
-void rev(queue<int>&q1)
-{
-    if(q1.size()==0) return;
-    if(q1.size()==1)
-    {
-        // q2.push(q1.front());
-        return;
-    }
-    int val=q1.front();
-    q1.pop();
-    rev(q1);
-    q1.push(val);
-}
+
     MyStack() {
         
     }
     
     void push(int x) {
-            q1.push(x);
+        q1.push(x);
+        int z=q1.size();
+        z--;
+        while(z--)
+        {
+            int val=q1.front();
+            q1.pop();
+            q1.push(val);
+        }
         
     }
     
     int pop() {
-        rev(q1);
         int val=q1.front();
         q1.pop();
-        rev(q1);
         return val;
         
     }
     
     int top() {
-        rev(q1);
         int val=q1.front();
-        rev(q1);
         return val;
     }
     
