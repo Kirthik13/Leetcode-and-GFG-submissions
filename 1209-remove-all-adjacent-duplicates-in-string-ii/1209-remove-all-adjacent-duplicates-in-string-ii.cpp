@@ -2,24 +2,24 @@ class Solution {
 public:
     string removeDuplicates(string s, int k) {
      string ans;
-        vector<pair<int,char>>st;
+        stack<pair<int,char>>st;
         for(auto i:s)
         {
             if(st.empty())
             {
-                st.push_back({1,i});
+                st.push({1,i});
             }
             else{
-                if(st.back().second==i)
+                if(st.top().second==i)
                 {
-                    st.back().first++;
-                    if(st.back().first==k) 
+                    st.top().first++;
+                    if(st.top().first==k) 
                     {
-                        st.pop_back();
+                        st.pop();
                     }
                 }
                 else{
-                    st.push_back({1,i});
+                    st.push({1,i});
 
                 }
                 
@@ -27,15 +27,15 @@ public:
         }
         while(!st.empty())
         {
-            char ch=st.back().second;
-            int nos=st.back().first;
-            while(nos--)
-            {
-                ans.push_back(ch);
-            }
-            st.pop_back();
+            char ch=st.top().second;
+            int nos=st.top().first;
+            // while(nos--)
+            // {
+                ans.insert(ans.begin(),nos,ch);
+            // }
+            st.pop();
         }
-        std::reverse(begin(ans),end(ans));
+        // std::reverse(begin(ans),end(ans));
         return ans;
     }
 };
