@@ -41,18 +41,19 @@ public:
             if(!i.isInteger())
             {
                 vector<NestedInteger> v2=i.getList();
-                for(auto &j:v2)
-                {
-                    if(j.isInteger()){
-                    int g=j.getInteger();
-                    v.push_back(g);
-                    }
-                    else{
+                fn(v2);
+//                 for(auto &j:v2)
+//                 {
+//                     if(j.isInteger()){
+//                     int g=j.getInteger();
+//                     v.push_back(g);
+//                     }
+//                     else{
                         
-                        fn(j.getList());
-                    }
+//                         fn(j.getList());
+//                     }
 
-                }
+//                 }
                     
             }
             else{
