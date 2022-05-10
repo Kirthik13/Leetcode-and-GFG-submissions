@@ -14,10 +14,9 @@ public:
         // cout<<"num : "<<num<<" but : "<<but<<endl;
         int ans{};
       
-        for(int j=idx;j<idx+but&&j<s.size();j++)
+        for(int j=idx;j<idx+but and j<s.size() and s[j]==s[idx];j++)
         {
-            if(s[j]==s[idx])ans=(ans+fn(j+1,s,keys))%mod;
-                else break;
+            ans=(ans+fn(j+1,s,keys))%mod;
         }
         return dp[idx]=ans;
     }
