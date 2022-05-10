@@ -1,16 +1,11 @@
 class Solution {
 public:
-    vector<vector<int>>ans;
-    void fn(int k,int sum,int curr_sum,int i,vector<int>&present)
+    void fn(int k,int sum,int curr_sum,int i,vector<int>present,vector<vector<int>>&ans)
     {
         if(sum<curr_sum) return;
         if(present.size()==k)
         {
-               // for(auto i:present)
-               //  {
-               //      cout<<i<<" ";
-               //  }
-               //  cout<<endl;
+               
             if(sum==curr_sum)
             {
                 ans.push_back(present);
@@ -23,7 +18,7 @@ public:
             if(curr_sum+j<=sum){
                 present.push_back(j);
 
-                fn(k,sum,curr_sum+j,j+1,present);
+                fn(k,sum,curr_sum+j,j+1,present,ans);
                 present.pop_back();
             }
         }
@@ -32,7 +27,9 @@ public:
     }
     vector<vector<int>> combinationSum3(int k, int n) {
         vector<int>present;
-        fn(k,n,0,1,present);
+            vector<vector<int>>ans;
+
+        fn(k,n,0,1,present,ans);
         return ans;
     }
 };
