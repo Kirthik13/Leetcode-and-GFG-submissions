@@ -8,16 +8,19 @@ public:
         {
             return 1;
         }
+        
         if(dp.find(idx)!=dp.end()) return dp[idx];
+        
         int num=int(s[idx])-'0';
         int but=keys[num];
-        // cout<<"num : "<<num<<" but : "<<but<<endl;
         int ans{};
       
         for(int j=idx;j<idx+but and j<s.size() and s[j]==s[idx];j++)
         {
-            ans=(ans+fn(j+1,s,keys))%mod;
+            ans+=fn(j+1,s,keys);
+            ans%=mod;
         }
+        
         return dp[idx]=ans;
     }
     int countTexts(string s) {
