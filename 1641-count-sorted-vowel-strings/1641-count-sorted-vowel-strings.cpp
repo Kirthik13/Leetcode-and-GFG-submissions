@@ -1,42 +1,18 @@
 class Solution {
 public:
-    vector<char>let={'a','e','i','o','u'};
-    int cnt{};
-    void fn(int n,string &s,unordered_map<char,int>&m)
+    map<pair<int,int>,int>dp;
+    int fn(int i,int n,string &vow)
     {
-        if(s.size()==n)
-        {
-            cnt++;
-                        // cout<<"s : "<<s<<endl;
+        if(n==0) return 1;
 
-            return;
-        }
-        int idx{};
-        if(s.size()>0){
-        char ch=s.back();
-        idx=m[ch];
-        }
-        for(int j=idx;j<let.size();j++)
-        {
-            s.push_back(let[j]);
-            fn(n,s,m);
-            if(s.size()>0){
-            s.pop_back();
-            }
-            
-        }
+        if(i>=5) return 0;
+        if(dp.find({i,n})!=dp.end()) return dp[{i,n}];
+        int pic=fn(i,n-1,vow);
+        int notpic=fn(i+1,n,vow);
+        return dp[{i,n}]=pic+notpic;
     }
     int countVowelStrings(int n) {
-        unordered_map<char,int>m;
-      
-        m['a']=0;
-        m['e']=1;
-        m['i']=2;
-        m['o']=3;
-        m['u']=4;
-        string s;
-        fn(n,s,m);
-        return cnt;
-        
+     string vow="aeiou";
+    return fn(0,n,vow);
     }
 };
