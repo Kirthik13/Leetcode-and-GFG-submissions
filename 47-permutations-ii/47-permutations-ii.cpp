@@ -25,6 +25,7 @@ public:
             
 //         }
 //     }
+    
     set<vector<int>>st;
     void fn1(vector<int>v,int idx,int n,vector<int>&tem,vector<int>&vis)
     {
@@ -51,14 +52,15 @@ public:
         // fn(v,0,n);
         vector<int>tem;
         vector<int>vis(n,0);
-        vector<vector<int>>ans;
         
         fn1(v,0,n,tem,vis);
+        vector<vector<int>>ans(begin(st),end(st));
         
-        for(auto &i:st)
-        {
-            ans.push_back(i);
-        }
+        // for(auto &i:st)
+        // {
+        //     ans.push_back(i);
+        // }
+        
         return ans;
     }
 };
