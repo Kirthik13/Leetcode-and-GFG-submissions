@@ -1,16 +1,16 @@
 class Solution {
 public:
-    int ans=INT_MIN;
-    int fn(int idx,vector<int>&v,vector<int>&dp)
+    unordered_map<int,int>dp;
+    int fn(int idx,vector<int>&v)
     {
-        if(idx>=v.size()) return 0;
-        if(dp[idx]!=-1) return dp[idx];
-        ans=max(ans,max(v[idx]+fn(idx+2,v,dp),fn(idx+1,v,dp)));
-        return dp[idx]=ans;
+        if(idx>=v.size())
+        {
+            return 0;
+        }
+        if(dp.find(idx)!=dp.end()) return dp[idx];
+        return dp[idx]=max(v[idx]+fn(idx+2,v),fn(idx+1,v));
     }
     int rob(vector<int>& v) {
-            vector<int>dp(101,-1);
-
-        return fn(0,v,dp);
+        return fn(0,v);
     }
 };
