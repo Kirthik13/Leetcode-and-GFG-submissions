@@ -27,24 +27,30 @@ public:
         while(!q.empty())
         {
             int n=q.size();
-            vector<Node*>st;
-            
+            // vector<Node*>st;
+            Node* prev=NULL;
             for(int i=0;i<n;i++)
             {
                 Node* t=q.front();
-                st.push_back(t);
+                // st.push_back(t);
+                if(prev) {
+                    prev->next=t;
+                    prev=t;
+                }
+                if(!prev) prev=t;
+                
                 q.pop();
                 if(t->left) q.push(t->left);
                 if(t->right) q.push(t->right);
             
             }
-            for(int i=0;i<st.size()-1;i++)
-            {
-                Node* t1=st[i];
-                Node* t2=st[i+1];
+//             for(int i=0;i<st.size()-1;i++)
+//             {
+//                 Node* t1=st[i];
+//                 Node* t2=st[i+1];
                 
-                t1->next=t2;
-            }
+//                 t1->next=t2;
+//             }
         }
             
 
