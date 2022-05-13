@@ -1,32 +1,47 @@
 class Solution {
 public:
-    
-    void fn(string &s,int l,int r,int &maxlen,int &st)
-    {
-        while(l>=0 and r<s.size() and s[l]==s[r])
-        {
-            l--;
-            r++;
-        }
-        
-        if(maxlen<r-l-1)
-        {
-            maxlen=r-l-1;
-            st=l+1;
-        
-            
-        }
-    }
     string longestPalindrome(string s) {
-        int n=s.size();
-        int maxlen=INT_MIN;
-        int st;
-        if(n==1) return s;
-        for(int i=0;i<n-1;i++)
+          int n=s.size();
+      
+       bool dp[n][n];
+        string ans;
+        for(int i=n-1;i>=0;i--)
         {
-            fn(s,i,i,maxlen,st);
-            fn(s,i,i+1,maxlen,st);
+            int maxj=i;
+            for(int j=i;j<n;j++)
+            {
+               dp[i][j]=(s[i]==s[j] and (j-i<3 or dp[i+1][j-1] ));
+               if(dp[i][j] )
+               {
+                   maxj=j;
+               }
+              
+            }
+            if(ans.size()==0 or ans.size()<maxj-i+1)
+            {
+                    
+                    ans=s.substr(i,maxj-i+1);
+            }
+            
+           
         }
-        return s.substr(st,maxlen);
+        return ans;
+//         int n=s.size();
+//         bool dp[n][n];
+//         string res;
+//         for (int i = n - 1; i >= 0; i--) 
+//         {
+//             for (int j = i; j < n; j++) 
+//             {
+//               dp[i][j] = s[i] == s[j] && (j - i < 3 || dp[i + 1][j - 1]);
+
+//               if (dp[i][j] && (res.size() == 0 || j - i + 1 > res.length())) 
+//               {
+//                 res = s.substr(i, j -i+ 1);
+//               }
+//             }
+//         }
+    
+//          return res;
     }
 };
