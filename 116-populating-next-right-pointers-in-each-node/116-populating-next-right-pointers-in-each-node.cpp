@@ -19,27 +19,58 @@ public:
 class Solution {
 public:
     Node* connect(Node* root) {
-        if(!root or (!root->left and !root->right)) return root;
+//         if(!root or (!root->left and !root->right)) return root;
         
-        Node* curr=root;
-        Node* nxt=curr->left;
+//         Node* curr=root;
+//         Node* nxt=curr->left;
         
-        while(curr and nxt)
+//         while(curr and nxt)
+//         {
+//             curr->left->next=curr->right;
+            
+//             if(curr->next)
+//             {
+//                 curr->right->next=curr->next->left;
+//             }
+            
+//             curr=curr->next;
+            
+//             if(!curr)
+//             {
+//                 curr=nxt;
+//                 nxt=curr->left;
+//             }
+//         }
+//         return root;
+//     }
+         if(!root or (!root->left and !root->right)) return root;
+        
+        Node* head=root;
+        Node* dum=new Node(-999);
+        
+        while(head)
         {
-            curr->left->next=curr->right;
+            Node* curr=head;
+            Node* prev=dum;
             
-            if(curr->next)
+            while(curr)
             {
-                curr->right->next=curr->next->left;
+                if(curr->left)
+                {
+                    
+                    prev->next=curr->left;
+                    prev=prev->next;
+                
+                }
+                if(curr->right)
+                {
+                    prev->next=curr->right;
+                    prev=prev->next;
+                }
+                curr=curr->next;
             }
-            
-            curr=curr->next;
-            
-            if(!curr)
-            {
-                curr=nxt;
-                nxt=curr->left;
-            }
+            head=dum->next;
+            dum->next=NULL;
         }
         return root;
     }
