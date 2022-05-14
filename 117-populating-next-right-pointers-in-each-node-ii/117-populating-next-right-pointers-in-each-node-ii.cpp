@@ -18,50 +18,36 @@ public:
 
 class Solution {
 public:
-    void fn(Node* &root)
-    {
- 
-        queue<Node*>q;
-        if(!root) return;
-        q.push(root);
-        while(!q.empty())
-        {
-            int n=q.size();
-            // vector<Node*>st;
-            Node* prev=NULL;
-            for(int i=0;i<n;i++)
-            {
-                Node* t=q.front();
-                // st.push_back(t);
-                if(prev) {
-                    prev->next=t;
-                    prev=t;
-                }
-                if(!prev) prev=t;
-                
-                q.pop();
-                if(t->left) q.push(t->left);
-                if(t->right) q.push(t->right);
-            
-            }
-//             for(int i=0;i<st.size()-1;i++)
-//             {
-//                 Node* t1=st[i];
-//                 Node* t2=st[i+1];
-                
-//                 t1->next=t2;
-//             }
-        }
-            
-
-        
-    }
     Node* connect(Node* root) {
-        vector<Node*>v;
         if(!root or (!root->left and !root->right)) return root;
-        fn(root);
-
-        return root;
         
+        Node* head=root;
+        Node* dum=new Node(-999);
+        
+        while(head)
+        {
+            Node* curr=head;
+            Node* prev=dum;
+            
+            while(curr)
+            {
+                if(curr->left)
+                {
+                    
+                    prev->next=curr->left;
+                    prev=prev->next;
+                
+                }
+                if(curr->right)
+                {
+                    prev->next=curr->right;
+                    prev=prev->next;
+                }
+                curr=curr->next;
+            }
+            head=dum->next;
+            dum->next=NULL;
+        }
+        return root;
     }
 };
