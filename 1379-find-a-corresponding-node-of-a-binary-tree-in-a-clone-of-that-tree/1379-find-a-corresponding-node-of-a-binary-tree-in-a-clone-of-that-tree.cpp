@@ -12,11 +12,11 @@ class Solution {
 public:
     TreeNode* fn(TreeNode* org, TreeNode* root, TreeNode* target)
     {
-        if(!root) return NULL;
+        if(!org) return NULL;
         
-        if(root->val==target->val) return root;
-        TreeNode* l=fn(org,root->left,target);
-        TreeNode* r=fn(org,root->right,target);
+        if(target==org) return root;
+        TreeNode* l=fn(org->left,root->left,target);
+        TreeNode* r=fn(org->right,root->right,target);
 
         if(l) return l;
         if(r) return r;
