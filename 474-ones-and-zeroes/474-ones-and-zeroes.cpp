@@ -1,7 +1,7 @@
 class Solution {
 public:
   int dp[601][101][101];
-    int fn(vector<string>& v, int &max_0, int &max_1, unordered_map<int,pair<int,int>>&m,int i,int curr_z,int curr_one,int st)
+    int fn(vector<string>& v, int &max_0, int &max_1, map<int,pair<int,int>>&m,int i,int curr_z,int curr_one,int st)
     {
         if(curr_z>max_0 or curr_one>max_1) return -1;
         
@@ -22,7 +22,7 @@ public:
     }
     int findMaxForm(vector<string>& v, int max_0, int max_1) {
         
-        unordered_map<int,pair<int,int>>m;
+        map<int,pair<int,int>>m;
         
         for(int i=0;i<v.size();i++)
         {
