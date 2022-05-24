@@ -4,7 +4,7 @@ public:
         vector<int>ans2(begin(v),end(v));
         
         
-        reverse(begin(ans2),end(ans2));
+        // reverse(begin(ans2),end(ans2));
         
         
             
@@ -13,8 +13,13 @@ public:
              if(v[i-1]!=0){
                 v[i]*=v[i-1];
              }
-               if(ans2[i-1]!=0){
-                 ans2[i]*=ans2[i-1];
+             
+        }
+        int n=v.size();
+        for(int i=n-2;i>=0;i--)
+        {
+              if(ans2[i+1]!=0){
+                 ans2[i]*=ans2[i+1];
              }
         }
         return max(*max_element(begin(v),end(v)),*max_element(begin(ans2),end(ans2)));
