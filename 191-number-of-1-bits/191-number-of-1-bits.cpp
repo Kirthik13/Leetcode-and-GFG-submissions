@@ -12,10 +12,17 @@ public:
 
 //         }
         
+        // while(n)
+        // {
+        //     n&=(n-1);
+        //     ++c;
+        // }
+        
         while(n)
         {
-            n&=(n-1);
-            ++c;
+            int rsb=n & (-n);
+            n-=rsb;
+            c++;
         }
         return c;
     }
