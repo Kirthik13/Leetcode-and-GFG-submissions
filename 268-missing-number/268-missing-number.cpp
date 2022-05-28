@@ -17,14 +17,34 @@ public:
 			// if(nums[i]!=i)
 			// return i;
 			// return n;
-        int i{},n=v.size();
+        // int i{},n=v.size();
+//         while(i<n)
+//         {
+//             int crctidx=v[i];
+//             // cout<<crctidx<<" ";
+//             if(crctidx<n and i!=crctidx)
+//             {
+//                 swap(v[crctidx],v[i]);
+//             }
+//             else{
+//                 i++;
+//             }
+//         }
+        
+//         for(int i=0;i<n;i++)
+//         {
+//             if(v[i]!=i) return i;
+//         }
+//         return n;
+            
+        int n=v.size(),i{};
         while(i<n)
         {
-            int crctidx=v[i];
-            // cout<<crctidx<<" ";
-            if(crctidx<n and i!=crctidx)
+            int cidx=v[i];
+            
+            if(cidx<n and i!=cidx)
             {
-                swap(v[crctidx],v[i]);
+                swap(v[i],v[cidx]);
             }
             else{
                 i++;
@@ -36,6 +56,5 @@ public:
             if(v[i]!=i) return i;
         }
         return n;
-            
     }
 };
