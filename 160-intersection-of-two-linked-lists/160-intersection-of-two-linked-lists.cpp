@@ -8,18 +8,18 @@
  */
 class Solution {
 public:
-    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        map<ListNode*,int>m;
-        while(headA)
+    ListNode *getIntersectionNode(ListNode *headA1, ListNode *headB1) {
+        ListNode *headA=headA1 ;
+        ListNode *headB=headB1;
+        while(headA and headB)
         {
-            m[headA]++;
+            if(headA==headB) return headA;
             headA=headA->next;
-        }
-        while(headB)
-        {
-            if(m.find(headB)!=m.end()) return headB;
-            m[headB]++;
             headB=headB->next;
+   
+            if(headA==NULL and headB) headA=headB1;
+            if(headB==NULL and headA) headB=headA1;
+
         }
         return NULL;
     }
