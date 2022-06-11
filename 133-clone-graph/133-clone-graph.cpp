@@ -21,31 +21,31 @@ public:
 
 class Solution {
 public:
-    unordered_map<int,Node*>m;
+    unordered_map<Node*,Node*>m;
     Node* cloneGraph(Node* node) {
         if(!node) return node;
+        
+        m[node]=new Node(node->val);
         queue<Node*>q;
-       q.push(node);
-                    m[node->val]=new Node(node->val);
-
+        q.push(node);
+        
         while(!q.empty())
         {
-            Node* el=q.front();
+            Node* curr=q.front();
             q.pop();
-
             
-            for(auto &it:el->neighbors)
+            for(auto &it:curr->neighbors)
             {
-                if(m.find(it->val)==m.end())
+                if(m.find(it)==m.end())
                 {
-                    m[it->val]=new Node(it->val);
-                                    q.push(it);
-
+                    m[it]=new Node(it->val);
+                    q.push(it);
                 }
-                m[el->val]->neighbors.push_back(m[it->val]);
+                m[curr]->neighbors.push_back(m[it]);
             }
         }
-
-        return m[node->val];
+        
+        return m[node];
+        
     }
 };
