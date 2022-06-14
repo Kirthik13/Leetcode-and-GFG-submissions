@@ -1,55 +1,34 @@
 class Solution {
 public:
-    bool bfs(vector<vector<int>>& graph, vector<int>&vis,int node)
+    bool dfs(vector<vector<int>>& v,int node,vector<int>&col)
     {
-        // vis[node]=prev;
-        // for(auto &i:graph[node])
-        // {
-        //     if(!vis[i])
-        //     {
-        //         if(!dfs(graph,vis,1-prev,i)) return 0;
-        //     }
-        //     else{
-        //         if(prev==vis[i]) return 0;
-        //     }
-        // }
-        // return 1;
-        
-        queue<int>q;
-        q.push(node);
-        vis[node]=0;
-        while(!q.empty())
+        for(auto &it:v[node])
         {
-            int el=q.front();
-            q.pop();
-            for(auto &i:graph[el])
+            if(col[it]==-1)
             {
-                if(!vis[i])
-                {
-                    vis[i]=1-vis[el];
-                    q.push(i);
-                }
-                else{
-                    if(vis[el]==vis[i]) return 0;
-                }
+                col[it]=1-col[node];
+                if(!dfs(v,it,col)) return 0;
             }
-        }
-        return  1;
-    }
-    bool isBipartite(vector<vector<int>>& graph) {
-        
-        int n=graph.size();
-        if(n==1) return 1;
-        vector<int>vis(n,0);
-        for(int i=0;i<n;i++)
-        {
-            if(!vis[i])
-            {
-                if(!bfs(graph,vis,i)) return 0;
+            else{
+                if(col[it]==col[node]) return 0;
             }
         }
         return 1;
-        // vector<vector<int>>adj[n];
-        
+    }        
+    bool isBipartite(vector<vector<int>>& v) {
+        int n=v.size();
+        vector<int>col(n,-1);
+        for(int i=0;i<n;i++)
+        {
+            if(col[i]==-1)
+            {
+                col[i]=1;
+                if(!dfs(v,i,col))
+                {
+                    return 0;
+                }
+            }
+        }
+        return 1;
     }
 };
