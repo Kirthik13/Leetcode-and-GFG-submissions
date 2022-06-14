@@ -12,7 +12,7 @@ public:
 
         q.push({0,0});
         
-        vector<int>vis(n);
+        // vector<int>vis(n);
         int ans=INT_MAX;
         
         while(!q.empty())
@@ -20,7 +20,7 @@ public:
             auto it=q.front();
             q.pop();
             int elidx=it.first;
-            vis[elidx]=1;
+            // vis[elidx]=1;
             int steps=it.second;
             
             if(elidx==n-1)
@@ -30,16 +30,16 @@ public:
             }
             else
             {
-                if(elidx+1<n and !vis[elidx+1])
+                if(elidx+1<n and m.find(v[elidx+1])!=m.end())
                 {
                 q.push({elidx+1,steps+1});
                 }
-                if(elidx-1>=0 and !vis[elidx-1]){
+                if(elidx-1>=0 and m.find(v[elidx-1])!=m.end()){
                 q.push({elidx-1,steps+1});
                 }
                 for(auto j:m[v[elidx]])
                 {
-                    if(!vis[j] and j!=elidx)
+                    if( j!=elidx)
                     {
                         q.push({j,steps+1});
                     }
