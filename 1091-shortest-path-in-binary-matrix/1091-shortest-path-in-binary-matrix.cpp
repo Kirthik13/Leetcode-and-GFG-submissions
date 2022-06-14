@@ -1,74 +1,50 @@
 class Solution {
 public:
-    int shortestPathBinaryMatrix(vector<vector<int>>& grid) {
-           
+    bool isvalid(int &x,int &y,int &n,map<pair<int,int>,int>&vis,vector<vector<int>>&v)
+    {
         
+        return x>=0 and y>=0 and x<n and y<n and !vis[{x,y}] and !v[x][y];
+    }
+    int shortestPathBinaryMatrix(vector<vector<int>>& v) {
+        vector<pair<int,int>>dir={
+            {-1,0},{1,0},{0,-1},{0,1},{-1,1},{1,1},{-1,-1},{1,-1}
+        };
+        queue<pair<pair<int,int>,int>>q;
+        int ans=INT_MAX;
+        int n=v.size();
+        if(v[0][0]!=0 or v[n-1][n-1]!=0) return -1;
+        q.push({{0,0},1});
         
-//         int row = grid.size();
-//         if (row == 0) return -1;
-//         int col = grid[0].size();
-//         if (col == 0 ) return -1;
-//         if (grid[0][0] != 0 | grid[row-1][col-1] != 0) return -1;
-
-//         queue<pair<int, int>> queue;
-//         queue.push(make_pair(0,0));
-//         vector<vector<int>> directions = {{1,1}, {0,1},{1,0},{0,-1},{-1,0},{-1, -1},{1, -1},{-1, 1}};
-//         grid[0][0] = 1;
-//         while(!queue.empty()){
-//             auto curr = queue.front();
-//             int x = curr.first, y = curr.second;
-//             if( x == row -1 && y == col -1) return grid[x][y];
-
-//             for(auto direction : directions){
-//                 int nx = x + direction[0];
-//                 int ny = y + direction[1];
-//                 if(nx >= 0 && nx < row && ny >= 0 && ny < col && grid[nx][ny] == 0){
-//                     queue.push(make_pair(nx,ny));
-//                     grid[nx][ny] = grid[x][y] + 1;
-//                 }
-//             }
-//             queue.pop();
-//         }
-//         return -1;
-        
-        
-        int row=grid.size(),col=grid[0].size();
-        if(col==0 or row==0) return -1;
-        
-        if(grid[0][0] == 1 or grid[row-1][col-1]==1) return -1;
-        
-        queue<pair<int,int>>q;
-        q.push({0,0});
-        grid[0][0]=1;
-        vector<vector<int>>dir={{1,1}, {0,1},{1,0},{0,-1},{-1,0},{-1, -1},{1, -1},{-1, 1}};
-        
+        map<pair<int,int>,int>vis;
         while(!q.empty())
         {
-            auto curr=q.front();
+            auto it=q.front();
+            q.pop();
             
-            int x=curr.first,y=curr.second;
+            int x=it.first.first;
+            int y=it.first.second;
+            int steps=it.second;
             
-            if(x==row-1 and y==col-1)
+            vis[{x,y}]=1;
+            
+            if(x==n-1 and y==n-1)
             {
-                    return grid[x][y];
+                ans=min(ans,steps);
             }
             
-            for(auto &i:dir)
+            for(auto it:dir)
             {
-                int nx=i[0]+x;
-                int ny=i[1]+y;
+                int dx=x+it.first;
+                int dy=y+it.second;
                 
-               
-                
-                if(nx>=0 and nx<row and ny>=0 and ny<col and grid[nx][ny]==0)
+                if(isvalid(dx,dy,n,vis,v))
                 {
-                    q.push({nx,ny});
-                    grid[nx][ny]=grid[x][y]+1;
+                    q.push({{dx,dy},steps+1});
+                    vis[{dx,dy}]=1;
                 }
             }
-                            q.pop();
-
+            
         }
-        return -1;
+        return ans==INT_MAX?-1:ans;
     }
 };
