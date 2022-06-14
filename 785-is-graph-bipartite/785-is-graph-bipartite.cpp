@@ -1,16 +1,28 @@
 class Solution {
 public:
-    bool dfs(vector<vector<int>>& v,int node,vector<int>&col)
+    bool bfs(vector<vector<int>>& v,int node,vector<int>&col)
     {
-        for(auto &it:v[node])
+        col[node]=1;
+        queue<int>q;
+        q.push(node);
+        
+        while(!q.empty())
         {
-            if(col[it]==-1)
+            int nod=q.front();
+            q.pop();
+            
+        
+            for(auto &it:v[nod])
             {
-                col[it]=1-col[node];
-                if(!dfs(v,it,col)) return 0;
-            }
-            else{
-                if(col[it]==col[node]) return 0;
+                if(col[it]==-1)
+                {
+                    col[it]=1-col[nod];
+                    q.push(it);
+                    // if(!dfs(v,it,col)) return 0;
+                }
+                else{
+                    if(col[it]==col[nod]) return 0;
+                }
             }
         }
         return 1;
@@ -22,8 +34,7 @@ public:
         {
             if(col[i]==-1)
             {
-                col[i]=1;
-                if(!dfs(v,i,col))
+                if(!bfs(v,i,col))
                 {
                     return 0;
                 }
