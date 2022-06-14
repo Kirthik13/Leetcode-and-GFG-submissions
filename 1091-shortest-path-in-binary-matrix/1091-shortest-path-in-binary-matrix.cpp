@@ -13,9 +13,12 @@ public:
         int ans=INT_MAX;
         int n=v.size();
         if(v[0][0]!=0 or v[n-1][n-1]!=0) return -1;
-        q.push({{0,0},1});
         
-        map<pair<int,int>,int>vis;
+                map<pair<int,int>,int>vis;
+
+        q.push({{0,0},1});
+        vis[{0,0}]=1;
+
         while(!q.empty())
         {
             auto it=q.front();
@@ -25,7 +28,6 @@ public:
             int y=it.first.second;
             int steps=it.second;
             
-            vis[{x,y}]=1;
             
             if(x==n-1 and y==n-1)
             {
