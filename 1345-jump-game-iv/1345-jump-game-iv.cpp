@@ -1,67 +1,52 @@
 class Solution {
 public:
-    int n;
-    int fn(int idx,vector<int>&v,unordered_map<int,vector<int>>&m)
-{
-    queue<int>q;
-    int ans{};
-    q.push(0);
-    while(!q.empty())
-    {
-        ans++;
-        int sz=q.size();
-        for(int i=0;i<sz;i++)
+    int minJumps(vector<int>& v) {
+        int n=v.size();
+        unordered_map<int,vector<int>>m;
+        for(int i=0;i<v.size();i++)
         {
-            int j=q.front();
+            m[v[i]].push_back(i);
+        }
+        
+        queue<pair<int,int>>q;
+
+        q.push({0,0});
+        
+        vector<int>vis(n);
+        int ans=INT_MAX;
+        
+        while(!q.empty())
+        {
+            auto it=q.front();
             q.pop();
-
-            if(j-1>=0 and m.find(v[j-1])!=m.end())
+            int elidx=it.first;
+            vis[elidx]=1;
+            int steps=it.second;
+            
+            if(elidx==n-1)
             {
-                q.push(j-1);
+                ans=min(ans,steps);
+                
             }
-            if(j+1<n and m.find(v[j+1])!=m.end())
+            else
             {
-                if(j+1==n-1)
+                if(elidx+1<n and !vis[elidx+1])
                 {
-                    return ans;
+                q.push({elidx+1,steps+1});
                 }
-                q.push(j+1);
-
-            }
-            if(m.find(v[j])!=m.end())
-            {
-                for(auto k:m[v[j]])
+                if(elidx-1>=0 and !vis[elidx-1]){
+                q.push({elidx-1,steps+1});
+                }
+                for(auto j:m[v[elidx]])
                 {
-                    if(k!=j)
+                    if(!vis[j] and j!=elidx)
                     {
-                        if(k==n-1)
-                        {
-                            return ans;
-                        }
-                        q.push(k);
+                        q.push({j,steps+1});
                     }
                 }
             }
-            m.erase(v[j]);
-
+            m.erase(v[elidx]);
         }
-    }
-    return ans;
-
-}
-    int minJumps(vector<int>& v) {
-      n=v.size();
-        if(n==1)
-        {
-            return 0;
-        }
-   
-    unordered_map<int,vector<int>>m;
-    for(int i=0;i<n;i++)
-    {
-        m[v[i]].push_back(i);
-    }
-    
-    return fn(0,v,m);       
+        return ans;
     }
 };
