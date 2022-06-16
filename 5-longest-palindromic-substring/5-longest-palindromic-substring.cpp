@@ -26,22 +26,5 @@ public:
            
         }
         return ans;
-//         int n=s.size();
-//         bool dp[n][n];
-//         string res;
-//         for (int i = n - 1; i >= 0; i--) 
-//         {
-//             for (int j = i; j < n; j++) 
-//             {
-//               dp[i][j] = s[i] == s[j] && (j - i < 3 || dp[i + 1][j - 1]);
-
-//               if (dp[i][j] && (res.size() == 0 || j - i + 1 > res.length())) 
-//               {
-//                 res = s.substr(i, j -i+ 1);
-//               }
-//             }
-//         }
-    
-//          return res;
     }
 };
