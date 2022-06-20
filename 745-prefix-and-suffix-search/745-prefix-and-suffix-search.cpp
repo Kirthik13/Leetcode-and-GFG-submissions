@@ -12,7 +12,8 @@ class WordFilter {
                 string p = word.substr(0, j);
                 for (int k = 0; k < wordSize; k++) {
                     string s = word.substr(k, wordSize);
-                    hashMap[p + "|" + s] = i + 1;
+                    // cout<<"p : "<<p<<" => s : "<<s<<endl;
+                    hashMap[p + "|" + s] = i ;
                 }
             }
         }
@@ -20,6 +21,7 @@ class WordFilter {
 
     int f(string prefix, string suffix) {
         string s = prefix + "|" + suffix;
-        return hashMap[s] - 1;
+        if(hashMap.find(s)==hashMap.end()) return -1;
+        return hashMap[s] ;
     }
 };
