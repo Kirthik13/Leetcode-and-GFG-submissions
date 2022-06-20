@@ -1,23 +1,26 @@
-
-    bool compare(string &a,string &b){
-    return a.length()>b.length();
-}
 class Solution {
 public:
     int minimumLengthEncoding(vector<string>& v) {
-        sort(begin(v),end(v),compare);
-        
-        string res=v[0]+"#";
-        
-        for(int i=1;i<v.size();i++)
+        unordered_set<string>st(begin(v),end(v));
+        for(auto &w:st)
         {
-            string t=v[i]+"#";
-            auto it=res.find(t);
-            if(it==-1)
+            string g=w;
+            for(int i=1;i<g.size();i++)
             {
-                res+=(t);
+                string t=g.substr(i);
+              
+                if(st.find(t)!=st.end()){
+                st.erase(t);
+                }
+                
             }
+            
         }
-        return res.size();
+        int res{};
+        for(auto &i:st)
+        {
+            res+=(i.size()+1);
+        }
+        return res;
     }
 };
