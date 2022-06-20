@@ -1,27 +1,34 @@
 class WordFilter {
-   private:
-    unordered_map<string, int> hashMap;
+public:
+    unordered_map<string,int>m;
+    WordFilter(vector<string>& v) {
+        for(int i=0;i<v.size();i++)
+        {
+            int n=v[i].size();
+            string s=v[i];
+            for(int j=1;j<=n;j++)
+            {
+                string t=s.substr(0,j);
+                for(int k=0;k<n;k++)
+                {
+                    string h=s.substr(k);
+                    // cout<<"t : "<<t<<" =>  h : "<<h<<endl;
 
-   public:
-    WordFilter(vector<string>& words) {
-        int n = words.size();
-        for (int i = 0; i < n; i++) {
-            string word = words[i];
-            int wordSize = word.size();
-            for (int j = 1; j <= wordSize; j++) {
-                string p = word.substr(0, j);
-                for (int k = 0; k < wordSize; k++) {
-                    string s = word.substr(k, wordSize);
-                    // cout<<"p : "<<p<<" => s : "<<s<<endl;
-                    hashMap[p + "|" + s] = i ;
+                    m[t+"|"+h]=i;
                 }
             }
         }
     }
-
+    
     int f(string prefix, string suffix) {
-        string s = prefix + "|" + suffix;
-        if(hashMap.find(s)==hashMap.end()) return -1;
-        return hashMap[s] ;
+        string t=prefix+"|"+suffix;
+        if(m.find(t)==m.end()) return -1;
+        return m[t];
     }
 };
+
+/**
+ * Your WordFilter object will be instantiated and called as such:
+ * WordFilter* obj = new WordFilter(words);
+ * int param_1 = obj->f(prefix,suffix);
+ */
