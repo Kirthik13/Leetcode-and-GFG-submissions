@@ -22,15 +22,15 @@ public:
             {
                 inc++;
             }
-            notinc=fn(num,k,v,i+1,sum,dp);
-            return dp[i][sum]=min(inc,notinc);
+            // notinc=fn(num,k,v,i+1,sum,dp);
 
 
             
         }
         notinc=fn(num,k,v,i+1,sum,dp);
-        
-        return notinc;
+                    return dp[i][sum]=min(inc,notinc);
+
+        // return notinc;
     }
     int minimumNumbers(int num, int k) {
         if(num==0 ) return 0;
