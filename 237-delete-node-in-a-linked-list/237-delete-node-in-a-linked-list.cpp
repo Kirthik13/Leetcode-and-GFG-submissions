@@ -18,8 +18,9 @@ public:
             prev=h;
             h=h->next;
         }
+        delete(prev->next);
+
         prev->next=NULL;
-        // delete(h);
         
     }
 };
