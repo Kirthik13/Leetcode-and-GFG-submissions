@@ -10,24 +10,17 @@
  */
 class Solution {
 public:
-    ListNode* fn(ListNode* &root)
-    {
-        if( !root or !root->next ) return root;
-        
-        ListNode* head=fn(root->next);
-        ListNode* node=root->next;
-        node->next=root;
-        root->next=NULL;
-      
-        return head;
-        
-        
-        
-    }
     ListNode* reverseList(ListNode* head) {
         ListNode* h=head;
-        ListNode* ans=fn(h);
+        ListNode* prev=NULL;
         
-        return ans;
+        while(h)
+        {
+            ListNode* nextnode=h->next;
+            h->next=prev;
+            prev=h;
+            h=nextnode;
+        }
+        return prev;
     }
 };
