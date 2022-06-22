@@ -24,11 +24,11 @@ public:
         
         ListNode* h=node;
         
-        ListNode* prev=h->next;
-        swap(h->val,prev->val);
+        ListNode* nextnode=h->next;
+        swap(h->val,nextnode->val);
                 h->next=h->next->next;
 
-        // delete(prev);
+        delete(nextnode);
         
     }
 };
