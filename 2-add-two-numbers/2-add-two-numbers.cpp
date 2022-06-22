@@ -10,66 +10,69 @@
  */
 class Solution {
 public:
+    // ListNode* reverse(ListNode* root)
+    // {
+    //     if(!root->next)
+    //     {
+    //         return root;
+    //     }
+    //     ListNode* h=reverse(root->next);
+    //     root->next->next=root;
+    //     root->next=NULL;
+    //     return h;
+    // }
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-         if(!l1 or !l2)
-         {
-             if(!l1) return l2;
-             return l1;
-
-         }
-        ListNode* h1=l1;
-        ListNode* h2=l2;
-        string s1,s2;
-        while(h1)
-        {
-            s1.push_back(char(h1->val)+48);
-            h1=h1->next;
-        }
-        while(h2)
-        {
-            s2.push_back(char(h2->val)+48);
-            h2=h2->next;
-        } 
-        h1=l1;
-        h2=l2;
-        int car{};
-        ListNode* dum=new ListNode(0);
-        ListNode* p=dum;
-        int i=0;
-        for( i=0;i<min(s1.size(),s2.size());i++)
-        {
-            int a=(int(s1[i])-48)+(int(s2[i])-48)+car;
-            // cout<<"A : "<<a<<endl;
-            p->next=new ListNode(a%10);
-            car=a/10;
-            p=p->next;
-             
-        }
-        while(i<s1.size())
-        {
-            int a=(int(s1[i])-48)+car;
-            p->next=new ListNode(a%10);
-            p=p->next;
-                        car=a/10;
-
-            i++;
-        }
+//         ListNode* l1=reverse(h1);
+//         ListNode* l2=reverse(h2);
         
-        while(i<s2.size())
+        ListNode* dum=new ListNode(-1);
+        ListNode* curr=dum;
+        int carry{};
+        while(l1 and l2)
         {
-            int a=(int(s2[i])-48)+car;
-            p->next=new ListNode(a%10);
-            p=p->next;
-            car=a/10;
-            i++;
-        }
-        if(car)
-        {
-            p->next=new ListNode(car);
-            p=p->next;
-        }
-        p->next=NULL;
-        return dum->next;
+            int sum=l1->val+l2->val+carry;
             
+            curr->next=new ListNode(sum%10);
+            carry=sum/10;
+            curr=curr->next;
+            
+            l1=l1->next;
+            l2=l2->next;
+
+        }
+        while(l1)
+        {
+            int sum=l1->val+carry;
+            
+            curr->next=new ListNode(sum%10);
+            carry=sum/10;
+            curr=curr->next;
+            
+            l1=l1->next;
+        }
+        while(l2)
+        {
+            int sum=l2->val+carry;
+            
+            curr->next=new ListNode(sum%10);
+            carry=sum/10;
+            curr=curr->next;
+            
+            
+            l2=l2->next;
+        }
+        while(carry)
+        {
+            int sum=carry;
+            curr->next=new ListNode(sum%10);
+            carry=sum/10;
+            curr=curr->next;
+            
+        }
+        curr->next=NULL;
+        // ListNode* ansnode=reverse(dum->next);
+        // return ansnode;
+        return dum->next;
+        
     }
 };
