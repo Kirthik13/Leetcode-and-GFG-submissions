@@ -110,35 +110,98 @@ struct Node{
 
 /*  Function which returns the  root of 
     the flattened linked list. */
-Node *flatten(Node *root)
+Node* midnode(Node* head)
 {
-    if(!root) return root;
-    priority_queue<int,vector<int>,greater<int>>pq;
-    Node* h1=root;
-    while(h1)
-    {
-        // pq.push(h1->data);
-        Node* h2=h1;
-        while(h2)
-        {
-        pq.push(h2->data);
-        h2=h2->bottom;
-            
-        }
-        h1=h1->next;
-    }
+    Node* f=head->bottom;
+    Node* s=head;
     
+    while(f and f->bottom)
+    {
+        f=f->bottom->bottom;
+        s=s->bottom;
+    }
+    return s;
+    
+}
+Node* sort(Node* l1,Node* l2)
+{
     Node* dum=new Node(-1);
     Node* curr=dum;
     
-    while(!pq.empty())
+    while(l1 and l2)
     {
-        curr->bottom=new Node(pq.top());
-        pq.pop();
+        if(l1->data<=l2->data)
+        {
+            curr->bottom=l1;
+            l1=l1->bottom;
+            // l1=l1->bottom;
+            
+        }
+        else{
+            curr->bottom=l2;
+            l2=l2->bottom;
+            
+        }
         curr=curr->bottom;
+        
+    }
+    while(l1)
+    {
+         curr->bottom=l1;
+            l1=l1->bottom;
+        curr=curr->bottom;
+            
+    }
+    while(l2)
+    {
+         curr->bottom=l2;
+            l2=l2->bottom;
+        curr=curr->bottom;
+            
     }
     curr->bottom=NULL;
     return dum->bottom;
+}
+Node* merge(Node* root)
+{
+    if(!root->bottom) return root;
+    
+    Node* l1=root;
+    Node* mid=midnode(l1);
+    Node* l2=mid->bottom;
+    mid->bottom=NULL;
+    
+    
+    return sort(merge(l1),merge(l2));
+}
+Node *flatten(Node *root)
+{
+    Node* h1=root;
+    Node* down=root;
+    while(down->bottom)
+    {
+        down=down->bottom;
+    }
+    Node*  prev=h1;
+    h1=h1->next;
+   while(h1)
+   {
+       
+            prev->next=NULL;
+            Node* h2=h1;
+           down->bottom=h2;
+           
+           while(down->bottom)
+           {
+               down=down->bottom;
+           }
+           prev=h1;
+         
+       
+       h1=h1->next;
+   }
+   
+   Node* ansnode=merge(root);
     
    // Your code here
 }
