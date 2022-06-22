@@ -11,14 +11,21 @@ public:
     ListNode *detectCycle(ListNode *head) {
         ListNode* f=head;
         ListNode* s=head;
+        int ch{};
         while(f and f->next)
         {
-               f=f->next->next;
+            f=f->next->next;
             s=s->next;
             if(f==s)
             {
+                ch=1;
+                break;    
+            }
+         
+        }
+        if(ch)
+        {
                 f=head;
-                // cout<<"s : "<<s->val<<endl;
                 while(f and s)
                 {
                        if(f==s)
@@ -29,8 +36,6 @@ public:
                     s=s->next;
                  
                 }
-            }
-         
         }
         return NULL;
     }
