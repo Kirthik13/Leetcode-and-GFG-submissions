@@ -14,7 +14,7 @@ public:
         
         while(h1 and h2)
         {
-                                    if(h1==h2) return h1;
+                                 if(h1==h2) return h1;
 
             // if(!h1->next and !h2->next) break;
               h1=h1->next;
@@ -28,8 +28,7 @@ public:
             {
                 h2=headA;
             }
-            
-          
+
             
 
         }
