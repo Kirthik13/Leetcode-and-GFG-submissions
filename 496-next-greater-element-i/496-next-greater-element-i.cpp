@@ -1,50 +1,36 @@
 class Solution {
 public:
-    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
-    
-        stack<int>s;
+    vector<int> nextGreaterElement(vector<int>& v1, vector<int>& v2) {
+                int n=v2.size();
+
+        vector<int>tot(v1.size());
+        stack<int>st;
+        st.push(v2[n-1]);
+        vector<int>ans(n,-1);
+        
+        for(int i=n-2;i>=0;i--)
+        {
+           
+            while(st.size()>0 and st.top()<v2[i])
+            {
+                st.pop();
+            }
+            if(st.size()>0) ans[i]=st.top();
+            st.push(v2[i]);
+        }
         map<int,int>m;
-        for(auto &i:nums1)
+        for(int i=0;i<v2.size();i++)
         {
-            m[i]=0;
+            m[v2[i]]=i;
         }
-        for(int i=nums2.size()-1;i>=0;i--)
+        
+        for(int i=0;i<v1.size();i++)
         {
-            if(s.empty())
-            {
-                m[nums2[i]]=-1;
-                s.push(nums2[i]);
-                continue;
-            }
-            else if(!s.empty())
-            {
-                int c=nums2[i];
-                while(!s.empty() and s.top()<=c)
-                {
-                    s.pop();
-                }
-               
-                if(m.find(c)!=m.end())
-                {
-                    if(!s.empty()){
-                    m[c]=s.top();
-                        }
-                    else{
-                        m[c]=-1;
-                    }
-                }
-                
-            }
-            s.push(nums2[i]);
+            int idx=m[v1[i]];
+            tot[i]=ans[idx];
+        }
+        return tot;
             
-        }
-        // sort(begin(nums1),end(nums1));
-        vector<int>res(nums1.size(),-1);
-        // int j=0;
-        for(int i=0;i<res.size();i++)
-        {
-           res[i]=m[nums1[i]];
-        }
-        return res;
+        
     }
 };
