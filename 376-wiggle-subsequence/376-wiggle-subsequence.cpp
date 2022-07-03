@@ -1,21 +1,28 @@
 class Solution {
 public:
     int dp[1001][2];
-    int f(vector<int>& nums, int  i, int positive){
-        if(i==nums.size()-1) return  1;
-        if(dp[i][positive]!=-1) return dp[i][positive];
-        if(positive){
-            if(nums[i+1] - nums[i]>0)
-                return 1 + f(nums, i+1, 0);
-            return f(nums, i+1, 1);
+    int fn(vector<int>&v,int idx,int positive)
+    {
+        if(idx==v.size()-1) return 1;
+        if(dp[idx][positive]!=-1) return dp[idx][positive];
+        
+        int take=INT_MIN;
+            
+        if(positive and v[idx+1]-v[idx]>0)
+        {
+           take=1+fn(v,idx+1,0);
         }
-        if(!positive  && nums[i+1]-nums[i]<0)
-             return 1 + f(nums, i+1, 1);
-        return f(nums, i+1 , 0);
+         if(!positive and v[idx+1]-v[idx]<0)
+        {
+           take=1+fn(v,idx+1,1);
+        }
+        int nottake=fn(v,idx+1,positive);
+        return  dp[idx][positive]=max(nottake,take);
+        
     }
-        int wiggleMaxLength(vector<int>& nums) {
-        memset(dp, -1 , sizeof dp);
-        return max(f(nums,0, 1), f(nums, 0, 0));
+    int wiggleMaxLength(vector<int>& v) {
+        int n=v.size();
+        memset(dp,-1,sizeof(dp));
+        return max(fn(v,0,1),fn(v,0,0));
     }
-   
 };
