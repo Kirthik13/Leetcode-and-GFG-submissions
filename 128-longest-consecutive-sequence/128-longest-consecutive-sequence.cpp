@@ -2,26 +2,33 @@ class Solution {
 public:
     int longestConsecutive(vector<int>& v) {
         if(v.size()<=1) return v.size();
-        set<int>st(begin(v),end(v));
-        int ans=1,curr_max=1;
-        int prev=*st.begin();
-        auto i=st.begin();
-        i++;
-        for(i;i!=st.end();i++)
+        
+        map<int,int>m;
+        for(auto &i:v)
         {
-            int el=*i;
+            m[i]++;
+        }
+        
+        int prev=(m.begin()->first);
+        int curr=1;
+        int ans=0;
+        auto i=m.begin();
+        i++;
+        for(;i!=m.end();i++)
+        {
+            int el=i->first;
             if(prev+1==el)
             {
-             curr_max++;   
+                curr++;
             }
             else{
-                ans=max(curr_max,ans);
-                curr_max=1;
+                ans=max(ans,curr);
+                curr=1;
             }
             prev=el;
 
         }
-         ans=max(curr_max,ans);
+        ans=max(ans,curr);
         return ans;
             
     }
