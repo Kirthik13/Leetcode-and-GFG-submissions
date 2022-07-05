@@ -3,33 +3,28 @@ public:
     int longestConsecutive(vector<int>& v) {
         if(v.size()<=1) return v.size();
         
-        map<int,int>m;
+        int ans=1;
+        unordered_set<int>st(begin(v),end(v));
         for(auto &i:v)
         {
-            m[i]++;
-        }
-        
-        int prev=(m.begin()->first);
-        int curr=1;
-        int ans=0;
-        auto i=m.begin();
-        i++;
-        for(;i!=m.end();i++)
-        {
-            int el=i->first;
-            if(prev+1==el)
-            {
-                curr++;
-            }
-            else{
-                ans=max(ans,curr);
-                curr=1;
-            }
-            prev=el;
-
-        }
-        ans=max(ans,curr);
-        return ans;
+            if(st.find(i)==st.end()) continue;
+            st.erase(i);
             
+            int prev=i-1,next=i+1;
+            
+            while(st.find(prev)!=st.end())
+            {
+                st.erase(prev);
+                --prev;
+            }
+            while(st.find(next)!=st.end())
+            {
+                st.erase(next);
+                ++next;
+            }
+            
+            ans=max(ans,next-prev-1);
+        }
+        return ans;
     }
 };
