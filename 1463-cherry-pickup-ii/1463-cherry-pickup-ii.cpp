@@ -2,11 +2,13 @@ class Solution {
 public:
     int cherryPickup(vector<vector<int>>& v) {
         int m=v.size(),n=v[0].size();
-          vector<vector<vector<int>>>dp(m,vector<vector<int>>(n,vector<int>(n,-1)));
-    
-    int bc;
+          // vector<vector<vector<int>>>dp(m,vector<vector<int>>(n,vector<int>(n,-1)));
+        
+    vector<vector<int>>dp(n,vector<int>(n,0));    
     for(int r=m-1;r>=0;r--)
     {
+        vector<vector<int>>curr(n,vector<int>(n,0));    
+
         for(int ac=n-1;ac>=0;ac--)
         {
             for(int bc=n-1;bc>=0;bc--)
@@ -25,7 +27,7 @@ public:
                             h=0;
                         }
                         else{
-                            h=(new_ac>=0 and new_ac<n and new_bc>=0 and new_bc<n)?dp[r+1][new_ac][new_bc]:-1e8;
+                            h=(new_ac>=0 and new_ac<n and new_bc>=0 and new_bc<n)?dp[new_ac][new_bc]:-1e8;
                         }
                         if(h!=-1e8)
                         {
@@ -42,12 +44,13 @@ public:
                     }
 
                 }
-               dp[r][ac][bc]=ans;
+               curr[ac][bc]=ans;
             }
         }
+        dp=curr;
         
      
     }
-    return dp[0][0][n-1];
+    return dp[0][n-1];
     }
 };
