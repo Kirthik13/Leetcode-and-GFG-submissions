@@ -1,49 +1,53 @@
 class Solution {
 public:
-    int dy[3]={-1,0,1};
-int n,m;
-int dp[71][71][71];
-int fn(int row,int c1,int c2,vector<vector<int>>&v)
-{
-    if(row>=n)
+    int cherryPickup(vector<vector<int>>& v) {
+        int m=v.size(),n=v[0].size();
+          vector<vector<vector<int>>>dp(m,vector<vector<int>>(n,vector<int>(n,-1)));
+    
+    int bc;
+    for(int r=m-1;r>=0;r--)
     {
-        return 0;
-    }
-    if(c1<0 or c1>=m or c2<0 or c2>=m)
-    {
-        return INT_MIN;
-    }
-    if(dp[row][c1][c2]!=-1)
-    {
-        return dp[row][c1][c2];
-    }
-    int maxi=0;
-    for(int i=0;i<3;i++)
-    {
-        for(int j=0;j<3;j++)
+        for(int ac=n-1;ac>=0;ac--)
         {
-            int newrow=row+1;
-            int newcol1=c1+dy[i];
-            int newcol2=c2+dy[j];
-
-            if(c1==c2)
+            for(int bc=n-1;bc>=0;bc--)
             {
-                maxi=max(maxi,v[row][c1]+fn(newrow,newcol1,newcol2,v));
-            }
-            else{
-                maxi=max(maxi,v[row][c1]+v[row][c2]+fn(newrow,newcol1,newcol2,v));
+                int ans=INT_MIN;
+                
+                 for(int i=-1;i<=1;i++)
+                {
+                    for(int j=-1;j<=1;j++)
+                    {
+                        int new_ac=ac+i;
+                        int new_bc=bc+j;
+                        int h;
+                        if(r+1>=m)
+                        {
+                            h=0;
+                        }
+                        else{
+                            h=(new_ac>=0 and new_ac<n and new_bc>=0 and new_bc<n)?dp[r+1][new_ac][new_bc]:-1e8;
+                        }
+                        if(h!=-1e8)
+                        {
+                            if(ac==bc)
+                            {
+                                h+=v[r][ac];
+                            }
+                            else{
+                                h+=(v[r][ac]+v[r][bc]);
+                            }
+                        }
+                        ans=max(ans,h);
 
+                    }
+
+                }
+               dp[r][ac][bc]=ans;
             }
         }
+        
+     
     }
-    return dp[row][c1][c2]=maxi;
-
-
-}
-    int cherryPickup(vector<vector<int>>& v) {
-        n=v.size();
-    m=v[0].size();
-    memset(dp,-1,sizeof(dp));
-    return fn(0,0,m-1,v);
+    return dp[0][0][n-1];
     }
 };
