@@ -5,10 +5,12 @@ public:
         int r=min(m-1,n-1);
         
         double ans=1;
-        
+        int h=N-r+1;
         for(int i=1;i<=r;i++)
         {
-            ans=ans*(N-r+i)/i;
+            ans=ans*h/i;
+            h++;
+            
             
         }
         
