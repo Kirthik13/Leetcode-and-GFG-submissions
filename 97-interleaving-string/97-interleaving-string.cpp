@@ -6,6 +6,9 @@ public:
         if(i>=s1.size() and j>=s2.size() and k>=s3.size()) return 1;
         
         if(k>=s3.size()) return 0;
+                if(i>=s1.size() and j>=s2.size()) return 0;
+        // if(j>=s2.size()) return 0;
+
         
         if(dp[i][j][k]!=-1) return dp[i][j][k];
         
