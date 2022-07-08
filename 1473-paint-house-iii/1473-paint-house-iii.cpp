@@ -8,7 +8,6 @@ public:
         {
             return (target==grp)?0:mx;
         }
-        // if(idx > v.size()) return mx;
         
         if(dp[idx][grp][prevcolor]!=-1) return dp[idx][grp][prevcolor];
         
@@ -20,7 +19,7 @@ public:
             {
                 mincost=fn(v,cost,idx+1,grp+1,v[idx],target);
             }
-            else  mincost=fn(v,cost,idx+1,grp,v[idx],target);
+            else  mincost=fn(v,cost,idx+1,grp,prevcolor,target);
         }
         else{
             for(int j=0;j<cost[0].size();j++)
