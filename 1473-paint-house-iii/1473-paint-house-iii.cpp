@@ -4,11 +4,11 @@ public:
     const int mx = 1e7+1;
     int fn(vector<int>& v, vector<vector<int>>& cost, int idx, int grp,int prevcolor, int target)
     {
-        if(idx==v.size())
+        if(idx>=v.size())
         {
             return (target==grp)?0:mx;
         }
-        if(idx > v.size()) return mx;
+        // if(idx > v.size()) return mx;
         
         if(dp[idx][grp][prevcolor]!=-1) return dp[idx][grp][prevcolor];
         
