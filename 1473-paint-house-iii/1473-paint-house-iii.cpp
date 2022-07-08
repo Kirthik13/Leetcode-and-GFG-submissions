@@ -2,7 +2,7 @@ class Solution {
 public:
     int dp[100][100][21];
     const int mx = 1e7+1;
-    int fn(vector<int>& v, vector<vector<int>>& cost, int idx, int grp,int prevcolor, int target)
+    int fn(vector<int>& v, vector<vector<int>>& cost, int idx, int grp,int prevcolor, int target,int n)
     {
         if(idx>=v.size())
         {
@@ -17,19 +17,19 @@ public:
         {
             if(prevcolor!=v[idx])
             {
-                mincost=fn(v,cost,idx+1,grp+1,v[idx],target);
+                mincost=fn(v,cost,idx+1,grp+1,v[idx],target,n);
             }
-            else  mincost=fn(v,cost,idx+1,grp,prevcolor,target);
+            else  mincost=fn(v,cost,idx+1,grp,prevcolor,target,n);
         }
         else{
-            for(int j=0;j<cost[0].size();j++)
+            for(int j=0;j<n;j++)
             {
                 
                 int tmp;  //store the current cost
+                int new_color=j+1;
+                if((new_color)!=prevcolor) tmp = cost[idx][j] +  fn(v,cost,idx+1,grp+1,new_color,target,n);
                 
-                if((j+1)!=prevcolor) tmp = cost[idx][j] +  fn(v,cost,idx+1,grp+1,j+1,target);
-                
-                else tmp = cost[idx][j] + fn(v,cost,idx+1,grp,j+1,target);
+                else tmp = cost[idx][j] + fn(v,cost,idx+1,grp,new_color,target,n);
                 mincost=min(mincost,tmp);
                 
             }
@@ -38,7 +38,7 @@ public:
     }
     int minCost(vector<int>& v, vector<vector<int>>& cost, int m, int n, int target) {
         memset(dp,-1,sizeof(dp));
-        int ans= fn(v,cost,0,0,0,target);
+        int ans= fn(v,cost,0,0,0,target,n);
         if(ans==mx) return -1;
         else return ans;
         
