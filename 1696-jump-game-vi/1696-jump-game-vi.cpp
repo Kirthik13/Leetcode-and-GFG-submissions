@@ -24,20 +24,20 @@ public:
         deque<int>dq;
         int n=v.size();
         int curr=0;
-        for(int i=n-1;i>=0;i--)
+        for(int i=0;i<n;i++)
         {
-           curr=v[i]+(dq.empty()?0:v[dq.front()]);
+           curr=v[i]+(dq.empty()?0:v[dq.back()]);
            
-            while(!dq.empty() and curr>v[dq.back()])
-            {
-                dq.pop_back();
-                
-            }
-            dq.push_back(i);
-            
-            if(dq.front()>=i+k)
+            while(!dq.empty() and curr>v[dq.front()])
             {
                 dq.pop_front();
+                
+            }
+            dq.push_front(i);
+            
+            if(dq.back()+k<=i)
+            {
+                dq.pop_back();
                 
             }
             
