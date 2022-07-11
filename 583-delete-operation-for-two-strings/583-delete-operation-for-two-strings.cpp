@@ -1,27 +1,29 @@
 class Solution {
 public:
-    // map<pair<int,int>,int>dp;
-    int dp[501][501];
-    int fn(string s1,string s2,int i,int j,int m,int n)
+    int fn(string s, string t,int idx1,int idx2,int m,int n, vector<vector<int>>&dp)
     {
-       if(i==m and j==n ) return 0;
-       if(i==m) return n-j;
-       if(j==n) return m-i;
+        if(idx1>=m and idx2>=n) return 0;
+        if(idx1>=m) return n-idx2;
+        if(idx2>=n) return m-idx1;
+
+        if(dp[idx1][idx2]!=-1) return dp[idx1][idx2];
         
-        if(dp[i][j]!=-1) return dp[i][j];
-       if(s1[i]==s2[j])
-       {
-           return dp[i][j]=fn(s1,s2,i+1,j+1,m,n);
-       }
+        if(s[idx1]==t[idx2])
+        {
+            return fn(s,t,idx1+1,idx2+1,m,n,dp);
+        }
+        int call1=INT_MAX,call2=INT_MAX;
+        call1=fn(s,t,idx1+1,idx2,m,n,dp);
+        call2=fn(s,t,idx1,idx2+1,m,n,dp);
         
-        
-        return dp[i][j]=1+min(fn(s1,s2,i+1,j,m,n),fn(s1,s2,i,j+1,m,n));
-        
+        return dp[idx1][idx2]=1+min(call1,call2);
+
     }
-    int minDistance(string s1, string s2) {
-        
-        int m=s1.size(),n=s2.size();
-        memset(dp,-1,sizeof(dp));
-        return fn(s1,s2,0,0,m,n);
+    int minDistance(string s, string t) {
+          int m=s.size(),n=t.size();
+            vector<vector<int>>dp(m+1,vector<int>(n+1,-1));
+            return fn(s,t,0,0,m,n,dp);
+            
+            
     }
 };
