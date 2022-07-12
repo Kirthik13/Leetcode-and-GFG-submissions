@@ -19,10 +19,10 @@ public:
             int call1{},call2{};
             if(s[idx1]==t[idx2])
             {
-                call1+=prev;//prev
+                call1=prev;//prev
             }
        
-                call2+=dp[idx2];
+                call2=dp[idx2];
                 
             
             dp[idx2]=(call1+call2)%mod;
