@@ -3,7 +3,7 @@ public:
 
     bool fn(vector<int>& v,int idx,int n,int currsum,int target,int nos,vector<int>&vis)
     {
-        if(nos==3) return 1;
+        if(nos==4) return 1;
         
         if(currsum==target)
         {
@@ -34,9 +34,7 @@ public:
         
         int target=totsum/4;
         
-        // int maxi=*max_element(begin(v),end(v));
         
-        // if(maxi>target) return 0;
         
         vector<int> vis(n,0);
        
