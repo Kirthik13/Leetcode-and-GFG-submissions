@@ -7,7 +7,7 @@ public:
     {
         if(t[idx2]=='*')   return fn(s,t,idx1,idx2+1,m,n,dp);
 
-        if(idx2==n-1 and t[idx2]=='*') return 1;
+        // if(idx2==n-1 and t[idx2]=='*') return 1;
         return 0;
     }
     if(idx2>=n) return 0;
