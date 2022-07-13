@@ -27,7 +27,10 @@ public:
     }
     int maxProfit(vector<int>& v, int fee) {
         int n=v.size();
-        vector<vector<int>>dp(n+1,vector<int>(2,0));
+        // vector<vector<int>>dp(n+1,vector<int>(2,0));
+        vector<int>dp(2,0);
+        vector<int>curr(2,0);
+
         
         for(int idx=n-1;idx>=0;idx--)
         {
@@ -37,24 +40,25 @@ public:
 
                 if(buy)
                 {
-                    int bought=dp[idx+1][false]-v[idx];
-                    int notbought=dp[idx+1][buy];
+                    int bought=dp[false]-v[idx];
+                    int notbought=dp[buy];
 
                     curr_res=max(bought,notbought);
 
                 }
                 else{
-                     int sold=dp[idx+1][true]+(v[idx]-fee);
-                    int notsold=dp[idx+1][buy];
+                     int sold=dp[true]+(v[idx]-fee);
+                    int notsold=dp[buy];
 
                     curr_res=max(sold,notsold);
 
                 }
-                dp[idx][buy]= curr_res;
+                curr[buy]= curr_res;
             }
+            dp=curr;
         }
         
-        return dp[0][1];
+        return dp[1];
         // return fn(v,0,n,1,fee,dp);
     }
 };
