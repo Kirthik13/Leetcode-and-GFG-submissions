@@ -29,7 +29,7 @@ public:
         int n=v.size();
         // vector<vector<int>>dp(n+1,vector<int>(2,0));
         vector<int>dp(2,0);
-        vector<int>curr(2,0);
+        // vector<int>curr(2,0);
 
         
         for(int idx=n-1;idx>=0;idx--)
@@ -53,9 +53,8 @@ public:
                     curr_res=max(sold,notsold);
 
                 }
-                curr[buy]= curr_res;
+                dp[buy]= curr_res;
             }
-            dp=curr;
         }
         
         return dp[1];
