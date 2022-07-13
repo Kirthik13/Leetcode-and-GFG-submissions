@@ -31,29 +31,38 @@ public:
     int lengthOfLIS(vector<int>& v) {
         // v.insert(v.begin(),INT_MIN);
                 int n=v.size();
-        vector<vector<int>>dp(n+1,vector<int>(n+1,-1));
+        vector<vector<int>>dp(n+1,vector<int>(n+1,0));
 //         vector<int>dp(n+1,0);
 //         // vector<int>curr(n+1,0);
 
         
-//         for(int idx=n-1;idx>=0;idx--)
-//         {
+        for(int idx=n-1;idx>=0;idx--)
+        {
 
-//             for(int previdx=n-1;previdx>=-1;previdx--)
-//             {
-//                     int call1{};
-//                     if(previdx==-1 or v[idx]>v[previdx])
-//                     {
-//                         call1=1+dp[idx+1][idx];
-//                     }
-//                     call1=max(call1,dp[idx+1][previdx]);
+            for(int previdx=n-1;previdx>=0;previdx--)
+            {
+                        int call1{};
+     
+                        if(idx==previdx)
+                        {
+                            call1=1+dp[idx+1][idx];
+                            call1=max(call1,dp[idx+1][idx+1]);
+                        }
+                        else
+                        {
+                            if( v[idx]>v[previdx])
+                            {
+                                call1=1+dp[idx+1][idx];
+                            }
+                            call1=max(call1,dp[idx+1][previdx]);
+                       }
 
-//                     return dp[idx][previdx+1]=call1;
-//             }
-//             // dp=curr;
-//         }
+                      dp[idx][previdx]=call1;
+            }
+            // dp=curr;
+        }
         
-        // return dp[0][0];
-        return fn(v,0,n,0,dp);
+        return dp[0][0];
+        // return fn(v,0,n,0,dp);
     }
 };
