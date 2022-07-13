@@ -1,8 +1,5 @@
-
 class Solution {
-     
 public:
-     
     // int dp[30001][2];
 //     int fn(vector<int>& v,int idx,int n,bool bought)
 //     {
@@ -33,35 +30,35 @@ public:
     int maxProfit(vector<int>& v) {
         int n=v.size();
         // vector<vector<int>>dp(n+1,vector<int>(2,0));
-        vector<int>dp(2,0);
-
+        // vector<int>dp(2,0);
+        // vector<int>curr(2,0);
+        int dpbuy=0,dpnotbuy=0,currnotbuy{},currbuy;
         
         
         for(int idx=n-1;idx>=0;idx--)
         {
-            for(int bought=0;bought<=1;bought++)
-            {
-                if(bought)
-               {
-                   int sell=dp[false]+v[idx];
-                   int notsell=dp[bought];
-                   dp[bought] =max(sell,notsell);
+            
+               
+                   int sell=dpbuy+v[idx];
+                   int notsell=dpnotbuy;
+                   currnotbuy =max(sell,notsell);
 
 
-               }
-               else{
-                   int buy=dp[true]-v[idx];
-                   int notbuy=dp[bought];
-                   dp[bought]=max(buy,notbuy);
+              
+                   int buy=dpnotbuy-v[idx];
+                   int notbuy=dpbuy;
+                   currbuy=max(buy,notbuy);
 
-               } 
-            }
+               
+               // prev=temp; 
+            dpbuy=currbuy;
+            dpnotbuy=currnotbuy;
+
+            // dp=curr;
         }
         
         // int g=fn(v,0,n,false);
-        int g=dp[false];
+        int g=dpbuy;
         return g;
     }
 };
-static bool     _foo = ios::sync_with_stdio(false);
-static ostream* _bar = cin.tie(NULL);
