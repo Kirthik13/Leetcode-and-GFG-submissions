@@ -36,13 +36,16 @@ public:
 
         vector<int>dp(2,0);
         vector<int>curr(2,0);
+            int temp{};
 
         
         for(int idx=n-1;idx>=0;idx--)
         {
             
+
             for(int buy=0;buy<=1;buy++)
             {
+                
                  int curr_res{};
                 
                 if(buy)
@@ -54,7 +57,7 @@ public:
 
                 }
                 else{
-                     int sold=dp0[true]+v[idx];
+                     int sold=temp+v[idx];
                     int notsold=dp[buy];
 
                     curr_res=max(sold,notsold);
@@ -63,7 +66,7 @@ public:
                 }
                 curr[buy]=curr_res;
             }
-            dp0=dp;
+            temp=dp[true];
             dp=curr;
         }
         
