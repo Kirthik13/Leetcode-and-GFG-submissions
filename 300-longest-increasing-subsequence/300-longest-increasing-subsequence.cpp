@@ -36,18 +36,37 @@ public:
 //             }
 //             // dp=curr;
 //         }
+        vector<int>hash(n+1,0);
+        for(int i=0;i<n;i++)
+        {
+            hash[i]=i;
+        }
+        
+        
+        int maxidx=0,maxinos=1;
         for(int idx=1;idx<n;idx++)
         {
             for(int prev=idx-1;prev>=0;prev--)
             {
                 if(v[idx]>v[prev])
                 {
-                    dp[idx]=max(dp[idx],dp[prev]+1);
+                    if(dp[idx]<dp[prev]+1)
+                    {
+                        hash[idx]=prev;
+                        dp[idx]=dp[prev]+1;
+                    }
+                }
+                
+                if(maxinos<dp[idx])
+                {
+                    maxidx=idx;
+                    maxinos=dp[idx];
                 }
             }
         }
         
-        return *max_element(begin(dp),end(dp));
+        // return *max_element(begin(dp),end(dp));
+        return maxinos;
         // return fn(v,0,-1,n,dp);
     }
 };
