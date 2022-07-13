@@ -56,32 +56,35 @@ public:
         // vector<vector<int>>curr(k1+1,vector<int>(2,0));
         
         vector<int>dp(2*k+2,0);
-        vector<int>curr(2*k+2,0);
+        // vector<int>curr(2*k+2,0);
 
         
         
         for(int idx=n-1;idx>=0;idx--)
         {
+            int prev=dp[2*k+1];
             for(int trans=2*k;trans>=0;trans--)
             {
+                int temp=dp[trans];
                  int curr_ans;
          
                  if(trans%2==0)
                  {
-                    int bought=-v[idx]+dp[trans+1];
+                    int bought=-v[idx]+prev;
                     int notbought=dp[trans];   
                     curr_ans=max(bought,notbought);
 
                  }
                  else{
-                     int sold=v[idx]+dp[trans+1];
+                     int sold=v[idx]+prev;
                     int notsold=dp[trans];   
                     curr_ans=max(sold,notsold);
 
                  }
-                 curr[trans]=curr_ans;
+                 dp[trans]=curr_ans;
+                prev=temp;
             }
-            dp=curr;
+            // dp=curr;
         }
       
         return dp[0];
