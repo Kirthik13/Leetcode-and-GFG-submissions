@@ -108,25 +108,30 @@ public:
         
         for(int idx=n-1;idx>=0;idx--)
         {
+            int prev=dp[4];
             for(int trans=3;trans>=0;trans--)
             {
+                int temp=dp[trans];
+                
                  int curr_ans;
         
                 if(trans%2==0)
                 {
-                    int bought=-v[idx]+dp[trans+1];
+                    int bought=-v[idx]+prev;//prev
                     int notbought=dp[trans];
                     curr_ans=max(bought,notbought);
 
                 }
                 else{
-                    int sold=v[idx]+dp[trans+1];
+                    int sold=v[idx]+prev;//prev
                     int notsold=dp[trans];
                     curr_ans=max(sold,notsold);
                 }
-                curr[trans]=curr_ans;
+                dp[trans]=curr_ans;
+                
+                prev=temp;
             }
-            dp=curr;
+            // dp=curr;
         }
         
         return dp[0];
