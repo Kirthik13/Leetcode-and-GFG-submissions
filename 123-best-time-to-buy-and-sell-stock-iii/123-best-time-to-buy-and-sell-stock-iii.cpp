@@ -102,7 +102,9 @@ public:
         
 //         // return fn(v,0,n,2,1,dp)
 //         return dp[2][1];
-        vector<vector<int>>dp(n+1,vector<int>(5,0));
+        vector<int>dp(5,0);
+        vector<int>curr(5,0);
+
         
         for(int idx=n-1;idx>=0;idx--)
         {
@@ -112,21 +114,22 @@ public:
         
                 if(trans%2==0)
                 {
-                    int bought=-v[idx]+dp[idx+1][trans+1];
-                    int notbought=dp[idx+1][trans];
+                    int bought=-v[idx]+dp[trans+1];
+                    int notbought=dp[trans];
                     curr_ans=max(bought,notbought);
 
                 }
                 else{
-                    int sold=v[idx]+dp[idx+1][trans+1];
-                    int notsold=dp[idx+1][trans];
+                    int sold=v[idx]+dp[trans+1];
+                    int notsold=dp[trans];
                     curr_ans=max(sold,notsold);
                 }
-                dp[idx][trans]=curr_ans;
+                curr[trans]=curr_ans;
             }
+            dp=curr;
         }
         
-        return dp[0][0];
+        return dp[0];
         // return fn(v,0,n,0,dp);
     }
 };
