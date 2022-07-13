@@ -34,27 +34,16 @@ public:
         
         for(int idx=n-1;idx>=0;idx--)
         {
-            for(int buy=0;buy<=1;buy++)
-            {
-                 int curr_res;
-
-                if(buy)
-                {
+           
                     int bought=dp[false]-v[idx];
-                    int notbought=dp[buy];
+                    int notbought=dp[true];
+                    dp[true]=max(bought,notbought);
 
-                    curr_res=max(bought,notbought);
+                    int sold=dp[true]+(v[idx]-fee);
+                    int notsold=dp[false];
+                    dp[false]=max(sold,notsold);
 
-                }
-                else{
-                     int sold=dp[true]+(v[idx]-fee);
-                    int notsold=dp[buy];
-
-                    curr_res=max(sold,notsold);
-
-                }
-                dp[buy]= curr_res;
-            }
+            
         }
         
         return dp[1];
