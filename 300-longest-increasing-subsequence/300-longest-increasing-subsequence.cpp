@@ -20,23 +20,25 @@ public:
         v.insert(v.begin(),INT_MIN);
                 int n=v.size();
         vector<int>dp(n+1,0);
-        vector<int>curr(n+1,0);
+        // vector<int>curr(n+1,0);
 
         
         for(int idx=n-1;idx>=1;idx--)
         {
+            int temp=dp[idx];
+
             for(int previdx=n-1;previdx>=0;previdx--)
             {
                  int call1{},call2{};
                 if((idx==1 and v[idx]>=v[previdx]) or (idx>1 and v[idx]>v[previdx]))
                 {
-                    call1=1+dp[idx];
+                    call1=1+temp;
                 }
                 call2=dp[previdx];
 
-                curr[previdx]=max({call1,call2});
+                dp[previdx]=max({call1,call2});
             }
-            dp=curr;
+            // dp=curr;
         }
         
         return dp[0];
