@@ -39,15 +39,15 @@ public:
         {
             
                
-                   int sell=dpbuy+v[idx];
-                   int notsell=dpnotbuy;
-                   currnotbuy =max(sell,notsell);
+                   int sell=dpnotbuy-v[idx];
+                   int notsell=dpbuy;
 
 
               
-                   int buy=dpnotbuy-v[idx];
-                   int notbuy=dpbuy;
-                   currbuy=max(buy,notbuy);
+                   int buy=dpbuy+v[idx];
+                   int notbuy=dpnotbuy;
+                   currbuy=max(sell,notsell);
+                   currnotbuy =max(buy,notbuy);
 
                
                // prev=temp; 
