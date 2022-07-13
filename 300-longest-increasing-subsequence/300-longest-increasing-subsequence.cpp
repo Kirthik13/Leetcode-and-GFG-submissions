@@ -33,9 +33,9 @@ public:
                 }
                 call1=max(call1,dp[previdx+1]);
 
-                curr[previdx+1]=call1;
+                dp[previdx+1]=call1;
             }
-            dp=curr;
+            // dp=curr;
         }
         
         return dp[0];
