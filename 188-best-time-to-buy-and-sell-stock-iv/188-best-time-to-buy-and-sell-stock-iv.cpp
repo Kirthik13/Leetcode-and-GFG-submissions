@@ -53,10 +53,34 @@ public:
         int n=v.size();
         // vector<vector<vector<int>>>dp(n+1,vector<vector<int>>(k1+1,vector<int>(2,0)));
         
-        vector<vector<int>>dp(n+1,vector<int>(2*k,-1));
         // vector<vector<int>>curr(k1+1,vector<int>(2,0));
+        vector<vector<int>>dp(n+1,vector<int>(2*k+2,0));
         
+        
+        for(int idx=n-1;idx>=0;idx--)
+        {
+            for(int trans=2*k;trans>=0;trans--)
+            {
+                 int curr_ans;
+         
+                 if(trans%2==0)
+                 {
+                    int bought=-v[idx]+dp[idx+1][trans+1];
+                    int notbought=dp[idx+1][trans];   
+                    curr_ans=max(bought,notbought);
+
+                 }
+                 else{
+                     int sold=v[idx]+dp[idx+1][trans+1];
+                    int notsold=dp[idx+1][trans];   
+                    curr_ans=max(sold,notsold);
+
+                 }
+                 dp[idx][trans]=curr_ans;
+            }
+        }
       
-        return fn(v,0,n,0,2*k,dp);
+        return dp[0][0];
+        // return fn(v,0,n,0,2*k,dp);
     }
 };
