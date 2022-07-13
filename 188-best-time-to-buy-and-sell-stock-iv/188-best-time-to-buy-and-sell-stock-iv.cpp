@@ -24,9 +24,36 @@ public:
         return dp[idx][k][buy]=curr_res;
         
     }
-    int maxProfit(int k, vector<int>& v) {
+    int maxProfit(int k1, vector<int>& v) {
         int n=v.size();
-        vector<vector<vector<int>>>dp(n+1,vector<vector<int>>(k+1,vector<int>(2,-1)));
-        return fn(v,0,n,1,k,dp);
+        vector<vector<vector<int>>>dp(n+1,vector<vector<int>>(k1+1,vector<int>(2,0)));
+        
+        for(int idx=n-1;idx>=0;idx--)
+        {
+            for(int buy=0;buy<=1;buy++)
+            {
+                for(int k=1;k<=k1;k++)
+                {
+                    int curr_res{};
+
+                    if(buy)
+                    {
+                        int bought=dp[idx+1][k][false]-v[idx];
+                        int notbought=dp[idx+1][k][buy];
+                        curr_res=max(bought,notbought);
+                    }
+                    else{
+                        int sold=dp[idx+1][k-1][true]+v[idx];
+                        int notsold=dp[idx+1][k][buy];
+                        curr_res=max(sold,notsold);
+                    }
+                    dp[idx][k][buy]=curr_res;
+                }
+            }
+        }
+        
+        
+        return dp[0][k1][1];
+        // return fn(v,0,n,1,k,dp);
     }
 };
