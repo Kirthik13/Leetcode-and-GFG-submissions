@@ -32,40 +32,33 @@ public:
         int n=v.size();
         
         // vector<vector<int>>dp(n+2,vector<int>(2,0));
-        vector<int>dp0(2,0);
 
         vector<int>dp(2,0);
         vector<int>curr(2,0);
-            int temp{};
+            int temp=dp[1];
 
         
         for(int idx=n-1;idx>=0;idx--)
         {
             
 
-            for(int buy=0;buy<=1;buy++)
-            {
+          
                 
-                 int curr_res{};
-                
-                if(buy)
-                {
                     int bought=dp[false]-v[idx];
-                    int notbought=dp[buy];
+                    int notbought=dp[true];
 
-                    curr_res=max(bought,notbought);
+                   curr[1]=max(bought,notbought);
 
-                }
-                else{
+              
                      int sold=temp+v[idx];
-                    int notsold=dp[buy];
+                    int notsold=dp[false];
 
-                    curr_res=max(sold,notsold);
+                    curr[0]=max(sold,notsold);
 
 
-                }
-                curr[buy]=curr_res;
-            }
+                
+              
+            
             temp=dp[true];
             dp=curr;
         }
