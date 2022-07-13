@@ -1,5 +1,8 @@
+
 class Solution {
+     
 public:
+     
     // int dp[30001][2];
 //     int fn(vector<int>& v,int idx,int n,bool bought)
 //     {
@@ -31,7 +34,6 @@ public:
         int n=v.size();
         // vector<vector<int>>dp(n+1,vector<int>(2,0));
         vector<int>dp(2,0);
-        // vector<int>curr(2,0);
 
         
         
@@ -39,7 +41,6 @@ public:
         {
             for(int bought=0;bought<=1;bought++)
             {
-                // int temp=dp[bought];
                 if(bought)
                {
                    int sell=dp[false]+v[idx];
@@ -54,9 +55,7 @@ public:
                    dp[bought]=max(buy,notbuy);
 
                } 
-               // prev=temp; 
             }
-            // dp=curr;
         }
         
         // int g=fn(v,0,n,false);
@@ -64,3 +63,5 @@ public:
         return g;
     }
 };
+static bool     _foo = ios::sync_with_stdio(false);
+static ostream* _bar = cin.tie(NULL);
