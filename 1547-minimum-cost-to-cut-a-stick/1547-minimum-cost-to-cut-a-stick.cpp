@@ -20,7 +20,26 @@ public:
         v.push_back(n);
         v.insert(v.begin(),0);
         sort(begin(v),end(v));
-        vector<vector<int>>dp(c+1,vector<int>(c+1,-1));
-        return f(1,c,v,dp);
+        vector<vector<int>>dp(c+2,vector<int>(c+2,0));
+        
+        for(int i=c;i>=1;i--)
+        {
+            for(int j=1;j<=c;j++)
+            {
+                if(i>j) continue;
+                 
+                int ans=INT_MAX;
+                for(int idx=i;idx<=j;idx++)
+                {
+                    int cost=(v[j+1]-v[i-1])+dp[i][idx-1]+dp[idx+1][j];
+
+                    ans=min(cost,ans);
+                }
+                dp[i][j]=ans;
+            }
+        }
+        
+        return dp[1][c];
+        // return f(1,c,v,dp);
     }
 };
