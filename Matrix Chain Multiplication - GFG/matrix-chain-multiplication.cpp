@@ -46,9 +46,24 @@ public:
     }
     int matrixMultiplication(int n, int v[])
     {
-        vector<vector<int>>dp(n+1,vector<int>(n+1,-1));
+        vector<vector<int>>dp(n+1,vector<int>(n+1,0));
         // return cc(v,1,n-1,dp);
-        return fn(v,1,n-1,dp);
+        for(int idx=n-1;idx>=1;idx--)
+        {
+            for(int j=idx+1;j<n;j++)
+            {
+                    int ans=INT_MAX;
+                    for(int k=idx;k<j;k++)
+                    {
+                        int call1=dp[idx][k]+dp[k+1][j]+(v[idx-1]*v[k]*v[j]);
+                        ans=min(call1,ans);
+                    }
+                    dp[idx][j]=ans;
+            }
+        }
+        
+        return dp[1][n-1];
+        // return fn(v,1,n-1,dp);
         // code here
     }
     
