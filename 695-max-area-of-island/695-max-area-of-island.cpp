@@ -1,46 +1,28 @@
 class Solution {
 public:
-       vector<int>dx={0,1,0,-1};
-    vector<int>dy={1,0,-1,0};
+    int dfs(vector<vector<int>>& v,int i,int j,int m,int n)
+    {
+        if(i<0 or j<0 or i>=m or j>=n or  v[i][j]==0) return 0;
+          v[i][j] = 0;
+  
+        return 1+dfs(v,i-1,j,m,n)+dfs(v,i+1,j,m,n)+dfs(v,i,j-1,m,n)+dfs(v,i,j+1,m,n);
+        
+    }
     int maxAreaOfIsland(vector<vector<int>>& v) {
-           int ans{};
-        // vector<vector<int>>vis(v.size(),vector<int>(v[0].size(),0));
-        for(int i=0;i<v.size();i++)
+        int m=v.size(),n=v[0].size();
+        int call1{},ans{};
+        for(int i=0;i<m;i++)
         {
-            for(int j=0;j<v[0].size();j++)
+            for(int j=0;j<n;j++)
             {
                 if(v[i][j]==1)
                 {
-                    // fn(v,i,j,vis);
-                    
-                    int curr=0;
-                    queue<pair<int,int>>q;
-                    q.push({i,j});
-                    v[i][j]=0;
-                    while(!q.empty())
-                    {
-                        curr++;
-                        int i1=q.front().first;
-                        int j1=q.front().second;
-                        q.pop();
-
-                        for(int s=0;s<4;s++)
-                        {
-                            int x=i1+dx[s],y=j1+dy[s];
-
-                            if((x>=0 and x<=v.size()-1) and  (y>=0 and y<=v[0].size()-1) and v[x][y]==1)
-                            {
-                                
-                                    q.push({x,y});
-                                    v[x][y]=0;
-
-                                
-                            }
-                        }
-                    }
-                    ans=max(ans,curr);
+                    int call1=dfs(v,i,j,m,n);
+                    // cout<<"cal 1 : "<<call1<<endl;
+                    ans=max(call1,ans);
                 }
             }
+                
         }
         return ans;
     }
