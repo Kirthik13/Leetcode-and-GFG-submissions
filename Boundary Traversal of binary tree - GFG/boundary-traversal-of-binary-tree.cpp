@@ -110,11 +110,11 @@ public:
         if(!root) return;
         if(root->left){
             tot.push_back(root->data);
-        lt(root->left,tot);
+            lt(root->left,tot);
         }
         else if(root->right){
             tot.push_back(root->data);
-        lt(root->right,tot);
+            lt(root->right,tot);
             
         }
         
@@ -127,25 +127,25 @@ public:
             tot.push_back(root->data);
             return;
         }
-         if(root->left){
+        //  if(root->left){
         lf(root->left,tot);
             
-        }
-         if(root->right){
+        // }
+        //  if(root->right){
             // tot.push_back(root->data);
         lf(root->right,tot);
-        }
+        // }
         
     }
     void rt(Node* root,vector<int>&tot)
     {
         if(!root) return;
         if(root->right){
-        rt(root->right,tot);
+            rt(root->right,tot);
             tot.push_back(root->data);
         }
         else if(root->left){
-        rt(root->left,tot);
+            rt(root->left,tot);
             tot.push_back(root->data);
             
         }
