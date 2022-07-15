@@ -11,23 +11,23 @@
  */
 class Solution {
 public:
-    int ans=INT_MIN;
-    int fn(TreeNode* root)
+    int fn(TreeNode* root,int &ans)
     {
         if(!root) return 0;
         
-        int l=fn(root->left);
-        int r=fn(root->right);
-        // if(l==0 and r==0){
-        // return 1+max(l,r);
-        // }
-        ans=max(ans,l+r);
-        return 1+max(l,r);
+        int hl=fn(root->left,ans);
+        int hr=fn(root->right,ans);
         
+        ans=max(ans,hl+hr);
         
+        return 1+max(hr,hl);
+
     }
     int diameterOfBinaryTree(TreeNode* root) {
-       int g=fn(root);
+        if(!root) return 0;
+        int ans=INT_MIN;
+        int g=fn(root,ans);
+        
         return ans;
     }
 };
