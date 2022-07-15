@@ -11,41 +11,40 @@
  */
 class Solution {
 public:
-    vector<vector<int>> zigzagLevelOrder(TreeNode* root)
-    { 
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
         if(!root) return {};
-        if(!root->left and !root->right) return {{root->val}};
-        vector<vector<int>>tot;
+        vector<vector<int>>ans;
+        
         queue<TreeNode*>q;
         q.push(root);
-        int f=0;
+        int flag=0;
         while(!q.empty())
         {
             int n=q.size();
-            vector<int>sam(n);
-            for(int i=0;i<n;i++){
-                TreeNode* t=q.front();
-
+            vector<int>curr;
+            // cout<<"fl : "<<flag<<endl;
+            for(int i=0;i<n;i++)
+            {
+                auto node=q.front();
+                if(flag==0)
+                {
+                    curr.push_back(node->val);
+                }
+                else{
+                    curr.insert(curr.begin(),node->val);
+                }
+                // cout<<node->val<<" ";
                 q.pop();
-                // int idx;
-                int idx=(f==1)?n-1-i:i;
-                sam[idx]=t->val;
                 
-                    if(t->left)
-                    {
-                        q.push(t->left);
-                    }
-                    if(t->right)
-                    {
-                        q.push(t->right);
-                    }
-                   
+                        if(node->left) q.push(node->left);
+                        if(node->right) q.push(node->right);
+
+
                 
             }
-           f=!f;
-            tot.push_back(sam);
-            
+            flag=1-flag;
+            ans.push_back(curr);
         }
-        return tot;
+        return ans;
     }
 };
