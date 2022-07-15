@@ -21,11 +21,12 @@ public:
         while(!q.empty())
         {
             int n=q.size();
-            vector<int>curr;
+            vector<int>curr(n);
             for(int i=0;i<n;i++)
             {
                 auto node=q.front();
-                    curr.push_back(node->val);
+                int idx=flag==0?i:n-i-1;
+                    curr[idx]=(node->val);
                 
                 
                 // cout<<node->val<<" ";
@@ -37,7 +38,6 @@ public:
 
                 
             }
-            if(flag==1) std::reverse(begin(curr),end(curr));
             flag=1-flag;
             ans.push_back(curr);
         }
