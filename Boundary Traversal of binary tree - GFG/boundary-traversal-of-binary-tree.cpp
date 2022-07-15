@@ -105,64 +105,65 @@ struct Node
 
 class Solution {
 public:
-    void lt(Node* root,vector<int>&tot)
+    void lt(Node* root,vector<int>&v)
     {
         if(!root) return;
-        if(root->left){
-            tot.push_back(root->data);
-            lt(root->left,tot);
+        
+        if(root->left)
+        {
+            v.push_back(root->data);
+            lt(root->left,v);
         }
-        else if(root->right){
-            tot.push_back(root->data);
-            lt(root->right,tot);
+        else if(root->right)
+        {
+            v.push_back(root->data);
+            lt(root->right,v);
             
         }
-        
     }
-    void lf(Node* root,vector<int>&tot)
+    void rt(Node* root,vector<int>&v)
+    {
+        if(!root) return;
+        
+        if(root->right)
+        {
+            rt(root->right,v);
+            v.push_back(root->data);
+        }
+        else if(root->left)
+        {
+            rt(root->left,v);
+            v.push_back(root->data);
+            
+        }
+    }
+    void lf(Node* root,vector<int>&v)
     {
         if(!root) return;
         if(!root->left and !root->right)
         {
-            tot.push_back(root->data);
-            return;
-        }
-        //  if(root->left){
-        lf(root->left,tot);
-            
-        // }
-        //  if(root->right){
-            // tot.push_back(root->data);
-        lf(root->right,tot);
-        // }
-        
-    }
-    void rt(Node* root,vector<int>&tot)
-    {
-        if(!root) return;
-        if(root->right){
-            rt(root->right,tot);
-            tot.push_back(root->data);
-        }
-        else if(root->left){
-            rt(root->left,tot);
-            tot.push_back(root->data);
+            v.push_back(root->data);
+            return ;
             
         }
         
+            lf(root->left,v);
+            lf(root->right,v);
+       
     }
+
     
+   
     vector <int> boundary(Node *root)
     {
         if(!root) return {};
         if(!root->left and !root->right) return {root->data};
-        vector<int>tot;
-        tot.push_back(root->data);
-        lt(root->left,tot);
-        lf(root,tot);
-        rt(root->right,tot);
-        return tot;
-        
+        vector<int>v;
+        v.push_back(root->data);
+        lt(root->left,v);
+        lf(root,v);
+        rt(root->right,v);
+        return v;
         //Your code here
     }
 };
