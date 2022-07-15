@@ -11,26 +11,22 @@
  */
 class Solution {
 public:
-    int fn(TreeNode* root,bool &ch)
+    int fn(TreeNode* root,bool &flag)
     {
-        if(!ch) return 0;
         if(!root) return 0;
+        if(!flag) return 0;
         
-        int l=fn(root->left,ch);
-        int r=fn(root->right,ch);
-        // cout<<" l : "<<l<<" r : "<<r<<endl;
-        if(abs(l-r)>1)
-        {
-            ch=0;
-            return 0;
-        }
-        return 1+max(l,r);
+        int hl=fn(root->left,flag);
+        int hr=fn(root->right,flag);
+        
+        if(abs(hl-hr)>1) flag=false;
+        
+        return 1+max(hl,hr);
+ 
     }
     bool isBalanced(TreeNode* root) {
-        if(!root) return 1;
-        bool ch=1;
-        int g=fn(root,ch);
-        return ch;
-            
+        bool flag=true;
+        int g=fn(root,flag);
+        return flag;
     }
 };
