@@ -18,10 +18,13 @@ public:
         int lsum=fn(root->left,ans);
         int rsum=fn(root->right,ans);
         
-        int h=root->val+max(lsum,rsum);
-        ans=max({ans,root->val,root->val+lsum+rsum,h});
+        if(lsum<0) lsum=0;
+        if(rsum<0) rsum=0;
+
         
-        return max(root->val,root->val+max(lsum,rsum));
+        ans=max(root->val+lsum+rsum,ans);
+        
+        return root->val+max(lsum,rsum);
 
     }
     int maxPathSum(TreeNode* root) {
