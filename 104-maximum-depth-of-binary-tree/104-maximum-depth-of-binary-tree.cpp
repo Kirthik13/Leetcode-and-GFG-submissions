@@ -11,17 +11,9 @@
  */
 class Solution {
 public:
-    int fn(TreeNode* root)
-    {
-        if(!root)
-        {
-            return 0;
-        }
-        return 1+max(fn(root->left),fn(root->right));
-    }
     int maxDepth(TreeNode* root) {
-        if(!root) return 0;
-        if(!root->left and !root->right) return 1;
-        return max(fn(root->left)+1,fn(root->right)+1);
+       if(!root)  return 0;
+        
+       return 1+max(maxDepth(root->left),maxDepth(root->right)); 
     }
 };
