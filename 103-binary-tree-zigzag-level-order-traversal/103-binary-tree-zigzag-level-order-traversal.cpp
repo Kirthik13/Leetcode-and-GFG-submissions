@@ -22,17 +22,12 @@ public:
         {
             int n=q.size();
             vector<int>curr;
-            // cout<<"fl : "<<flag<<endl;
             for(int i=0;i<n;i++)
             {
                 auto node=q.front();
-                if(flag==0)
-                {
                     curr.push_back(node->val);
-                }
-                else{
-                    curr.insert(curr.begin(),node->val);
-                }
+                
+                
                 // cout<<node->val<<" ";
                 q.pop();
                 
@@ -42,6 +37,7 @@ public:
 
                 
             }
+            if(flag==1) std::reverse(begin(curr),end(curr));
             flag=1-flag;
             ans.push_back(curr);
         }
