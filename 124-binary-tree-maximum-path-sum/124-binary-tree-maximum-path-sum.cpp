@@ -11,25 +11,23 @@
  */
 class Solution {
 public:
-    int ans=INT_MIN;
-    int fn(TreeNode* root)
+    int fn(TreeNode* root,int &ans)
     {
         if(!root) return 0;
         
-        int l=fn(root->left);
-        int r=fn(root->right);
-        if (l < 0) l = 0;
-        if (r < 0) r = 0;
-        // ans=max(ans,max(max(max(root->val+l,root->val+r),root->val+l+r),root->val));
-        ans=max(ans,root->val+l+r);
-
-        return root->val+max(l,r);
+        int lsum=fn(root->left,ans);
+        int rsum=fn(root->right,ans);
+        
+        int h=root->val+max(lsum,rsum);
+        ans=max({ans,root->val,root->val+lsum+rsum,h});
+        
+        return max(root->val,root->val+max(lsum,rsum));
 
     }
     int maxPathSum(TreeNode* root) {
         if(!root) return 0;
-        if(!root->right and !root->left) return root->val;
-       int g=fn(root);
+        int ans=INT_MIN;
+        int g=fn(root,ans);   
         return ans;
     }
 };
