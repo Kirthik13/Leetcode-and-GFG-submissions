@@ -13,73 +13,36 @@
 class Solution {
 public:
     int widthOfBinaryTree(TreeNode* root) {
-        if(!root->left and !root->right)
-        {
-            return 1;
-        }
-//         queue<pair<TreeNode*,unsigned long long int>>q;
-//         q.push({root,0});
-//         unsigned long long int ans=0;
-        
-//         while(!q.empty())
-//         {
-//             unsigned int n=q.size();
-//             unsigned long long int end{};
-//             unsigned long long int st=q.front().second;
-//             for(int i=0;i<n;i++)
-//             {
-//                 TreeNode* t=q.front().first;
-//                 unsigned long long int curr=q.front().second;
-//                 q.pop();
-//                 if(i==n-1)
-//                 {
-//                     end=curr;
-//                 }
-//                 if(t->left)
-//                 {
-//                     q.push({t->left,2*curr+1});
-//                 }
-//                if(t->right)
-//                 {
-//                     q.push({t->right,2*curr+2});
-//                 }   
-//             }
-//             if(ans<end-st+1)
-//             {
-//                 ans=end-st+1;
-//             }
-                
-        // }
-        ull ans{};
+        if(!root) return 0;
         queue<pair<TreeNode*,ull>>q;
         q.push({root,0});
+        ull ans{};
         while(!q.empty())
         {
-            ull n=q.size();
-            ull st=q.front().second;
-            
-            ull end{};
+            int n=q.size();
+            ull st=0,end=0;
             for(int i=0;i<n;i++)
             {
-                ull curr=q.front().second;
-                TreeNode* node=q.front().first;
+                auto it=q.front();
                 q.pop();
-                if(i==n-1)
-                    
-                {
-                    end=curr;
-                }
+                
+                auto node=it.first;
+                auto idx=it.second;
+                
+                if(i==0) st=idx;
+                if(i==n-1) end=idx;
+                
                 if(node->left)
                 {
-                    q.push({node->left,2*curr+1});
-                    
+                    q.push({node->left,2*idx+1});
                 }
                 if(node->right)
                 {
-                    q.push({node->right,2*curr+2});
+                    q.push({node->right,2*idx+2});
                 }
+                
             }
-            if(ans<end-st+1) ans=end-st+1;
+            ans=max(ans,end-st+1);
         }
         return ans;
     }
