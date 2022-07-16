@@ -11,29 +11,25 @@
  */
 class Solution {
 public:
-    unordered_map<int,int>m;
-    TreeNode* fn(vector<int>& pre, vector<int>& in,int st,int en,int &idx) 
+    TreeNode* fn(vector<int>& pre, vector<int>& in,map<int,int>&m,int &idx,int st,int n)
     {
-        if(st>en) return NULL;
+        if(st>n) return NULL;
+        if(idx>=in.size()) return NULL;
         
         TreeNode* root=new TreeNode(pre[idx]);
-        
         int mid=m[pre[idx]];
-        
         idx++;
+        root->left=fn(pre,in,m,idx,st,mid-1);
+        root->right=fn(pre,in,m,idx,mid+1,n);
         
-        root->left=fn(pre,in,st,mid-1,idx);
-        root->right=fn(pre,in,mid+1,en,idx);
-
         return root;
+        
     }
     TreeNode* buildTree(vector<int>& pre, vector<int>& in) {
-        for(auto i=0;i<in.size();i++)
-        {
-            m[in[i]]=i;
-        }
-        int n=pre.size()-1;
+        map<int,int>m;
+        for(auto i=0;i<in.size();i++) m[in[i]]=i;
         int idx{};
-        return fn(pre,in,0,n,idx);
+        int n=in.size();
+        return fn(pre,in,m,idx,0,n);
     }
 };
