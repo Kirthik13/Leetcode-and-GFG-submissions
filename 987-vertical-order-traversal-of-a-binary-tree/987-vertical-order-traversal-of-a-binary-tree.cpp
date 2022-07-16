@@ -12,42 +12,36 @@
 class Solution {
 public:
     vector<vector<int>> verticalTraversal(TreeNode* root) {
-        map<int,vector<int>>m;
-        queue<pair<TreeNode*,int>>q;
+        if(!root) return {};
         vector<vector<int>>totans;
-        
-        q.push({root,0});
+        map<int,map<int,multiset<int>>>m;
+        queue<pair<int,pair<int,TreeNode*>>>q;
+        q.push({0,{0,root}});
         
         while(!q.empty())
         {
-            int n=q.size();
+            auto it=q.front();
+            q.pop();
+            auto node=it.second.second;
+            auto pt=it.first;
+            auto lvl=it.second.first;
             
-            multiset<pair<int,int>>curr;
-            for(int i=0;i<n;i++)
-            {
-                auto it=q.front();
-                q.pop();
-                auto node=it.first;
-                auto pt=it.second;
-                curr.insert({node->val,pt});
-                
-                if(node->left) q.push({node->left,pt-1});
-                if(node->right) q.push({node->right,pt+1});
-               
-            }
-          
-            for(auto &i:curr)
-            {
-                m[i.second].push_back(i.first);
-            }
-                
+            m[pt][lvl].insert(node->val);
+            
+            if(node->left) q.push({pt-1,{lvl+1,node->left}});
+            if(node->right) q.push({pt+1,{lvl+1,node->right}});
+            
         }
         
         for(auto &i:m)
         {
-            totans.push_back(i.second);
+            vector<int>curr;
+            for(auto &j:i.second)
+            {
+                curr.insert(curr.end(),j.second.begin(),j.second.end());
+            }
+            totans.push_back(curr);
         }
         return totans;
-        
     }
 };
