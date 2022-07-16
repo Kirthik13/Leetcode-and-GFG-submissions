@@ -15,7 +15,25 @@ public:
     {
         if(!root) return 0;
         
+        TreeNode* l=root;
+        TreeNode* r=root;
+        
+        int hl{},hr{};
+        while(l)
+        {
+            hl++;
+            l=l->left;
+        }
+        while(r)
+        {
+            hr++;
+            r=r->right;
+        }        
+        
+        if(hl==hr) return pow(2,hl)-1;
         return 1+fn(root->left)+fn(root->right);
+        
+        
     }
     int countNodes(TreeNode* root) {
         return fn(root);
