@@ -11,16 +11,32 @@
  */
 class Solution {
 public:
-    void fn(TreeNode* root,int level, vector<int>&tot)
-    {
-        if(!root) return;
-        if(tot.size()<level) tot.push_back(root->val);
-        fn(root->right,level+1,tot);
-        fn(root->left,level+1,tot);
-    }
     vector<int> rightSideView(TreeNode* root) {
+        if(!root) return {};
+        
         vector<int>tot;
-        fn(root,1,tot);
+        queue<TreeNode*>q;
+        q.push(root);
+        
+        while(!q.empty())
+        {
+            int n=q.size();
+            for(int i=0;i<n;i++)
+            {
+                auto node=q.front();
+                q.pop();
+                if(i==n-1)
+                {
+                    tot.push_back(node->val);
+                    
+                }
+                
+                if(node->left) q.push(node->left);
+                if(node->right) q.push(node->right);
+                
+            }
+        }
         return tot;
+            
     }
 };
