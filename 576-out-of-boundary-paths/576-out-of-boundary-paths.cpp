@@ -27,7 +27,8 @@ public:
         return dp[r][c][k]=ans%mod;
     }
     int findPaths(int m, int n, int maxMove, int sr, int sc) {
-             int dp[maxMove+1][m][n];
+          // vector<vector<vector<int>>>dp(maxMove+1,vector<vector<int>>(m+1,vector<int>(m+1,0)));
+          int dp[maxMove+1][m][n];
         memset(dp,0,sizeof dp);
         for(int i=0;i<maxMove;i++){
             for(int j=0;j<m;j++){
@@ -53,6 +54,5 @@ public:
             return dp[0][sr][sc];
         }
         return dp[maxMove-1][sr][sc];
-        // return fn(sr,sc,m,n,maxMove,dp);
     }
 };
