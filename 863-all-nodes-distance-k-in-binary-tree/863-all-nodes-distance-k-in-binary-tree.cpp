@@ -9,67 +9,66 @@
  */
 class Solution {
 public:
-    unordered_map<TreeNode*,TreeNode*>m;
-    void dfs(TreeNode* root)
+    void parentfn(TreeNode* root,TreeNode* par,unordered_map<TreeNode*,TreeNode*>&m)
     {
         if(!root) return;
-        if(root->left){
-        m[root->left]=root;
-            
-            }
-        if(root->right)
+        
+        if(par!=NULL)
         {
-            m[root->right]=root;
+            m[root]=par;
         }
-        dfs(root->left);
-        dfs(root->right);
+        parentfn(root->left,root,m);
+        parentfn(root->right,root,m);
         
     }
-    
     vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
-        dfs(root);
-        m[root]=NULL;
-        vector<int>tot;
+        if(k==0) return {target->val};
+     
+        unordered_map<TreeNode*,TreeNode*>m;
+        parentfn(root,NULL,m);
+        
         queue<TreeNode*>q;
         q.push(target);
-        int c=0;
+        
+        vector<int>ans;
         unordered_set<TreeNode*>st;
-        st.insert(target);
-        while(!q.empty() and c<k)
-        {
+        
+        int k1=0;
+        while(!q.empty() and k1<=k){
             
             int n=q.size();
             for(int i=0;i<n;i++)
             {
-                TreeNode* t=q.front();
+                auto node=q.front();
+                // cout<<"node : "<<node->val<<endl;
                 q.pop();
-                if(t->left and st.find(t->left)==st.end())
+                st.insert(node);
+                if(k1==k) ans.push_back(node->val);
+                if(m[node]!=NULL)
                 {
-                    q.push(t->left);
-                    st.insert(t->left);
+                    if(st.find(m[node])==st.end()){
+                    q.push(m[node]);
+                    }
                 }
-                if(t->right and st.find(t->right)==st.end())
+                if(node->left)
                 {
-                    q.push(t->right);
-                            st.insert(t->right);
+                    if(st.find(node->left)==st.end()){
+                        q.push(node->left);
 
+                    }
                 }
-                if(st.find(m[t])==st.end() and m[t]!=NULL)
+                if(node->right)
                 {
-                    q.push(m[t]);
-                    st.insert(m[t]);
+                     if(st.find(node->right)==st.end()){
+                        q.push(node->right);
 
+                    }
                 }
-                
             }
-            c++;
+            k1++;
             
         }
-        while(!q.empty())
-        {
-            tot.emplace_back(q.front()->val);
-            q.pop();
-        }
-        return tot;
+        
+        return ans;
     }
 };
