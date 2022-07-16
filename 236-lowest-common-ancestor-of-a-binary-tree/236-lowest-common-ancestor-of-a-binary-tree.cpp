@@ -9,25 +9,37 @@
  */
 class Solution {
 public:
-    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if(!root)
+    TreeNode* fn(TreeNode* root, TreeNode* p, TreeNode* q)
+    {
+        if(!root) return NULL;
+        
+        if(p==root)
         {
-            return NULL;
-        }
-        if(root->left==p and root->right==q)
-        {
+              // cout<<"f : "<<root->val<<endl;
             return root;
         }
-        if(root==p or root==q) return root;
-        TreeNode* ll=lowestCommonAncestor(root->left,p,q);
-        TreeNode* lr=lowestCommonAncestor(root->right,p,q);
-        if(ll and lr)
+        if(q==root)
         {
+            // cout<<"s : "<<root->val<<endl;
             return root;
         }
-        if(ll) return ll;
-        if(lr) return lr;
+        
+        TreeNode* lt=fn(root->left,p,q);
+        TreeNode* rt=fn(root->right,p,q);
+        // if(lt==p and rt==q) cout<<"asdasdf";
+        if(lt and rt) return root;
+        
+        if(lt and !rt) return lt;
+        if(rt and !lt) return rt;
+        
+        
         return NULL;
-
+        
+        
+    }
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+      
+        return fn(root,p,q);  
+        
     }
 };
