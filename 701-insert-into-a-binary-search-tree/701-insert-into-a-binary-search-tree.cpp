@@ -11,33 +11,27 @@
  */
 class Solution {
 public:
-   TreeNode* fn(TreeNode* node,int k)
+    TreeNode* fn(TreeNode* root, int val)
     {
-        if(!node)
-        {
-               // else{
-        TreeNode *newnode=new TreeNode(k);
-        return newnode;
-        }
-            // return NULL;
-        // }
-        
-        if(node->val > k)
-        {
-           node->left= fn(node->left,k);
-        }
-        else if(node->val < k){
-            node->right=fn(node->right,k);
-        }
-     
-        return node;
-    }
-    TreeNode* insertIntoBST(TreeNode* root, int val) {
         if(!root)
         {
-            TreeNode *newnode=new TreeNode(val);
-            return newnode;
+            TreeNode* h=new TreeNode(val);
+            return h;
         }
+        
+        if(root->val > val)
+        {
+            root->left=fn(root->left,val);
+        }
+        if(root->val < val)
+        {
+            root->right=fn(root->right,val);
+        }
+        return root;
+            
+    }
+    TreeNode* insertIntoBST(TreeNode* root, int val) {
+        
         return fn(root,val);
     }
 };
