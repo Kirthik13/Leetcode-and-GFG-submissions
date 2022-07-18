@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    bool fn(TreeNode* root,long long int min,long long int max)
+      bool fn(TreeNode* root,long long int min,long long int max)
     {
         if(!root) return 1;
         
