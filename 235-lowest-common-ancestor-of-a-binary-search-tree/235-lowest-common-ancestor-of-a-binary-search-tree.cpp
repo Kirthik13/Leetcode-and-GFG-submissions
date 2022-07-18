@@ -10,27 +10,35 @@
 
 class Solution {
 public:
-    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+    TreeNode* fn(TreeNode* root, TreeNode* p, TreeNode* q)
+    {
         if(!root) return NULL;
+        if((root->left==p and root->right==q) or (root->left==q and root->right==p)) return root;
+
+        if(root->val==p->val or root->val==q->val )
+        {
+            if(root->val==p->val)
+            {
+                if(p->val < q->val or p->val > q->val) return p;
+            }
+             if(root->val==q->val)
+            {
+                if(q->val < p->val or q->val > p->val) return q;
+            } 
+        }
         
-        if(root==p) return root;
-        if(root==q) return root;
-        TreeNode* l=NULL;
-        TreeNode* r=NULL;
-        if(root->val>p->val or root->val>q->val)
-        {
-            l=lowestCommonAncestor(root->left,p,q);
-            // if(l) return l;
-        }
-        if(root->val<p->val or root->val<q->val)
-        {
-            r=lowestCommonAncestor(root->right,p,q);
-            // if(r) return r;
-        }
-        if(l and r) return root;
-        if(l) return l;
-        if(r) return r;
+        TreeNode* ln=fn(root->left,p,q);
+        TreeNode* rn=fn(root->right,p,q);
+        
+        if(ln and rn) return root;
+        if(ln) return ln;
+        if(rn) return rn;
+        
         return NULL;
-            
+        
+        
+    }
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        return fn(root,p,q);
     }
 };
