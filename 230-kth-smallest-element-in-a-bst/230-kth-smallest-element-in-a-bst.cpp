@@ -11,26 +11,20 @@
  */
 class Solution {
 public:
-    int ans=INT_MIN;
-    void fn(TreeNode* root, int &k)
+    void fn(TreeNode* root,int k,int &cnt,int &ans)
     {
-        
-        if(!root) return;
+        if(!root) return ;
         if(ans!=INT_MIN) return;
-        fn(root->left,k);
-        // cout<<"val : "<<root->val<<endl;
-        k--;
-        // cout<<"An : "<<ans<<endl;
-        if(k==0 and ans==INT_MIN)
-        {
-            ans=root->val;
-            return;
-        }
-        fn(root->right,k);
+        fn(root->left,k,cnt,ans);
+        if(cnt==k) ans=root->val;
+        cnt++;
+        fn(root->right,k,cnt,ans);
+        
+        
     }
     int kthSmallest(TreeNode* root, int k) {
-        fn(root,k);
+        int cnt=1,ans=INT_MIN;
+         fn(root,k,cnt,ans);
         return ans;
-            
     }
 };
