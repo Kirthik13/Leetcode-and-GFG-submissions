@@ -26,10 +26,14 @@ public:
                 if(q->val < p->val or q->val > p->val) return q;
             } 
         }
-        
-        TreeNode* ln=fn(root->left,p,q);
-        TreeNode* rn=fn(root->right,p,q);
-        
+        TreeNode* ln=NULL;
+        TreeNode* rn=NULL;
+        if(p->val < root->val or q->val < root->val){
+            ln=fn(root->left,p,q);
+        }
+        if(p->val > root->val or q->val > root->val){        
+             rn=fn(root->right,p,q);
+        }
         if(ln and rn) return root;
         if(ln) return ln;
         if(rn) return rn;
