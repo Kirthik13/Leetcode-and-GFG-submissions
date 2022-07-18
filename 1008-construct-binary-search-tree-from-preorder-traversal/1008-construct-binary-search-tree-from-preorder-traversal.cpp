@@ -12,13 +12,16 @@
 class Solution {
 public:
     int idx{};
-    TreeNode* bstFromPreorder(vector<int>& v,int par=INT_MAX) {
-     if(v.size()==idx or par<v[idx]) return NULL;
-    
-        int curval=v[idx];
-        TreeNode* root=new TreeNode(v[idx++]);
-        root->left=bstFromPreorder(v,curval);
-        root->right=bstFromPreorder(v,par);
+    TreeNode* bstFromPreorder(vector<int>& pre,int par=INT_MAX) {
+        if(idx==pre.size() or par<pre[idx])  return NULL;
+        
+        TreeNode* root=new TreeNode(pre[idx]);
+        int currpar=pre[idx];
+        idx++;
+        root->left=bstFromPreorder(pre,currpar);
+        root->right=bstFromPreorder(pre,par);
+        
         return root;
+        
     }
 };
