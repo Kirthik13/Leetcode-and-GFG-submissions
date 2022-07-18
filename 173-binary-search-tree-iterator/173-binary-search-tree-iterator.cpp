@@ -11,34 +11,30 @@
  */
 class BSTIterator {
 public:
-    TreeNode* root=NULL;
-    deque<int>dq;
-
+    map<int,int>m;
     void fn(TreeNode* root)
     {
         if(!root) return;
         
         fn(root->left);
-        dq.push_back(root->val);
+        m[root->val]++;
         fn(root->right);
+        
     }
     BSTIterator(TreeNode* root) {
-        this->root=root;
         fn(root);
     }
     
     int next() {
-     
-          int ans=dq.front();
-          dq.pop_front();
-          return ans;
-      
-        
+        int val=m.begin()->first;
+        m.erase(m.begin());
+        return val;
     }
     
     bool hasNext() {
-        if(!dq.empty()) return 1;
+        if(m.size()>0) return 1;
         return 0;
+        
     }
 };
 
