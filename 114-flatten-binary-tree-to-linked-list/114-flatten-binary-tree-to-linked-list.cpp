@@ -11,46 +11,16 @@
  */
 class Solution {
 public:
-    TreeNode* fn(TreeNode* root)
-    {
-        if(!root) return NULL;
-        TreeNode* lnode=fn(root->left);
-        TreeNode* rnode=fn(root->right);
-      
-        if(lnode and rnode)
-        {
-            
-            root->right=lnode;
-            root->left=NULL;
-            while(lnode->right!=NULL)
-            {
-                lnode=lnode->right;
-            }
-           
-            
-            lnode->right=rnode;
-             
-            
-            
-        }
-        else if(lnode)
-        {
-            // cout<<lnode->val<<endl;
-            root->right=lnode;
-            root->left=NULL;
-        }
-       
-               
-        
-        return root;
-        
-        
-        
-    }
+    TreeNode* prev=NULL;
     void flatten(TreeNode* root) {
+        if(!root) return ;
         
-        TreeNode* g=fn(root);
+        flatten(root->right);
+        flatten(root->left);
         
+        root->right=prev;
+        root->left=NULL;
+        prev=root;
         
     }
 };
