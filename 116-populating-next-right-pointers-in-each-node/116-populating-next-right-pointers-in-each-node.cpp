@@ -19,59 +19,30 @@ public:
 class Solution {
 public:
     Node* connect(Node* root) {
-//         if(!root or (!root->left and !root->right)) return root;
-        
-//         Node* curr=root;
-//         Node* nxt=curr->left;
-        
-//         while(curr and nxt)
-//         {
-//             curr->left->next=curr->right;
-            
-//             if(curr->next)
-//             {
-//                 curr->right->next=curr->next->left;
-//             }
-            
-//             curr=curr->next;
-            
-//             if(!curr)
-//             {
-//                 curr=nxt;
-//                 nxt=curr->left;
-//             }
-//         }
-//         return root;
-//     }
-         if(!root or (!root->left and !root->right)) return root;
-        
-        Node* head=root;
-        Node* dum=new Node(-999);
-        
-        while(head)
+        if(!root) return NULL;
+        queue<Node*>q;
+        q.push(root);
+        Node* curr=root;
+        while(!q.empty())
         {
-            Node* curr=head;
-            Node* prev=dum;
-            
-            while(curr)
+            int n=q.size();
+            Node* prev;
+            for(int i=0;i<n;i++)
             {
-                if(curr->left)
-                {
-                    
-                    prev->next=curr->left;
-                    prev=prev->next;
+                auto node=q.front();
+                // cout<<node->val<<" ";
+                q.pop();
                 
+                if(node->left) q.push(node->left);
+                if(node->right) q.push(node->right);
+                
+                if(i>0){
+                    prev->next=node;
                 }
-                if(curr->right)
-                {
-                    prev->next=curr->right;
-                    prev=prev->next;
-                }
-                curr=curr->next;
+                
+                prev=node;
             }
-            head=dum->next;
-            dum->next=NULL;
         }
-        return root;
+        return curr;
     }
 };
