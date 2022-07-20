@@ -20,29 +20,31 @@ class Solution {
 public:
     Node* connect(Node* root) {
         if(!root) return NULL;
-        queue<Node*>q;
-        q.push(root);
-        Node* curr=root;
-        while(!q.empty())
+        
+        Node* dum=new Node();
+        Node* head=root;
+        while(head)
         {
-            int n=q.size();
-            Node* prev;
-            for(int i=0;i<n;i++)
+            Node* curr=head;
+            Node* prev=dum;
+            while(curr)
             {
-                auto node=q.front();
-                // cout<<node->val<<" ";
-                q.pop();
-                
-                if(node->left) q.push(node->left);
-                if(node->right) q.push(node->right);
-                
-                if(i>0){
-                    prev->next=node;
+                if(curr->left)
+                {
+                    prev->next=curr->left;
+                    prev=prev->next;
                 }
-                
-                prev=node;
+                if(curr->right)
+                {
+                    prev->next=curr->right;
+                    prev=prev->next;
+
+                }
+                curr=curr->next;
             }
+            head=dum->next;
+            dum->next=NULL;
         }
-        return curr;
+        return root;
     }
 };
