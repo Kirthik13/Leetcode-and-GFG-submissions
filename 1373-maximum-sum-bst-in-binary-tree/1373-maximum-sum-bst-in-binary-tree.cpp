@@ -12,63 +12,38 @@
 class Solution {
 public:
     int ans{};
-//     int fn(TreeNode* root,int &mn,int &mx)
-//     {
-//         if(!root) return 0;
+    int fn(TreeNode* root,int &mn,int &mx)
+    {
+        if(!root) return 0;
+        int lmn,rmn,lmx,rmx;
+     lmn=rmn=INT_MAX;
+        lmx=rmx=INT_MIN;
         
-//         int lmn=INT_MAX,lmx=INT_MIN,rmn=INT_MAX,rmx=INT_MIN;
+        int ln=fn(root->left,lmn,lmx);
+        int rn=fn(root->right,rmn,rmx);
+    
         
-//         int l=fn(root->left,lmn,lmx);
-//         int r=fn(root->right,rmn,rmx);
+        int value=root->val+ln+rn;
         
-//         int val=l+r+root->val;
-//         if(lmx<root->val and rmn>root->val)
-//         {
-            
-//             // if(root->val==3)
-//             // {
-//             //     cout<<lmx<<" "<<rmn<<endl;
-//             //     cout<<"ASd";
-//             // }
-//             ans=max(ans,val);
-//            mx=max(root->val,rmx);
-//             mn=min(root->val,lmn);
-//         }
-//         else{
-//             mn=INT_MIN;
-//             mx=INT_MAX;
-//         }
-//         return val;
-//     }
-    // int maxSumBST(TreeNode* root) {
-    //     int mx=INT_MIN,mn=INT_MAX;
-    //     fn(root,mn,mx);
-    //     return ans;
-    // }
-        int fn(TreeNode* root,int &mn,int &mx)
+        if(lmx<root->val and rmn>root->val)
         {
-            if(!root) return 0;
-            int lmn,rmn,lmx,rmx;
-            lmn=rmn=INT_MAX;
-            lmx=rmx=INT_MIN;
-            int l=fn(root->left,lmn,lmx);
-            int r=fn(root->right,rmn,rmx);
-            int val=l+r+root->val;
-            if(lmx<root->val and rmn>root->val)
-            {
-                ans=max(ans,val);
-                mx=max(root->val,rmx);
-                mn=min(root->val,lmn);
-            }
-            else{
-                mn=INT_MIN;
-                mx=INT_MAX;
-            }
-          return val;
+            ans=max(ans,value);
+            mx=max(rmx,root->val);
+            mn=min(lmn,root->val);
+            
         }
-      int maxSumBST(TreeNode* root) {
-        int mx=INT_MIN,mn=INT_MAX;
-        fn(root,mn,mx);
+        else{
+            mn=INT_MIN;
+            mx=INT_MAX;
+        }
+        
+        return value;
+        
+        
+    }
+    int maxSumBST(TreeNode* root) {
+        int mn=INT_MIN,mx=INT_MAX;
+         fn(root,mn,mx);
         return ans;
     }
 };
