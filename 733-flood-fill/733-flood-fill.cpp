@@ -8,12 +8,12 @@ public:
        
         
         v[sr][sc]=color;
-        
-        dfs(v,sr-1,sc,val,color,m,n);
-        dfs(v,sr+1,sc,val,color,m,n);
-        dfs(v,sr,sc+1,val,color,m,n);
-        dfs(v,sr,sc-1,val,color,m,n);
-        
+        for(auto &i:dir){
+            dfs(v,sr+i.first,sc+i.second,val,color,m,n);
+            // dfs(v,sr+1,sc,val,color,m,n);
+            // dfs(v,sr,sc+1,val,color,m,n);
+            // dfs(v,sr,sc-1,val,color,m,n);
+        }
 
     }
     vector<vector<int>> floodFill(vector<vector<int>>& v, int sr, int sc, int color) {
