@@ -1,30 +1,33 @@
 class Solution {
 public:
-    void fn(vector<int>&v,int &k,vector<int> &sam,vector<vector<int>>&tot,int idx,int sum)
+    set<vector<int>>st;
+    void fn(vector<int>& v, int idx,int n,int target,vector<int>& temp,int sum)
     {
-        
-        if(sum>k)
+        if(idx>=n)
+        {
+            if(sum==target)
             {
-                return;
+                
+                st.insert(temp);
             }
-        if(sum==k)
-            {
-                tot.emplace_back(sam);
             return;
-            }
-      
-        for(int j=idx;j<v.size();j++){
-            if(sum+v[j]<=k){
-        sam.emplace_back(v[j]);
-        fn(v,k,sam,tot,j,sum+v[j]);
-        sam.pop_back();
-            }
         }
+        
+        if(sum+v[idx]<=target){
+            temp.push_back(v[idx]);
+            fn(v,idx,n,target,temp,sum+v[idx]);
+            if(temp.size()>0) temp.pop_back();
+        }
+        fn(v,idx+1,n,target,temp,sum);
+        
     }
-    vector<vector<int>> combinationSum(vector<int>& v, int k) {
-        vector<vector<int>> tot;
-        vector<int>sam;
-        fn(v,k,sam,tot,0,0);
-        return tot;
+    vector<vector<int>> combinationSum(vector<int>& v, int target) {
+        int n=v.size();
+        sort(begin(v),end(v));
+        vector<int> temp;
+        fn(v,0,n,target,temp,0);
+        vector<vector<int>>curr(begin(st),end(st));
+        
+        return curr;
     }
 };
