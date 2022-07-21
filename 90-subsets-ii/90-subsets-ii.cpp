@@ -6,10 +6,10 @@ public:
         if(idx>=n)
             
         {
-            vector<int>v3=temp;
-            sort(begin(temp),end(temp));
+            // vector<int>v3=temp;
+            // sort(begin(temp),end(temp));
             totans.insert(temp);
-            temp=v3;
+            // temp=v3;
                 
             return ;
         }
@@ -22,6 +22,7 @@ public:
     vector<vector<int>> subsetsWithDup(vector<int>& v)
     {
         int n=v.size();
+        sort(begin(v),end(v));
         vector<int> temp;
         fn(v,0,n,temp);
         
