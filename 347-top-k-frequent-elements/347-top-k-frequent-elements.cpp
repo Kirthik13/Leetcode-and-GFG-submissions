@@ -6,17 +6,23 @@ public:
         {
             m[i]++;
         }
-        priority_queue<pair<int,int>>pq;
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
+        
         for(auto &i:m)
         {
             pq.push({i.second,i.first});
+            if(pq.size()>k) pq.pop();
         }
-        vector<int>tot;
-        while(k--)
+        
+        vector<int>ans;
+        while(!pq.empty())
         {
-            tot.push_back(pq.top().second);
+            auto node=pq.top();
+            ans.push_back(node.second);
             pq.pop();
         }
-        return tot;
+        
+        return ans;
+      
     }
 };
