@@ -1,43 +1,40 @@
-
 class Solution {
 public:
-    bool ispalin(string &s)
-{
-    int i=0,j=s.size()-1;
-    while(i<j)
-    {
-        if(s[i]!=s[j]) return 0;
-        i++;
-        j--;
-    }
-    return 1;
-}
     vector<vector<string>>tot;
-    void fn(int idx,string &s,vector<string>&ans)
+    bool ispalin(string &s)
     {
-        if(idx==s.size())
+        int l=0,r=s.size()-1;
+        while(l<r)
         {
-            tot.push_back(ans);
-            return;
+            if(s[l]!=s[r]) return 0;
+            l++;
+            r--;
         }
-        int c=1;
-        for(int i=idx;i<s.size();i++)
+        return 1;
+    }
+    void fn(string s,int idx,int n,vector<string>&v)
+    {
+        if(idx>=n)
         {
-            string k=s.substr(idx,c);
-            if(ispalin(k))
+            tot.push_back(v);
+            return ;
+        }
+        
+        for(int i=idx;i<n;i++)
+        {
+            string tem=s.substr(idx,i-idx+1);
+            if(ispalin(tem))
             {
-                ans.push_back(k);
-                fn(i+1,s,ans);
-                ans.pop_back();
-                
+                v.push_back(tem);
+                fn(s,i+1,n,v);
+                if(v.size()>0) v.pop_back();
             }
-            c++;
         }
     }
     vector<vector<string>> partition(string s) {
-        
-        vector<string>ans;
-        fn(0,s,ans);
+        vector<string>v;
+        int n=s.size();
+        fn(s,0,n,v);
         return tot;
     }
 };
