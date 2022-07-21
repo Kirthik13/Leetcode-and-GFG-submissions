@@ -1,18 +1,24 @@
 class Solution {
 public:
     vector<pair<int,int>>dir={{-1,0},{0,1},{1,0},{0,-1}};
-   
+   bool isvalid(vector<vector<int>>& v,int sr, int sc, int val,int color,int m,int n)
+   {
+       return sr<0 or sr>=m or sc<0 or sc>=n or v[sr][sc]==color or v[sr][sc]!=val;
+   }
+       
     void dfs(vector<vector<int>>& v, int sr, int sc, int val,int color,int m,int n)
     {
-        if(sr<0 or sr>=m or sc<0 or sc>=n or v[sr][sc]==color or v[sr][sc]!=val) return ;
+        
        
         
         v[sr][sc]=color;
         for(auto &i:dir){
-            dfs(v,sr+i.first,sc+i.second,val,color,m,n);
-            // dfs(v,sr+1,sc,val,color,m,n);
-            // dfs(v,sr,sc+1,val,color,m,n);
-            // dfs(v,sr,sc-1,val,color,m,n);
+            int newx=sr+i.first,newy=sc+i.second;
+            
+            if(!isvalid(v,newx,newy,val,color,m,n)){
+                 dfs(v,newx,newy,val,color,m,n);
+            }
+           
         }
 
     }
