@@ -9,41 +9,47 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+class nodeval
+{
+    public:
+        int mini,maxi,maxsum;
+        nodeval(int x,int y,int z)
+        {
+            mini=x;
+            maxi=y;
+            maxsum=z;
+        }
+};
 class Solution {
 public:
     int ans{};
-    int fn(TreeNode* root,int &mn,int &mx)
+    nodeval fn(TreeNode* root)
     {
-        if(!root) return 0;
-        int lmn,rmn,lmx,rmx;
-     lmn=rmn=INT_MAX;
-        lmx=rmx=INT_MIN;
-        
-        int ln=fn(root->left,lmn,lmx);
-        int rn=fn(root->right,rmn,rmx);
-    
-        
-        int value=root->val+ln+rn;
-        
-        if(lmx<root->val and rmn>root->val)
+        if(!root)
         {
-            ans=max(ans,value);
-            mx=max(rmx,root->val);
-            mn=min(lmn,root->val);
-            
-        }
-        else{
-            mn=INT_MIN;
-            mx=INT_MAX;
+            return {INT_MAX,INT_MIN,0};
         }
         
-        return value;
+        nodeval ln=fn(root->left);
+        nodeval rn=fn(root->right);
+        
+        if(ln.maxi<root->val and rn.mini>root->val)
+        {
+            // if(root->val==-5)
+            // {
+            //     cout<<ln.maxsum<<" "<<rn.maxsum<<endl;
+            // }
+            ans=max(ans,root->val+ln.maxsum+rn.maxsum);
+            return {min(root->val,ln.mini),max(root->val,rn.maxi),ln.maxsum+rn.maxsum+root->val};
+        }
+            
+        return {INT_MIN,INT_MAX,max(ln.maxsum,rn.maxsum)};
         
         
     }
     int maxSumBST(TreeNode* root) {
-        int mn=INT_MIN,mx=INT_MAX;
-         fn(root,mn,mx);
+        int g=fn(root).maxsum;   
         return ans;
+        // return g>0?g:0;
     }
 };
