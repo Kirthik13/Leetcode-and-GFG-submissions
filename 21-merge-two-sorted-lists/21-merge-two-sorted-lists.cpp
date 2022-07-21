@@ -10,80 +10,89 @@
  */
 class Solution {
 public:
-    ListNode* midnode(ListNode* head)
+    ListNode* findmid(ListNode* h1)
     {
-        ListNode *slow = head;
-    ListNode *fast = head->next;
-    
-    while(slow->next != NULL && (fast!=NULL && fast->next!=NULL)) {
-        slow = slow->next;
-        fast = fast->next->next;
-    }
-    return slow;
-    }
-    ListNode* sort(ListNode* l1,ListNode* l2)
-    {
-        ListNode* c1=l1;
-        ListNode* c2=l2;
-        ListNode* dum=new ListNode(-1);
-        ListNode *curr=dum;
+        ListNode* s=h1;
+        ListNode* f=h1->next;
         
-        while(c1 and c2)
+        while((f and f->next))
         {
-            if(c1->val<=c2->val)
+            s=s->next;
+            f=f->next->next;
+        }
+        
+        return s;
+        
+    }
+    ListNode* sort(ListNode* h1,ListNode* h2)
+    {
+        ListNode* dum=new ListNode();
+        ListNode* prev=dum;
+        
+        ListNode* l1=h1;
+        ListNode* l2=h2;
+        
+        while(l1 and l2)
+        {
+            if(l1->val<=l2->val)
             {
-                curr->next=c1;
-                c1=c1->next;
+                prev->next=l1;
+                l1=l1->next;
+                prev=prev->next;
             }
-            else
-            {
-                curr->next=c2;
-                c2=c2->next;
+            else{
+                prev->next=l2;
+                l2=l2->next;
+                prev=prev->next;
             }
-            
-            curr=curr->next;
         }
-        while(c1)
+        
+        while(l1)
         {
-            curr->next=c1;
-            c1=c1->next;
-            curr=curr->next;
-       
+             prev->next=l1;
+                l1=l1->next;
+                prev=prev->next;
         }
-        while(c2)
+        while(l2)
         {
-            curr->next=c2;
-            c2=c2->next;
-            curr=curr->next;
-       
+            prev->next=l2;
+                l2=l2->next;
+                prev=prev->next;
         }
-        curr->next=NULL;
+        
+        prev->next=NULL;
         return dum->next;
     }
     ListNode* merge(ListNode* l1)
     {
         if(!l1->next) return l1;
-        ListNode* mid=midnode(l1);
+        
+        ListNode* mid=findmid(l1);
+        
         ListNode* l2=mid->next;
         mid->next=NULL;
-        ListNode* newnode= sort(merge(l1),merge(l2));
+        
+        ListNode* newnode=sort(merge(l1),merge(l2));
         return newnode;
-        
     }
-    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-        if(!list1 or !list2)
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2)
+    {
+         if(!list1 or !list2)
+         {
+             return !list1?list2:list1;
+         }
+         
+        ListNode* h1=list1;
+        ListNode* h2=list2;
+
+        while(h1->next)
         {
-            return !list1?list2:list1;
+            h1=h1->next;
         }
-        ListNode* l1=list1;
-        ListNode* l2=list2;
         
-        while(l1->next)
-        {
-            l1=l1->next;
-        }
-        l1->next=l2;
+        h1->next=h2;
         
         return merge(list1);
+        
     }
 };
