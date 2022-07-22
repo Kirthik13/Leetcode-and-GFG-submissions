@@ -1,48 +1,24 @@
 class Solution {
 public:
-    bool isopen(char c)
-    {
-        if(c=='(' or c=='[' or c=='{') return 1;
-        return 0;
-    }
-    int type(char c)
-    {
-        if(c=='(' or c==')') return 1;
-             if(c=='[' or c==']') return 2;
-        return 3;
-    }
     bool isValid(string s) {
-        if(s.size()==1) return 0;
-            
-        stack<char>st;
-        for(int i=0;i<s.size();i++)
+        vector<char>v;
+        for(auto &i:s)
         {
-            if(st.empty())
+            if(v.empty())
             {
-                if(isopen(s[i])) st.push(s[i]);
-                else{
-                return false;
-                }
+                v.push_back(i);
+                continue;
             }
-            else if(!st.empty())
-            {
-                if(!isopen(s[i]))
-                {
-                    if(isopen(st.top()) and type(s[i])==type(st.top()))
-                    {
-                        st.pop();
-                        // cout<<"ae";
-                    }
-                    else{
-                    return false;
-                    }
-                    
-                }
-                else{
-                        st.push(s[i]);
-                    }
+            if(i=='(' or i=='[' or i=='{') v.push_back(i);
+            else{
+                if(v.back()=='(' and i==')') v.pop_back();
+                else if(v.back()=='[' and i==']') v.pop_back();
+                else if(v.back()=='{' and i=='}') v.pop_back();
+                else return 0;
+                
             }
+            
         }
-        return st.empty();
+        return v.empty();
     }
 };
