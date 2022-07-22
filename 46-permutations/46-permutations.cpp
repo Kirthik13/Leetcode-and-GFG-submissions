@@ -1,12 +1,12 @@
 class Solution {
 public:
-    set<vector<int>>totans;
+    vector<vector<int>>totans;
     
     void fn(vector<int>& v,int idx,int n)
     {
         if(idx>=n)
         {
-            totans.insert(v);
+            totans.push_back(v);
             return;
         }
         
@@ -23,8 +23,8 @@ public:
     vector<vector<int>> permute(vector<int>& v) {
         int n=v.size();
         fn(v,0,n);
-        vector<vector<int>>temp(begin(totans),end(totans));
+        // vector<vector<int>>temp(begin(totans),end(totans));
         
-        return temp;
+        return totans;
     }
 };
