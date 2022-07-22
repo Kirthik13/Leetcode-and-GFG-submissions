@@ -6,28 +6,13 @@ public:
         for(int i=0;i<9;i++)
         {
             if(v[r][i]==num) return 0;
-        }
         
-         for(int i=0;i<9;i++)
-        {
             if(v[i][c]==num) return 0;
-        }
         
-        int st,en;
-        if(r>=0 and r<=2) st=0;
-        if(r>=3 and r<=5) st=3;
-        if(r>=6 and r<=8) st=6;
         
-        if(c>=0 and c<=2) en=0;
-        if(c>=3 and c<=5) en=3;
-        if(c>=6 and c<=8) en=6;
-        
-        for(int i=st;i<=st+2;i++)
-        {
-            for(int j=en;j<=en+2;j++)
-            {
-                if(v[i][j]==num) return 0;
-            }
+     
+            if(v[(3*(r/3))+(i/3)][(3*(c/3))+(i%3)]==num) return 0;
+            
 
             
         }
