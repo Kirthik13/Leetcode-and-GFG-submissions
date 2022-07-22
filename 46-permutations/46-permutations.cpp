@@ -1,30 +1,30 @@
 class Solution {
 public:
-    vector<vector<int>>totans;
+    set<vector<int>>totans;
     
-    void fn(vector<int>& v,int l,int r)
+    void fn(vector<int>& v,int idx,int n)
     {
-        if(l==r)
+        if(idx>=n)
         {
-            // totans.insert(v);
-            totans.push_back(v);
+            totans.insert(v);
             return;
         }
         
-        for(int i=l;i<=r;i++)
+        for(int i=idx;i<n;i++)
         {
-            swap(v[l],v[i]);
-            fn(v,l+1,r);
-            swap(v[l],v[i]);
+            // if(i==idx) continue;
+            swap(v[idx],v[i]);
+            fn(v,idx+1,n);
+            swap(v[idx],v[i]);
             
         }
     }
     
     vector<vector<int>> permute(vector<int>& v) {
         int n=v.size();
-        fn(v,0,n-1);
-        // vector<vector<int>>temp(begin(totans),end(totans));
-        return totans;
-        // return temp;
+        fn(v,0,n);
+        vector<vector<int>>temp(begin(totans),end(totans));
+        
+        return temp;
     }
 };
