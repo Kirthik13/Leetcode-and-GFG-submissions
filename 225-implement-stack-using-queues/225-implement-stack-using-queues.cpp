@@ -15,11 +15,12 @@ public:
             q1.pop();
         }
         
-        while(!q2.empty())
-        {
-            q1.push(q2.front());
-            q2.pop();
-        }
+        swap(q1,q2);
+        // while(!q2.empty())
+        // {
+        //     q1.push(q2.front());
+        //     q2.pop();
+        // }
     }
     
     int pop() {
