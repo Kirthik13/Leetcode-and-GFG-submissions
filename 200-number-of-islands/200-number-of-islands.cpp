@@ -1,71 +1,40 @@
 class Solution {
 public:
-    vector<int>dx={0,1,0,-1};
-    vector<int>dy={1,0,-1,0};
-
-//     void fn(vector<vector<char>>& v,int i,int j,  vector<vector<int>>&vis)
-//     {
-//         // if(i==v.size()) return;
-//         // if(j==v[0].size()) return;
-//         // if(i<0 or j<0) return;
-//         if(v[i][j]=='0') return;
-//         vis[i][j]=1;
-//         if(v[i][j]=='1')
-//         {
-//             for(int s=0;s<4;s++)
-//             {
-//                 int x=i+dx[s],y=j+dy[s];
-                
-//                 if((x>=0 and x<=v.size()-1) and  (y>=0 and y<=v[0].size()-1))
-//                 {
-//                     if(!vis[x][y] and v[x][y]=='1' )
-//                     {
-//                         fn(v,x,y,vis);
-//                     }
-//                 }
-//             }
-//         }
-//     }
+    vector<pair<int,int>>dir={{-1,0},{1,0},{0,1},{0,-1}};
     
-    int numIslands(vector<vector<char>>& v) {
-        // fn(v,0,0);
-        int ans{};
-        // vector<vector<int>>vis(v.size(),vector<int>(v[0].size(),0));
-        for(int i=0;i<v.size();i++)
+    bool isvalid(vector<vector<char>>& v,int r,int c)
+    {
+        return r<0 or c<0 or r>=v.size() or c>=v[0].size() or v[r][c]=='0';
+    }
+    void dfs(vector<vector<char>>& v,int r,int c)
+    {
+        v[r][c]='0';
+        for(auto &i:dir)
         {
-            for(int j=0;j<v[0].size();j++)
+            int newr=i.first+r;
+            int newc=i.second+c;
+            
+            if(!isvalid(v,newr,newc))
+            {
+                dfs(v,newr,newc);
+            }
+            
+        }
+    }
+        
+    int numIslands(vector<vector<char>>& v) {
+        int c{},m=v.size(),n=v[0].size();
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
             {
                 if(v[i][j]=='1')
                 {
-                    // fn(v,i,j,vis);
-                    
-                    ans++;
-                    queue<pair<int,int>>q;
-                    q.push({i,j});
-                    v[i][j]='0';
-                    while(!q.empty())
-                    {
-                        int i1=q.front().first;
-                        int j1=q.front().second;
-                        q.pop();
-
-                        for(int s=0;s<4;s++)
-                        {
-                            int x=i1+dx[s],y=j1+dy[s];
-
-                            if((x>=0 and x<=v.size()-1) and  (y>=0 and y<=v[0].size()-1) and v[x][y]=='1')
-                            {
-                                
-                                    q.push({x,y});
-                                    v[x][y]='0';
-
-                                
-                            }
-                        }
-                    }
+                    dfs(v,i,j);
+                    c++;
                 }
             }
         }
-        return ans;
+        return c;
     }
 };
