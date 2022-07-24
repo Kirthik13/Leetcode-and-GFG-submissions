@@ -48,8 +48,48 @@ public:
         return curr;
         
     }
+     Node* bfs(Node* node1)
+    {
+       
+        int val=node1->val;
+        Node* newnode=new Node(val);
+        m[node1]=newnode;
+            
+        Node* curr=m[node1];
+        
+         queue<Node*>q;
+         q.push(node1);
+         int g=0;
+         
+         while(!q.empty())
+         {
+            auto node=q.front();
+          
+             q.pop();
+            for(auto &it:node->neighbors)
+            {
+                if(m.find(it)==m.end())
+                {
+                    // Node* newnode=dfs(it);
+                    int val=it->val;
+                    Node* newnode=new Node(val);
+                     m[it]=newnode;
+                    q.push(it);
+                    // m[it]=newnode;
+                }
+                
+                    m[node]->neighbors.push_back(m[it]);
+                
+
+            }
+             // g=1;
+         }
+        return curr;
+        
+    }
     Node* cloneGraph(Node* node) {
         if(!node) return NULL;
-       return dfs(node);
+       // return dfs(node);
+        return bfs(node);
     }
 };
