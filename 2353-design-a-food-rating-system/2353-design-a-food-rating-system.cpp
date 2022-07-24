@@ -25,8 +25,8 @@ public:
     void changeRating(string food, int newr) {
         string c=fmap[food];
         pair<int,string>p={rmap[food],food};
-        // auto it=m2[c].find(p);
-        m2[c].erase(p);
+        auto it=m2[c].find(p);
+        m2[c].erase(it);
         m2[c].insert({newr,food});
         
         rmap[food]=newr;
