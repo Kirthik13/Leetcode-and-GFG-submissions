@@ -4,48 +4,47 @@ public:
         int n=v.size();        
         int cy=2;
         stack<int>st;
-        vector<int>ans(2*n,-1);
-        int idx=(2*n)-1;
-        while(cy--)
-        {
-            for(int i=n-1;i>=0;i--)
+        vector<int>ans(n,-1);
+        int idx=2*n-1;
+      
+            for(int i=2*n-1;i>=0;i--)
             {
                 if(st.empty())
                 {
-                    st.push(v[i]);
+                    st.push(v[i%n]);
                     
                 }
                 else{
-                    while(!st.empty() and st.top()<=v[i])
+                    while(!st.empty() and st.top()<=v[i%n])
                     {
                         st.pop();
                     }
                     if(!st.empty())
                     {
-                        ans[idx]=st.top();
+                        ans[idx%n]=st.top();
                         
                     }
                   
                 }
                 idx--;
 
-                st.push(v[i]);
+                st.push(v[i%n]);
             }
             
             
        
             
-        }
         
         
         
-        vector<int> result;
-        for(auto i=ans.begin();i!=ans.begin()+(n);i++)
-        {
-           result.push_back(*i);
-        }
+        
+        // vector<int> result;
+        // for(auto i=ans.begin();i!=ans.begin()+(n);i++)
+        // {
+        //    result.push_back(*i);
+        // }
 
-        return result;
+        return ans;
         
     }
 };
