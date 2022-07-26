@@ -16,9 +16,26 @@ public:
         int n=v.size();
         if(n==1) return v[0];
 
-        vector<int>dp1(n+2,-1);
-        vector<int>dp2(n+2,-1);
+        vector<int>dp1(n+2,0);
+        vector<int>dp2(n+2,0);
         
-        return max(fn(v,1,n,dp1),fn(v,0,n-1,dp2));
+        for(int idx=n-1;idx>=1;idx--)
+        {
+             int call1=v[idx]+dp1[idx+2];
+             int call2=dp1[idx+1];
+        
+             dp1[idx]=max(call1,call2);
+        }
+        
+         for(int idx=n-2;idx>=0;idx--)
+        {
+             int call1=v[idx]+dp2[idx+2];
+             int call2=dp2[idx+1];
+        
+             dp2[idx]=max(call1,call2);
+        }
+        
+        return max(dp1[1],dp2[0]);
+        // return max(fn(v,1,n,dp1),fn(v,0,n-1,dp2));
     }
 };
