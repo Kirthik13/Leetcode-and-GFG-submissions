@@ -1,27 +1,28 @@
 class Solution {
 public:
     int trap(vector<int>& v) {
-        stack<int>st;
-        int n=v.size();
-        int ans{};
+        int n=v.size(),ans{};
+        
+        vector<int>pre(n,0);
+        vector<int>suf(n,0);
+        pre[0]=v[0];
+        suf[n-1]=v[n-1];
+        
+        for(int i=1;i<n;i++)
+        {
+            pre[i]=max(v[i],pre[i-1]);
+        }
+        
+        for(int i=n-2;i>=0;i--)
+        {
+            suf[i]=max(v[i],suf[i+1]);
+        }
+        
+
+        
         for(int i=0;i<n;i++)
         {
-           
-            while(!st.empty() and v[st.top()]<v[i])
-            {
-                int dig=v[st.top()];
-                st.pop();
-           
-                if(!st.empty())
-                {
-                    int leftidx=v[st.top()];
-                    int minheight=min(leftidx,v[i]);
-                    int width=i-st.top()-1;
-                    ans+=(minheight-dig)*width;
-                }
-            }
-            st.push(i);
-            
+            ans+=(min(pre[i],suf[i])-v[i]);
         }
         return ans;
     }
