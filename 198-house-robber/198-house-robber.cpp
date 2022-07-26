@@ -15,18 +15,19 @@ public:
     }
     int rob(vector<int>& v) {
         int n=v.size();
-        vector<int>dp(n+2,0);
-        
+        vector<int>dp(n+3,0);
+        int nextprev=0;
+        int prev=0;
         for(int idx=n-1;idx>=0;idx--)
         {
-            int call1=v[idx]+dp[idx+2];
-            int call2=dp[idx+1];
+            int call1=v[idx]+nextprev;
+            int call2=prev;
             
             int ans=max(call1,call2);
-            
-            dp[idx]=ans;
+            nextprev=prev;
+            prev=ans;
         }
-        return dp[0];
+        return prev;
         // return fn(v,0,n,dp);
     }
 };
