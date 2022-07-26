@@ -15,18 +15,15 @@ public:
         
         if(p==root)
         {
-              // cout<<"f : "<<root->val<<endl;
             return root;
         }
         if(q==root)
         {
-            // cout<<"s : "<<root->val<<endl;
             return root;
         }
         
         TreeNode* lt=fn(root->left,p,q);
         TreeNode* rt=fn(root->right,p,q);
-        // if(lt==p and rt==q) cout<<"asdasdf";
         if(lt and rt) return root;
         
         if(lt and !rt) return lt;
