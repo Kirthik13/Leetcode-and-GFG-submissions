@@ -1,13 +1,20 @@
 class Solution {
 public:
-    int climbStairs(int n) {
-        int prev=1,nextprev=1;
-        for(int i=n-2;i>=0;i--)
+    int fn(int i,int n, vector<int>&dp)
+    {
+        if(i==n)
         {
-            int curr=prev+nextprev;
-            nextprev=prev;
-            prev=curr;
+            return 1;
         }
-        return prev;
+        if(i>n) return 0;
+        
+        if(dp[i]!=-1) return dp[i];
+        
+        return dp[i]=fn(i+1,n,dp)+fn(i+2,n,dp);
+        
+    }
+    int climbStairs(int n) {
+        vector<int>dp(n,-1);
+        return fn(0,n,dp);
     }
 };
