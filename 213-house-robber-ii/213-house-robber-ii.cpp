@@ -1,33 +1,24 @@
 class Solution {
 public:
- map<pair<int,int>,int>dp;
-    int fn(int idx,vector<int>&v,vector<int>&vis,bool rob)
+    int fn(vector<int>&v,int idx,int n,vector<int>&dp)
     {
-        if(idx>=v.size() or (idx==v.size()-1 and rob))
-        {
-            return 0;
-        }
+        if(idx>=n) return 0;
         
-        if(dp.find({idx,rob})!=dp.end()) return dp[{idx,rob}];
-        int f=0,s=0;
+        if(dp[idx]!=-1) return dp[idx];
         
-        if(idx==0){
-            f=v[idx]+fn(idx+2,v,vis,1);
-        }
-        else{
-            f=v[idx]+fn(idx+2,v,vis,rob);
-
-        }
+        int call1=v[idx]+fn(v,idx+2,n,dp);
+        int call2=fn(v,idx+1,n,dp);
         
-        s=fn(idx+1,v,vis,rob);
+        return dp[idx]=max(call1,call2);
         
-       return dp[{idx,rob}]=max(f,s);
-   
     }
     int rob(vector<int>& v) {
         int n=v.size();
-        vector<int>vis(n);
-        bool rob=0;
-        return fn(0,v,vis,rob);
+        if(n==1) return v[0];
+
+        vector<int>dp1(n+2,-1);
+        vector<int>dp2(n+2,-1);
+        
+        return max(fn(v,1,n,dp1),fn(v,0,n-1,dp2));
     }
 };
