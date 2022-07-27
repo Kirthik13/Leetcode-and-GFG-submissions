@@ -3,19 +3,20 @@ public:
     vector<int> maxSlidingWindow(vector<int>& v, int k) {
         priority_queue<pair<int,int>>pq;
         vector<int>ans;
-        for(int i=0;i<v.size();i++)
+        for(int i=0;i<k;i++)
         {
-            while(!pq.empty() and pq.top().second<=i-k)
+            pq.push({v[i],i});
+        }
+                    ans.push_back(pq.top().first);
+
+        for(int i=k;i<v.size();i++)
+        {
+            pq.push({v[i],i});
+            while(pq.top().second<=i-k)
             {
                 pq.pop();
             }
-            
-            pq.push({v[i],i});
-            if(i>=k-1)
-            {
-                ans.push_back(pq.top().first);
-            }
-                
+            ans.push_back(pq.top().first);
         }
         return ans;
     }
