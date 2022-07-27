@@ -6,14 +6,16 @@ public:
     }
     
     int next(int price) {
-        int res=1;
+        int c{};
         while(!st.empty() and st.top().first<=price)
         {
-            res+=st.top().second;
+            c+=st.top().second;
             st.pop();
         }
-        st.push({price,res});
-        return res;
+        
+        st.push({price,c+1});
+        return c+1;
+        
     }
 };
 
