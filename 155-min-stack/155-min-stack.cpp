@@ -6,23 +6,12 @@ public:
     }
     
     void push(int val) {
-        if(st.empty())   
+        int g=val;
+        if(!st.empty() and st.top().second<val)
         {
-            st.push({val,val});
-            
+            g=st.top().second;
         }
-        else{
-            int el=st.top().second;
-            if(el<val)
-            {
-                st.push({val,el});
-            }
-            else{
-                st.push({val,val});
-                
-            }
-        }
-            
+        st.push({val,g});
     }
     
     void pop() {
@@ -34,8 +23,7 @@ public:
     }
     
     int getMin() {
-                return st.top().second;
-
+        return st.top().second;
     }
 };
 
