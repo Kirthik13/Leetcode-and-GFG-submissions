@@ -6,6 +6,7 @@ public:
     int firstBadVersion(int n) {
        long long int l=1;
         long long int r=((long long)1<<31)-1;
+        long long int ans=LONG_LONG_MAX;
         
         while(l<r)
         {
@@ -14,16 +15,16 @@ public:
             if(isBadVersion(mid))
             {
                 r=mid;
-                // ans=min(ans,mid);
+                ans=min(ans,mid);
             }
             else{
                 l=mid+1;
             }
         }
-        // if(isBadVersion(l))
-        // {
-        //     ans=min(ans,l);
-        // }
-        return l;
+        if(isBadVersion(l))
+        {
+            ans=min(ans,l);
+        }
+        return ans;
     }
 };
