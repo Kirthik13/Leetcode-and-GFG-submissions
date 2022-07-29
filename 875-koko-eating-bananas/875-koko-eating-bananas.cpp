@@ -1,51 +1,38 @@
-#define all(v) v.begin(),v.end()
 class Solution {
 public:
-    int caneat(vector<int>& v,int &k,int &h)
+    bool cando(vector<int>&v,long long int speed,int h)
     {
-        
-        int n=v.size();
-     
-        int nh=0;
-
-      
-        int i=0;
-        
-        while(i<n)
+        long long int time{};
+        for(int i=0;i<v.size();i++)
         {
-         
-
-           nh=nh+ceil(1.0*v[i]/k);
-            if(nh>h)
-            {
-                return 0;
+            long long a=(long long)v[i]/speed;
+            long long b=(long long)v[i]%speed;
+            time+=a;
+            
+            if(b>0){
+                time++;
             }
-            i++;
         }
-     
-        return nh<=h;
-            
+        
+        return time<=h;
     }
-            
-    // }
     int minEatingSpeed(vector<int>& v, int h) {
-         int n=v.size();
-        int r=*max_element(all(v));
-        int l=1;
-        int ans=INT_MAX;
-        while(l<=r)
+        long long int l=1;
+        long long int r=*max_element(begin(v),end(v));
+        
+        while(l<r)
         {
-            int mid=(l+r)/2;
-            // deb(mid);
-            if(caneat(v,mid,h))
+            long long int mid=l+((r-l)/2);
+            
+            if(cando(v,mid,h))
             {
-                ans=mid;
-                r=mid-1;
+                r=mid;
             }
             else{
                 l=mid+1;
             }
         }
-        return ans;
+        
+        return l;
     }
 };
