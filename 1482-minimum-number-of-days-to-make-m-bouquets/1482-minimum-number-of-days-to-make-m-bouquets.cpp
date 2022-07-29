@@ -14,7 +14,6 @@ public:
             {
                 curr_fl=0;
                 continue;
-                // return 0;
             }
             if(v[i]<=max_time)
             {
@@ -38,7 +37,7 @@ public:
         
         if(n < (m*k)) return -1;
         
-        ll int l=1,r=lmax;
+        ll int l=1,r=*max_element(begin(v),end(v));
         
         while(l<r)
         {
