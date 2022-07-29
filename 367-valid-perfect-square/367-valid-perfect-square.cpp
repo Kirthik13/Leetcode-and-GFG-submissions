@@ -1,7 +1,7 @@
 class Solution {
 public:
     bool isPerfectSquare(int num) {
-        long long int l=1,r=num;
+        long long int l=1,r=1<<31-1;
         
         while(l<r)
         {
