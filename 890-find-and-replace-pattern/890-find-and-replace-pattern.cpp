@@ -1,40 +1,34 @@
 class Solution {
 public:
+    string f(string s)
+    {
+        unordered_map<char,int>m;
+        for(auto &i:s)
+        {
+            if(m.count(i)==0)
+            {
+                m[i]=m.size();
+            }
+        }
+        
+        for(int i=0;i<s.size();i++)
+        {
+            s[i]='a'+m[s[i]];
+        }
+        return s;
+    }
     vector<string> findAndReplacePattern(vector<string>& v, string p)
     {
          vector<string>totans;
-         map<char,int>m;
-         map<char,int>m2;
-         for(int i=0;i<v.size();i++)
+         string fp=f(p);
+         for(auto &w:v)
          {
-             string s=v[i];
-             if(s.size()==p.size())
+             if(f(w)==fp)
              {
-                 
-                 
-                 int fl=1;
-                 for(int j=0;j<s.size();j++)
-                 {
-                     if((m.find(p[j])!=m.end() and m[p[j]]!=s[j]) or (m2.find(s[j])!=m2.end() and m2[s[j]]!=p[j]))
-                     {
-                         fl=0;
-                         break;
-                     }
-                         
-                     m[p[j]]=s[j];
-                     m2[s[j]]=p[j];
-                 }
-                 
-                 if(fl)
-                 {
-                     totans.push_back(s);
-                 }
-                 m.clear();
-                 m2.clear();
-                 
+                 totans.push_back(w);
              }
          }
-        return totans;
+         return totans;
         
         
     }
