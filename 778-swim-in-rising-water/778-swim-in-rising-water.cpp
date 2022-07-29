@@ -7,8 +7,13 @@ public:
         return x<0 or y<0 or x>=n or y>=n or v[x][y]>max_dpt or vis[x][y]==1;
     }
     
-    void dfs(vector<vector<int>>&v,int x,int y,int n,int max_dpt,vector<vector<int>>&vis)
+    bool dfs(vector<vector<int>>&v,int x,int y,int n,int max_dpt,vector<vector<int>>&vis)
     {
+         if(x==n-1 and y==n-1)
+        {
+          
+            return true;
+        }
        
         vis[x][y]=1;
         for(auto &i:dir)
@@ -18,17 +23,18 @@ public:
             
             if(!isvalid(v,newx,newy,n,max_dpt,vis))
             {
-                dfs(v,newx,newy,n,max_dpt,vis);
+                if(dfs(v,newx,newy,n,max_dpt,vis)) return 1;
             }
             
         }
+        return 0;
         // vis[x][y]=0;
     }
     bool cando(vector<vector<int>>&v,int max_dpt,int n)
     {
         vector<vector<int>>vis(n+1,vector<int>(n+1,0));
-        dfs(v,0,0,n,max_dpt,vis);
-        return vis[n-1][n-1]==1;
+        return dfs(v,0,0,n,max_dpt,vis);
+        // return vis[n-1][n-1]==1;
     }
     int swimInWater(vector<vector<int>>& v) {
         int l=v[0][0],r=2500,n=v.size();
