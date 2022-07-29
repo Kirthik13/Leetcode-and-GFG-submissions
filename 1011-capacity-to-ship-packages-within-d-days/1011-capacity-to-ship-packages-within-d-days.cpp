@@ -8,15 +8,19 @@ public:
         {
             if(max_cap<v[i]) return 0;
             
-            curr_wt+=v[i];
             
-            if(curr_wt>max_cap)
+            if(curr_wt+v[i]<=max_cap)
+            {
+                curr_wt+=v[i];
+
+            }
+                
+            else
             {
                 d++;
                 curr_wt=v[i];
             }
             
-            // if(days==0) return 0;
         
         }
         return d<=days;
