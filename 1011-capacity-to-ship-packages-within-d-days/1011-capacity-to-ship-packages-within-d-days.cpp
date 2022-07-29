@@ -3,6 +3,7 @@ public:
     bool cando(vector<int>&v,int max_cap,int days)
     {
         int curr_wt=0;
+        int d=1;
         for(int i=0;i<v.size();i++)
         {
             if(max_cap<v[i]) return 0;
@@ -11,13 +12,14 @@ public:
             
             if(curr_wt>max_cap)
             {
-                days--;
+                d++;
                 curr_wt=v[i];
             }
-            if(days==0) return 0;
+            
+            // if(days==0) return 0;
         
         }
-        return 1;
+        return d<=days;
         
     }
     int shipWithinDays(vector<int>& v, int days) {
