@@ -6,7 +6,7 @@ public:
         long long int time{};
         for(int i=0;i<v.size();i++)
         {
-            long long a=ceil(v[i]/(speed*1.0));
+            long long a=(long long)(ceil(v[i]/(speed*1.0)));
             // long long b=(long long)v[i]%speed;
             time+=a;
             
