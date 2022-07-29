@@ -5,8 +5,10 @@ class Solution {
 public:
     int firstBadVersion(int n) {
        long long int l=1;
-        long long int r=n;
+        long long int r=((long long)1<<31)-1;
         long long int ans=LONG_LONG_MAX;
+        
+        
         while(l<r)
         {
             long long int mid=l+((r-l)/2);
