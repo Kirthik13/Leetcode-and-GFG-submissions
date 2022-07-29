@@ -12,7 +12,13 @@ public:
         {
             if(max_time<v[i] and curr_fl!=0)
             {
+                if(curr_fl==k)
+                {
+                    curr_b++;
+                    // curr_fl=0;
+                }
                 curr_fl=0;
+                
                 continue;
             }
             if(v[i]<=max_time)
