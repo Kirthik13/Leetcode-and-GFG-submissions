@@ -1,7 +1,11 @@
 class Solution {
 public:
     
- 
+  vector<vector<int>>dir={{-1,0},{1,0},{0,1},{0,-1}};
+    bool isvalid(vector<vector<int>>&v,int x,int y,int n,int max_dpt,vector<vector<int>>&vis)
+    {
+        return x<0 or y<0 or x>=n or y>=n or v[x][y]>max_dpt or vis[x][y]==1;
+    }
     
      void dfs(vector<vector<int>>&v,int x,int y,int n,int max_dpt,vector<vector<int>>&vis)
     {
@@ -9,11 +13,21 @@ public:
             if(!vis[x][y] and v[x][y]<=max_dpt)
             {
                 vis[x][y]=1;
-                
-                if(x+1<n) dfs(v,x+1,y,n,max_dpt,vis);
-                if(x-1>=0) dfs(v,x-1,y,n,max_dpt,vis);
-                if(y-1>=0) dfs(v,x,y-1,n,max_dpt,vis);
-                if(y+1<n) dfs(v,x,y+1,n,max_dpt,vis);
+                for(auto &i:dir)
+                {
+                    int newx=x+i[0];
+                    int newy=y+i[1];
+
+                    if(!isvalid(v,newx,newy,n,max_dpt,vis))
+                    {
+                        dfs(v,newx,newy,n,max_dpt,vis) ;
+                    }
+
+                }
+                // if(x+1<n) dfs(v,x+1,y,n,max_dpt,vis);
+                // if(x-1>=0) dfs(v,x-1,y,n,max_dpt,vis);
+                // if(y-1>=0) dfs(v,x,y-1,n,max_dpt,vis);
+                // if(y+1<n) dfs(v,x,y+1,n,max_dpt,vis);
                 
                 
                 
