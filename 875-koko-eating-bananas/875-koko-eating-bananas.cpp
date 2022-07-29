@@ -6,13 +6,13 @@ public:
         long long int time{};
         for(int i=0;i<v.size();i++)
         {
-            long long a=(long long)v[i]/speed;
-            long long b=(long long)v[i]%speed;
+            long long a=ceil(v[i]/(speed*1.0));
+            // long long b=(long long)v[i]%speed;
             time+=a;
             
-            if(b>0){
-                time++;
-            }
+            // if(b>0){
+                // time++;
+            // }
         }
         
         return time<=h;
