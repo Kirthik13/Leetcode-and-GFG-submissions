@@ -80,14 +80,26 @@ public:
             }
         }
         
-        vector<pair<int,int>> dir={{0,0},{0,3},{0,6},{3,0},{3,3},{3,6},{6,0},{6,3},{6,6}};
+        // vector<pair<int,int>> dir={{0,0},{0,3},{0,6},{3,0},{3,3},{3,6},{6,0},{6,3},{6,6}};
         
-        for(auto &i:dir)
-        {
-            if(!indfn(v,i.first,i.second,n))
-            {
+//         for(auto &i:dir)
+//         {
+//             if(!indfn(v,i.first,i.second,n))
+//             {
 
-                return 0;
+//                 return 0;
+//             }
+//         }
+        
+        for(int i=0;i<=6;i+=3)
+        {
+            for(int j=0;j<=6;j+=3)
+            {
+                if(!indfn(v,i,j,n))
+                {
+
+                    return 0;
+                }
             }
         }
         return 1;
