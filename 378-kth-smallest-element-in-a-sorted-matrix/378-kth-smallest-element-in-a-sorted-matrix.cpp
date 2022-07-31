@@ -1,9 +1,21 @@
 class Solution {
 public:
-    int fn(vector<int>&v,int val)
+    int fn(vector<vector<int>>&v,int val)
     {
-        int idx=upper_bound(begin(v),end(v),val)-begin(v);
-        return idx;
+        // int idx=upper_bound(begin(v),end(v),val)-begin(v);
+        
+        // return idx;
+        
+        int n=v.size();
+        int c=n-1;
+        int cnt{};
+        
+        for(int i=0;i<n;i++)
+        {
+            while(c>=0 and v[i][c]>val) c--;
+            cnt+=(c+1);
+        }
+        return cnt;
     }
     int kthSmallest(vector<vector<int>>& v, int k) {
         int n=v.size();
@@ -15,10 +27,9 @@ public:
             int mid=l+((r-l)/2);
             
             int cnt{};
-            for(int i=0;i<n;i++)
-            {
-                cnt+=fn(v[i],mid);
-            }
+          
+                cnt=fn(v,mid);
+            
             
             if(cnt>=k)
             {
