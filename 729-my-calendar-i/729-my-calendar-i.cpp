@@ -9,15 +9,12 @@ public:
         
     }
     
-    bool book(int start, int end) {
-        for(auto &i:st)
-        {
-            if(!isvalid(i,start,end))
-            {
-               return false;
-            }
-        }
-        st.insert({start,end});
+    bool book(int s, int e) {
+        auto next=st.lower_bound({s,e});
+      
+        if (next != st.end() && next->first < e) return false; 
+        if (next != st.begin() && s < (--next)->second) return false; 
+        st.insert({s,e});
         return 1;
     }
 };
