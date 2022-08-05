@@ -10,10 +10,7 @@ public:
         }
         if(idx>=n)
         {
-            if(nob==3)
-            {
-                return 1;
-            }
+           
             return 0;
         }
         
@@ -45,11 +42,57 @@ public:
     }
     long long numberOfWays(string s) {
         int n=s.size();
-        
-        // vector<vector<vector<ll int>>>dp(n,vector<vector<ll int>>(4,vector<ll int>(3,-1)));
-      
         memset(dp, -1, sizeof(dp));
         
+//         for(int idx=n-1;idx>=0;idx--)
+//         {
+            
+//                 for(int prev=1;prev>=-1;prev--)
+//                 {
+                   
+//                         dp[idx][3][prev+1]=1;
+                    
+                   
+        
+//                 }
+            
+//         }
+        
+        
+        
+        
+//         for(int idx=n-1;idx>=0;idx--)
+//         {
+//             for(int nob=2;nob>=0;nob--)
+//             {
+//                 for(int prev=1;prev>=-1;prev--)
+//                 {
+                  
+//                     ll int call1{},call2{};
+//                     if(prev==-1)
+//                     {
+//                         call1=dp[idx+1][nob+1][int(s[idx])-'0'];
+//                     }
+//                     else
+//                     {
+//                         if(prev==1 and s[idx]=='0')
+//                         {
+//                             call1=dp[idx+1][nob+1][int(s[idx])-'0'];
+//                         }
+//                         else if(prev==0 and s[idx]=='1')
+//                         {
+//                             call1=dp[idx+1][nob+1][int(s[idx])-'0'];
+
+//                         }
+//                     }
+//                     call2=dp[idx+1][nob][prev+1];
+        
+//                    dp[idx][nob][prev+1]=call1+call2;
+//                 }
+//             }
+//         }
+        
+//         return dp[0][0][0];
         return fn(s,0,n,0,-1);
     }
 };
