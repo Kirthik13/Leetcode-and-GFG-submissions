@@ -12,7 +12,7 @@ public:
             
             if(k2>k)
             {
-                while(l<v.size())
+                while(l<=i)
                 {
                     if(v[l]==0)
                     {
