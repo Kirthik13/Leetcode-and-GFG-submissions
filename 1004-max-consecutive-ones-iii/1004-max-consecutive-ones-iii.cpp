@@ -12,8 +12,15 @@ public:
             
             while(k2>k)
             {
-                if(v[st]==0) k2--;
+                if(v[st]==0)
+                {
+                    
+                    k2--;
+                    st++;
+                    break;
+                }
                 st++;
+                
                 
             }
             ans=max(ans,i-st+1);
