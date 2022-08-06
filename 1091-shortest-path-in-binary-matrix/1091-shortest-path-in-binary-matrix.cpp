@@ -1,52 +1,76 @@
 class Solution {
 public:
-    bool isvalid(int &x,int &y,int &n,map<pair<int,int>,int>&vis,vector<vector<int>>&v)
+    vector<vector<int>>dir={{-1,0},{-1,1},{0,1},{1,1},{1,0},{1,-1},{0,-1},{-1,-1}};
+    
+    bool isvalid(vector<vector<int>>& grid,int x,int y,int m,int n)
     {
-        
-        return x>=0 and y>=0 and x<n and y<n and !vis[{x,y}] and !v[x][y];
+        return x<0 or y<0 or x>=m or y>=n or grid[x][y]>0;
     }
-    int shortestPathBinaryMatrix(vector<vector<int>>& v) {
-        vector<pair<int,int>>dir={
-            {-1,0},{1,0},{0,-1},{0,1},{-1,1},{1,1},{-1,-1},{1,-1}
-        };
-        queue<pair<pair<int,int>,int>>q;
-        int ans=INT_MAX;
-        int n=v.size();
-        if(v[0][0]!=0 or v[n-1][n-1]!=0) return -1;
+    
+    int shortestPathBinaryMatrix(vector<vector<int>>& grid) {
+        int ans=INT_MAX,m=grid.size(),n=grid[0].size();
+        if(grid[0][0]==1 or grid[m-1][n-1]==1) return -1;
         
-                map<pair<int,int>,int>vis;
+         queue<pair<int, int>> queue;
+        queue.push(make_pair(0,0));
+        vector<vector<int>> directions = {{1,1}, {0,1},{1,0},{0,-1},{-1,0},{-1, -1},{1, -1},{-1, 1}};
+        grid[0][0] = 1;
+        int row=m,col=n;
+        while(!queue.empty()){
+            auto curr = queue.front();
+                        queue.pop();
 
-        q.push({{0,0},1});
-        vis[{0,0}]=1;
+            int x = curr.first, y = curr.second;
+            if( x == row -1 && y == col -1) return grid[x][y];
 
-        while(!q.empty())
-        {
-            auto it=q.front();
-            q.pop();
-            
-            int x=it.first.first;
-            int y=it.first.second;
-            int steps=it.second;
-            
-            
-            if(x==n-1 and y==n-1)
-            {
-                ans=min(ans,steps);
-            }
-            
-            for(auto it:dir)
-            {
-                int dx=x+it.first;
-                int dy=y+it.second;
-                
-                if(isvalid(dx,dy,n,vis,v))
-                {
-                    q.push({{dx,dy},steps+1});
-                    vis[{dx,dy}]=1;
+            for(auto direction : directions){
+                int nx = x + direction[0];
+                int ny = y + direction[1];
+                if(!isvalid(grid,nx,ny,m,n)){
+                    queue.push(make_pair(nx,ny));
+                    grid[nx][ny] = grid[x][y] + 1;
                 }
             }
-            
         }
-        return ans==INT_MAX?-1:ans;
+        return -1;
+        
+        
+        
+        // queue<pair<int,int>>q;
+//         q.push({0,0});
+//         grid[0][0]=1;
+        
+        
+//         while(!q.empty())
+//         {
+//             auto node=q.front();
+//             auto x=node.first;
+//             auto y=node.second;
+//             auto wt=grid[x][y];
+            
+//             if(x==m-1 and y==n-1)
+//             {
+//                         return wt;
+//             }
+//             for(auto &it:dir)
+//             {
+//                 int newx=it[0]+x;
+//                 int newy=it[1]+y;
+                
+//                 if(!isvalid(grid,newx,newy,m,n))
+//                 {
+                   
+//                     q.push({newx,newy});
+//                     grid[newx][newy]=1+grid[x][y];
+//                 }
+                
+//             }
+//             q.pop();
+            
+//         }
+        
+//         return ans;
+        
+            
     }
 };
