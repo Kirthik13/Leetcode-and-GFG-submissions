@@ -1,41 +1,46 @@
 class Solution {
 public:
-    int shortestPathLength(vector<vector<int>>& v) {
-        if(v[0].size()==0) return 0;
-        if(v.size()==1) return 1;
-        
-        int finalstate=(1<<v.size())-1;
+    int shortestPathLength(vector<vector<int>>& graph) {
+        int n=graph.size();
+        int fstate=(1<<n)-1;
         
         queue<pair<int,int>>q;
         
-        for(int i=0;i<v.size();i++)
+        for(int i=0;i<n;i++)
         {
-            q.push({i,1<<i});
+            int st=(1<<i);
+            q.push({i,st});
         }
-        // unordered_map<pair<int,int>,int>m;
-         map<pair<int ,int> ,int > m;
+        
+        map<pair<int,int>,int>m;
         int ans{};
         while(!q.empty())
         {
-            int n=q.size();
             
+            int siz=q.size();
             ans++;
-            for(int i=0;i<n;i++)
+            for(int i=0;i<siz;i++)
             {
-                int curnode=q.front().first;
-                int curbitstate=q.front().second;
+                auto node=q.front().first;
+                auto currstate=q.front().second;
                 q.pop();
                 
-                for(auto &j:v[curnode])
+                for(auto &it:graph[node])
                 {
-                    int newvisnode=curbitstate|(1<<j);
-                    if(m.find({j,newvisnode})!=m.end()) continue;
-                    m[{j,newvisnode}]=1;
-                    if(newvisnode==finalstate) return ans;
-                    q.push({j,newvisnode});
+                    auto childnode=it;
+                     int newstate=currstate|(1<<childnode);
+                    if(newstate==fstate) return ans;
+                    if(m.find({childnode,newstate})!=m.end()) continue;
+                    
+                    m[{childnode,newstate}]=1;
+                    q.push({childnode,newstate});
+                    
+                    
                 }
             }
+            
+            
         }
-        return -1;
+        return 0;
     }
 };
