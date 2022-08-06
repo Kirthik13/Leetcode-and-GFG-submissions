@@ -16,7 +16,7 @@ public:
             int newx=r+i[0];
             int newy=c+i[1];
             
-            if(!isvalid(grid,newx,newy,m,n)  and clr==abs(grid[newx][newy]))
+            if(!isvalid(grid,newx,newy,m,n)  and  abs(grid[r][c])==abs(grid[newx][newy]))
             {
                 cnt++;
                 
