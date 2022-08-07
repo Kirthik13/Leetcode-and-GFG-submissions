@@ -1,35 +1,42 @@
 class Solution {
 public:
-    vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& v) {
-        
-        int n=v.size();
-            
-        queue<pair<int,vector<int>>>q;
-        vector<vector<int>>tot;
-        
-        q.push({0,{0}});
-        
-        while(!q.empty())
+    vector<vector<int>>totans;
+    
+    void fn(vector<vector<int>>& v,int node,vector<int>&vis,vector<int>&temp,int n)
+    {
+        if(node==n-1)
         {
-            auto p=q.front();
-            int node=p.first;
-            vector<int>path=p.second;
-            q.pop();
+            temp.push_back(node);
+            totans.push_back(temp);
+            temp.pop_back();
             
-            if(node==n-1)
+            return;
+        }
+        
+        
+        vis[node]=1;
+        temp.push_back(node);
+        for(auto &it:v[node])
+        {
+            if(!vis[it])
             {
-                tot.push_back(path);
-                continue;
-            }
                 
-            for(auto &it:v[node])
-            {
-                path.push_back(it);
-                q.push({it,path});
-                path.pop_back();
+                fn(v,it,vis,temp,n);
             }
         }
-        return tot;
+        if(temp.size()>0) temp.pop_back();
+        vis[node]=0;
         
+    }
+    
+    vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& v) {
+        int n=v.size();
+        
+        vector<int>vis(n,0);
+        vector<int>temp;
+        
+        fn(v,0,vis,temp,n);
+        
+        return totans;
     }
 };
