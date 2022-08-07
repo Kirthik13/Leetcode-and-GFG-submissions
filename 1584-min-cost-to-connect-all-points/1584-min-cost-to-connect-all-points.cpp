@@ -1,46 +1,59 @@
 class Solution {
 public:
-    int minCostConnectPoints(vector<vector<int>>& graph) {
-        vector<vector<pair<int,int>>>dist(graph.size());
-        for(int i=0;i<graph.size();i++)
+    int minCostConnectPoints(vector<vector<int>>& pts) {
+        int n=pts.size();
+        vector<vector<pair<int,int>>>v(n);
+        for(int i=0;i<pts.size();i++)
         {
-            for(int j=i+1;j<graph.size();j++)
+            for(int j=0;j<pts.size();j++)
             {
-                int len=abs(abs(graph[i][0]-graph[j][0])+abs(graph[i][1]-graph[j][1]));
-                dist[i].push_back({j,len});
-                dist[j].push_back({i,len});
-            }
-        }
-        priority_queue<pair<int,pair<int,int>>,vector<pair<int,pair<int,int>>>,greater<pair<int,pair<int,int>>>>pq;
-        vector<int>vis(graph.size(),0);
-        pq.push({0,{0,0}});
-        int cost{},nos{};
-        while(nos<vis.size())
-        {
-                int curr_node=pq.top().second.second;
-                // int g=accumulate(begin(vis),end(vis),0);
-            // if(g==vis.size()) break;
-                if(vis[curr_node]==0)
-                {
-                    cost+=pq.top().first;
-                    // cout<<pq.top().first<<" "<<pq.top().second.first<<" " <<pq.top().second.second<<endl;
-                    vis[curr_node]=1;
-                    pq.pop();
-                    nos++;
-                    for(auto &i:dist[curr_node])
-                    {
-                        pq.push({i.second,{curr_node,i.first}});
-                        // cout<<curr_node<<" "<<i.first<<" "<<i.second<<endl;
-                    }
-                    
+                if(i==j) continue;
+                int wt=abs(pts[i][0]-pts[j][0])+abs(pts[i][1]-pts[j][1]);
+                v[i].push_back({j,wt});
+                v[j].push_back({i,wt});
                 
-                    
-                    
-                }
-            else{
-                pq.pop();
             }
         }
-        return cost;
+        
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
+        
+        vector<int>dis(n,INT_MAX);
+        vector<int>mst(n,false);
+        vector<int>parent(n,-1);
+        
+        dis[0]=0;
+        
+        pq.push({0,0});
+        
+        while(!pq.empty())
+        {
+            auto node=pq.top().second;
+            // auto wt=pq.top().first;
+            mst[node]=1;
+            pq.pop();
+            
+            for(auto &it:v[node])
+            {
+                if(!mst[it.first] and dis[it.first]>it.second)
+                {
+                    dis[it.first]=it.second;
+                    parent[it.first]=node;
+                    pq.push({dis[it.first],it.first});
+                }
+            }
+            
+        }
+        
+        int c{};
+        for(int i=1;i<n;i++)
+        {
+            if(dis[i]!=INT_MAX)
+            {
+                c+=dis[i];
+            }
+        }
+        
+        return c;
+        
     }
 };
