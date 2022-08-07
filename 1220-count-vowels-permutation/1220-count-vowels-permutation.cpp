@@ -41,14 +41,13 @@ public:
     m['o'].push_back('u');
     m['u'].push_back('a');
         
-      vector<vector<ll>>dp(n,vector<ll>(128,-1));
+      vector<vector<ll>>dp(n,vector<ll>(27,-1));
         ll call1{};
        for(auto &i:m)
        {
            call1=(call1+fn(1,n,m,i.first,dp))%mod;
        }
         return call1;
-    // return fn(0,n,m,'z',dp);
    
     
         
