@@ -5,9 +5,9 @@ public:
         vector<vector<pair<int,int>>>v(n);
         for(int i=0;i<pts.size();i++)
         {
-            for(int j=0;j<pts.size();j++)
+            for(int j=i+1;j<pts.size();j++)
             {
-                if(i==j) continue;
+                
                 int wt=abs(pts[i][0]-pts[j][0])+abs(pts[i][1]-pts[j][1]);
                 v[i].push_back({j,wt});
                 v[j].push_back({i,wt});
