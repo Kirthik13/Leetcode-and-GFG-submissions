@@ -1,54 +1,74 @@
 class Solution {
 public:
- 
-   
-    vector<int> findOrder(int n, vector<vector<int>>& v) {
-        
-        vector<vector<int>>g(n);
-        vector<int>in(n);
-
-     
-
-        for(auto &i:v)
-        {
-            int c=i[0],fc=i[1];
-           
-            g[fc].push_back(c);
-            in[c]++;
-            
-        }
-    
-       
-     
-  
-        queue<int>q;
-       
-    for(int i=0;i<n;i++)
+    void dfs( vector<vector<int>>&v,int node,vector<int>&vis,stack<int>&st)
     {
-        if(!in[i])
+        vis[node]=1;
+        for(auto &it:v[node])
         {
-            q.push(i);
-           
-        }
-    }
-        
-        vector<int>ans;
-        // cout<<q.front()<<endl;
-        while(!q.empty())
-        {
-            int el=q.front();
-            ans.push_back(el);
-            q.pop();
-            
-            for(auto &it:g[el])
+            if(!vis[it])
             {
-                if(--in[it]==0)
-                {
-                    q.push(it);
+                dfs(v,it,vis,st);
+            }
+        }
+        
+        st.push(node);
+        
+    }
+    bool cydfs(vector<vector<int>>&v,int node,vector<int>&vis,vector<int>&dvis)
+    {
+        vis[node]=1;
+        dvis[node]=1;
+        for(auto &it:v[node])
+        {
+            if(!vis[it] and !dvis[it])
+            {
+                if(cydfs(v,it,vis,dvis)) return 1;
+            }
+            else{
+                if(dvis[it]==vis[it]){
+                return 1;
                 }
             }
         }
-        if(ans.size()==n)  return ans;
-        return {};
+        dvis[node]=0;
+        return 0;
+    }
+    
+    vector<int> findOrder(int n, vector<vector<int>>& pre) {
+        vector<vector<int>>v(n);
+        
+        for(auto &i:pre)
+        {
+            v[i[1]].push_back(i[0]);
+        
+        }
+        
+        vector<int>vis1(n);
+        vector<int>dvis(n);
+        for(int i=0;i<n;i++)
+        {
+            if(cydfs(v,i,vis1,dvis)) return {};
+        }
+        
+        stack<int>st;
+        vector<int>vis(n);
+        vector<int>ans;
+        
+        for(int i=0;i<n;i++)
+        {
+            if(!vis[i])
+            {
+                dfs(v,i,vis,st);
+            }
+        }
+        
+        while(!st.empty())
+        {
+            ans.push_back(st.top());
+            st.pop();
+        }
+        
+        return ans;
+        
     }
 };
