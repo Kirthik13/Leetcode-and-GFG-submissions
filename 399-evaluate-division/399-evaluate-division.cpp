@@ -1,69 +1,54 @@
 class Solution {
 public:
-    double dfs(string source,string dest, map<string,vector<pair<string,double>>>m,set<string>&vis)
+    void dfs(string source,string dest,unordered_set<string>vis,  map<string,vector<pair<string,double>>>&m,double &ans,double temp)
     {
+         
                 if(source==dest)
                 {
-
-                     return 1.0;
+                    ans=temp;
+                    return;
                 }
-
                 vis.insert(source);
 
-
-                int fl=0;
-                double cat=0.0;
-               for(auto &i:m[source])
-               {
-
-                           if(vis.find(i.first)==vis.end())
-                           {
-                                double res=dfs(i.first,dest,m,vis);
-
-                                if(res!=-1.0)
-                                {
-                                    // vis.erase(source);
-                                    fl=1;
-                                    cat=res*i.second;
-                                    break;
-                                }
-                           }
-
-               }
-
-            vis.erase(source);
-            
-            return fl==0?-1.0:cat;
-    
+                for(auto &it:m[source])
+                {
+                    if(vis.find(it.first)==vis.end()){
+                        dfs(it.first,dest,vis,m,ans,temp*it.second);
+                    }
+                }
+        
     }
-
-    vector<double> calcEquation(vector<vector<string>>& eq, vector<double>& val, vector<vector<string>>& q) {
+    vector<double> calcEquation(vector<vector<string>>& eq, vector<double>& vals, vector<vector<string>>& q) {
+        
         map<string,vector<pair<string,double>>>m;
         for(int i=0;i<eq.size();i++)
         {
-            string f=eq[i][0];
-            string d=eq[i][1];
+            string a=eq[i][0];
+            string b=eq[i][1];
             
-            m[f].push_back({d,val[i]});
-                m[d].push_back({f,1/val[i]});
-
+            m[a].push_back({b,vals[i]});
+            m[b].push_back({a,1/vals[i]});
+            
+            
         }
-      
-        vector<double>tot;
-        set<string>vis;        set<int>vi;
-
+        
+        vector<double>totans;
+        unordered_set<string>vis;
         for(int i=0;i<q.size();i++)
         {
-            string new_f=q[i][0];
-            string new_d=q[i][1];
+            string source=q[i][0];
+            string dest=q[i][1];
+            
             double ans=-1.0;
-            if(m.find(new_f)!=m.end()){
-            ans= dfs(new_f,new_d,m,vis);
+            
+            if(m.find(source)!=m.end())
+            {
+                dfs(source,dest,vis,m,ans,1.0);
             }
-            tot.push_back(ans);
-
+            totans.push_back(ans);
+            
         }
-        // fn(vi,0);
-        return tot;
+        return totans;
+        
     }
 };
