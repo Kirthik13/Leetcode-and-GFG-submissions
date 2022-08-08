@@ -1,7 +1,7 @@
 #define ll long long
 class Solution {
 public:
-    long long dp[100003][4][3];
+    long long dp[4][3];
 //    ll int fn(string &s,int idx,int n,int nob,int prev)
 //     {
 //         if(nob==3)
@@ -50,7 +50,7 @@ public:
                 for(int prev=1;prev>=-1;prev--)
                 {
                    
-                        dp[idx][3][prev+1]=1;
+                        dp[3][prev+1]=1;
                     
                    
         
@@ -71,49 +71,28 @@ public:
                     ll int call1{},call2{};
                     if(prev==-1)
                     {
-                        call1=dp[idx+1][nob+1][(int(s[idx])-'0')+1];
+                        call1=dp[nob+1][(int(s[idx])-'0')+1];
                     }
                     else
                     {
                         if(prev+1==2 and s[idx]=='0')
                         {
-                            call1=dp[idx+1][nob+1][(int(s[idx])-'0')+1];
+                            call1=dp[nob+1][(int(s[idx])-'0')+1];
                         }
                         else if(prev+1==1 and s[idx]=='1')
                         {
-                            call1=dp[idx+1][nob+1][(int(s[idx])-'0')+1];
+                            call1=dp[nob+1][(int(s[idx])-'0')+1];
 
                         }
                     }
-                    call2=dp[idx+1][nob][prev+1];
+                    call2=dp[nob][prev+1];
         
-                   dp[idx][nob][prev+1]=call1+call2;
+                   dp[nob][prev+1]=call1+call2;
                 }
             }
         }
         
-        return dp[0][0][0];
-        // return fn(s,0,n,0,-1);
+        return dp[0][0];
         
-        
-//          int N = (int) s.size();
-//         long long dp[N + 1][3][4] ;
-//         memset(dp, 0, sizeof(dp));
-
-//         for (int i = 0; i <= N; i++)
-//             for (int j = 0; j < 3; j++)
-//                 dp[i][j][0] = 1;
-
-//         for (int i = 1; i <= N; i++) 
-//             for (int prev = 0; prev < 3; prev++) 
-//                 for (int len = 1; len < 4; len++) {
-
-//                     dp[i][prev][len] = dp[i - 1][prev][len];
-
-//                     if (prev != (s[i - 1] - '0'))
-//                         dp[i][prev][len] += dp[i - 1][s[i - 1] - '0'][len - 1];
-//                 }
-  
-//         return dp[N][2][3];
     }
 };
