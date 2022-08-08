@@ -75,11 +75,11 @@ public:
                     }
                     else
                     {
-                        if(prev+1==2 and s[idx]=='0')
+                        if(prev==1 and s[idx]=='0')
                         {
                             call1=dp[nob+1][(int(s[idx])-'0')+1];
                         }
-                        else if(prev+1==1 and s[idx]=='1')
+                        else if(prev==0 and s[idx]=='1')
                         {
                             call1=dp[nob+1][(int(s[idx])-'0')+1];
 
