@@ -11,15 +11,19 @@
  */
 class Solution {
 public:
-    bool fn(TreeNode* root,long l,long r)
+    bool fn(TreeNode* root,long low,long high)
     {
         if(!root) return 1;
         
-        if(root->val<=l or root->val>=r) return 0;
+        if(root->val<=low or root->val>=high) return 0;
         
-        return fn(root->right,root->val,r) and fn(root->left,l,root->val);
+        
+        bool l=fn(root->left,low,root->val);
+        bool r=fn(root->right,root->val,high);
+                 
+        return l and r;
     }
     bool isValidBST(TreeNode* root) {
-     return fn(root,LONG_MIN,LONG_MAX);
+        return fn(root,LONG_MIN,LONG_MAX);
     }
 };
