@@ -1,6 +1,5 @@
 class NumArray {
 public:
-    // int bit[100001];
      vector<int> bit;
      vector<int> arr;
     
@@ -29,8 +28,9 @@ public:
     
     void update(int index, int val) {
          int diff = val-arr[index];
-        arr[index]=val;
         update1(index+1,diff);
+                arr[index]=val;
+
     }
     
     int sumRange(int left, int right) {
