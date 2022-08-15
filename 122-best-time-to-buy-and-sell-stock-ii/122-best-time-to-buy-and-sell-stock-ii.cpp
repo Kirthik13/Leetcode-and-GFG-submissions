@@ -1,64 +1,36 @@
 class Solution {
 public:
-    // int dp[30001][2];
-//     int fn(vector<int>& v,int idx,int n,bool bought)
-//     {
-
-//        if(idx>=n)
-//        {
+    int fn(vector<int>& v,int idx,int n,int status,vector<vector<int>>&dp)
+    {
+        if(idx>=n)
+        {
+            return 0;
+        }
+         if(  dp[idx][status]!=-1)return dp[idx][status];
+        int curr=0;
         
-//           return 0;
-//        }
-        
-//         if(dp[idx][bought]!=-1) return dp[idx][bought];
-        
-//            if(bought)
-//            {
-//                int sell=fn(v,idx+1,n,false)+v[idx];
-//                int notsell=fn(v,idx+1,n,bought);
-//                return dp[idx][bought] =max(sell,notsell);
-
-
-//            }
-//            else{
-//                int buy=fn(v,idx+1,n,true)-v[idx];
-//                int notbuy=fn(v,idx+1,n,bought);
-//                return dp[idx][bought]=max(buy,notbuy);
-
-//            } 
-//     }
-    int maxProfit(vector<int>& v) {
-        int n=v.size();
-        // vector<vector<int>>dp(n+1,vector<int>(2,0));
-        // vector<int>dp(2,0);
-        // vector<int>curr(2,0);
-        int dpbuy=0,dpnotbuy=0,currnotbuy{},currbuy;
-        
-        
-        for(int idx=n-1;idx>=0;idx--)
+        if(status==0)
         {
             
-               
-                   int sell=dpnotbuy-v[idx];
-                   int notsell=dpbuy;
-
-
-              
-                   int buy=dpbuy+v[idx];
-                   int notbuy=dpnotbuy;
-                   currbuy=max(sell,notsell);
-                   currnotbuy =max(buy,notbuy);
-
-               
-               // prev=temp; 
-            dpbuy=currbuy;
-            dpnotbuy=currnotbuy;
-
-            // dp=curr;
-        }
+           int buy=fn(v,idx+1,n,1,dp)-v[idx];
+           int notbuy=fn(v,idx+1,n,0,dp);
         
-        // int g=fn(v,0,n,false);
-        int g=dpbuy;
-        return g;
+            curr=max(buy,notbuy);
+            
+        }
+        if(status)
+        {
+          int sell=fn(v,idx+1,n,0,dp)+v[idx];
+           int notsell=fn(v,idx+1,n,1,dp);
+        
+            curr=max(sell,notsell);
+        }
+    return dp[idx][status]=curr;
+    }
+    int maxProfit(vector<int>& v) {
+        
+        int n=v.size();
+        vector<vector<int>>dp(n+1,vector<int>(2,-1));
+        return fn(v,0,n,0,dp);
     }
 };
