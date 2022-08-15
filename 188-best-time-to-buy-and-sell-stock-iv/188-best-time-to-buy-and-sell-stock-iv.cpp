@@ -27,7 +27,7 @@ public:
     }
     int maxProfit(int k1, vector<int>& v) {
         int n=v.size();
-        vector<vector<vector<int>>>dp(n+1,vector<vector<int>>(k1+1,vector<int>(2,0)));
+       vector<vector<int>>dp(k1+1,vector<int>(2,0));
         
         for(int idx=n-1;idx>=0;idx--)
         {
@@ -39,23 +39,23 @@ public:
         
                     if(status==0)
                     {
-                        int buy=dp[idx+1][k][1]-v[idx];
-                        int notbuy=dp[idx+1][k][0];
+                        int buy=dp[k][1]-v[idx];
+                        int notbuy=dp[k][0];
                         curr=max(buy,notbuy);
                     }
                     else{
-                         int sell=dp[idx+1][k-1][0]+v[idx];
-                        int notsell=dp[idx+1][k][1];
+                         int sell=dp[k-1][0]+v[idx];
+                        int notsell=dp[k][1];
                         curr=max(sell,notsell);
 
                     }
 
-                    dp[idx][k][status]=curr;
+                    dp[k][status]=curr;
                 }
             }
         }
         
-        return dp[0][k1][0];
+        return dp[k1][0];
         // return fn(v,0,n,0,k,dp);
     }
 };
