@@ -1,140 +1,38 @@
 class Solution {
 public:
-//     int fn(vector<int>&v,int idx,int n,int nos,int buy, vector<vector<vector<int>>>&dp)
-//     {
-//         if(idx>=n)
-//         {
-//             return 0;
-//         }
-//         if(nos==0)
-//         {
-//             return 0;
-//         }
-        
-//         if(dp[idx][nos][buy]!=-1) return dp[idx][nos][buy];
-        
-//         int curr_ans;
-        
-//         if(buy)
-//         {
-//             int bought=fn(v,idx+1,n,nos,false,dp)-v[idx];
-//             int notbought=fn(v,idx+1,n,nos,true,dp);
-            
-//             curr_ans=max(bought,notbought);
-
-//         }
-//         else{
-//              int sold=fn(v,idx+1,n,nos-1,true,dp)+v[idx];
-//             int notsold=fn(v,idx+1,n,nos,false,dp);
-            
-//             curr_ans=max(sold,notsold);
-//         }
-        
-//         return dp[idx][nos][buy]=curr_ans;
-//     }
-    
-    
-    int fn(vector<int>&v,int idx,int n,int trans,vector<vector<int>>&dp)
+    int fn(vector<int>& v,int idx,int n,int status,int k,vector<vector<vector<int>>>&dp) 
     {
-        if(idx>=n) return 0;
-        if(trans==4)return 0;
-        
-        if(dp[idx][trans]!=-1) return dp[idx][trans];
-        
-        int curr_ans;
-        
-        if(trans%2==0)
+                if(k==0) return 0;
+
+        if(idx>=n)
         {
-            int bought=-v[idx]+fn(v,idx+1,n,trans+1,dp);
-            int notbought=fn(v,idx+1,n,trans,dp);
-            curr_ans=max(bought,notbought);
-      
+            return 0;
+        }
+        
+        
+        if( dp[idx][k][status]!=-1) return dp[idx][k][status];
+        int curr{};
+        if(status==0)
+        {
+            int buy=fn(v,idx+1,n,1,k,dp)-v[idx];
+            int notbuy=fn(v,idx+1,n,status,k,dp);
+            
+            curr=max(buy,notbuy);
         }
         else{
-            int sold=v[idx]+fn(v,idx+1,n,trans+1,dp);
-            int notsold=fn(v,idx+1,n,trans,dp);
-            curr_ans=max(sold,notsold);
+            
+            int sell=fn(v,idx+1,n,0,k-1,dp)+v[idx];
+            int notsell=fn(v,idx+1,n,status,k,dp);
+            
+            curr=max(sell,notsell);
         }
-        return dp[idx][trans]=curr_ans;
+        
+        return dp[idx][k][status]=curr;
+            
     }
     int maxProfit(vector<int>& v) {
         int n=v.size();
-        
-//         vector<vector<vector<int>>>dp(n+1,vector<vector<int>>(3,vector<int>(2,0)));
-//            vector<vector<int>>dp(3,vector<int>(2,0));
-//            vector<vector<int>>curr(3,vector<int>(2,0));
-
-        
-//         for(int idx=n-1;idx>=0;idx--)
-//         {
-//             for(int nos=1;nos<=2;nos++)
-//             {
-//                 for(int buy=0;buy<=1;buy++)
-//                 {
-            
-//                     // int temp=dp[true];
-//                      int curr_ans;
-        
-//                     if(buy)
-//                     {
-//                         int bought=dp[nos][false]-v[idx];
-//                         int notbought=dp[nos][buy];
-
-//                         curr_ans=max(bought,notbought);
-
-//                     }
-//                     else{
-//                          int sold=dp[nos-1][true]+v[idx];
-//                         int notsold=dp[nos][buy];
-
-//                         curr_ans=max(sold,notsold);
-//                     }
-
-//                     curr[nos][buy]=curr_ans;
-
-                    
-//                 }
-//                 dp=curr;
-                
-//             }
-//         }
-        
-        
-//         // return fn(v,0,n,2,1,dp)
-//         return dp[2][1];
-        vector<int>dp(5,0);
-        vector<int>curr(5,0);
-
-        
-        for(int idx=n-1;idx>=0;idx--)
-        {
-            int prev=dp[4];
-            for(int trans=3;trans>=0;trans--)
-            {
-                int temp=dp[trans];
-                
-                 int curr_ans;
-        
-                if(trans%2==0)
-                {
-                    int bought=-v[idx]+prev;//prev
-                    int notbought=dp[trans];
-                    curr_ans=max(bought,notbought);
-
-                }
-                else{
-                    int sold=v[idx]+prev;//prev
-                    int notsold=dp[trans];
-                    curr_ans=max(sold,notsold);
-                }
-                dp[trans]=curr_ans;
-                
-                prev=temp;
-            }
-            // dp=curr;
-        }
-        
-        return dp[0];
-        // return fn(v,0,n,0,dp);
+        vector<vector<vector<int>>>dp(n+1,vector<vector<int>>(3,vector<int>(2,-1)));
+        return fn(v,0,n,0,2,dp);
     }
 };
