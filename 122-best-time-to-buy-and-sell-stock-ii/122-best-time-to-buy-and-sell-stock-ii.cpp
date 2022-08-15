@@ -18,7 +18,7 @@ public:
             curr=max(buy,notbuy);
             
         }
-        if(status)
+        else
         {
           int sell=fn(v,idx+1,n,0,dp)+v[idx];
            int notsell=fn(v,idx+1,n,1,dp);
@@ -47,7 +47,7 @@ public:
                     curr=max(buy,notbuy);
 
                 }
-                if(status)
+                else
                 {
                   int sell=dp[0]+v[idx];
                    int notsell=dp[1];
