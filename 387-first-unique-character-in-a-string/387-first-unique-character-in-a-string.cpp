@@ -20,16 +20,20 @@ public:
         
         int curridx=INT_MAX;
         
-        for(auto &i:m)
-        {
-            // cout<<i.first<<" "<<i.second.first<<" "<<i.second.second<<endl;
-            if(i.second.second==1)
-            {
-                curridx=min(i.second.first,curridx);
+//         for(auto &i:m)
+//         {
+//             // cout<<i.first<<" "<<i.second.first<<" "<<i.second.second<<endl;
+//             if(i.second.second==1)
+//             {
+//                 curridx=min(i.second.first,curridx);
                 
-            }
+//             }
+//         }
+        for(int i=0;i<s.size();i++)
+        {
+            if(m[s[i]].second==1) return i;
         }
         
-        return curridx==INT_MAX?-1:curridx;
+        return -1;
     }
 };
