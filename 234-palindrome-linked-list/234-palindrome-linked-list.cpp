@@ -10,57 +10,21 @@
  */
 class Solution {
 public:
-    ListNode* mid(ListNode* head)
+    bool fn(ListNode* head,ListNode* &tem)
     {
-        ListNode* f=head->next;
-        ListNode* s=head;
+        if(!head) return 1;
         
-        while(f and f->next)
+        if(!fn(head->next,tem)) return 0;
+        
+        if(tem->val==head->val)
         {
-            s=s->next;
-            f=f->next->next;
-            
-            
+            tem=tem->next;
+            return 1;
         }
-        
-        return s;
-        
-        
+        return 0;
     }
-    ListNode* rev(ListNode* head)
-    {
-        if(!head->next)
-        {
-            return head;
-        }
-        
-        ListNode* ans=rev(head->next);
-        head->next->next=head;
-        head->next=NULL;
-        return ans;
-    }
-        
-        
     bool isPalindrome(ListNode* head) {
-        if(!head or !head->next) return 1;
-        ListNode* nh1=head;
-        ListNode* h2=head;
-        ListNode* k1=mid(h2);
-        ListNode* prev=k1->next;
-        k1->next=NULL;
-        k1=prev;
-        ListNode *nh2=rev(k1);
-        
-        while(nh2 and nh1)
-        {
-            if(nh1->val!=nh2->val) return 0;
-            nh1=nh1->next;
-            nh2=nh2->next;
-            
-        }
-        
-        // if(nh1 or nh2) return 0;
-        return 1;
-            
+        ListNode* tem=head;
+        return fn(head,tem);
     }
 };
