@@ -1,27 +1,20 @@
 class Solution {
 public:
-    vector<int>freqint(int n)
+    string sorted(int n)
     {
-        vector<int>ans(10);
-        while(n!=0)
-        {
-            ans[n%10]++;
-            n/=10;
-            
-        }
-        return ans;
-    }
+       string res=to_string(n);
         
+        sort(begin(res),end(res));
+        return res;
+    }
     bool reorderedPowerOf2(int n) {
-       vector<int>freq=freqint(n);
-        for(int i=0;i<31;i++)
+        string res=sorted(n);
+        
+        for(int i=0;i<32;i++)
         {
-            vector<int>g=freqint((int)pow(2,i));
-            if(freq==g)
-            {
-                return 1;
-            }
+            if(res==sorted((1<<i))) return 1;
         }
         return 0;
+        
     }
 };
