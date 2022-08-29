@@ -1,60 +1,38 @@
 class Solution {
 public:
-    bool isvalid(vector<vector<char>>&v,int row,int col,int n)
+    bool isvalid(int row,int col,vector<int>&v)
     {
-        int j;
-        for(int i=row-1,j=col-1;i>=0 and j>=0;i--,j--)
+        for(int i=0;i<row;i++)
         {
-            if(v[i][j]=='Q' ) return 0;
-        }
-        for(int i=row+1,j=col-1;i<n and j>=0;i++,j--)
-        {
-            if(v[i][j]=='Q' ) return 0;
-        }
-        for(int j=col-1;j>=0;j--)
-        {
-            if(v[row][j]=='Q' ) return 0;
-
+            int prow=i;
+            int pcol=v[i];
+            
+            if(pcol==col or abs(pcol-col)==abs(prow-row)) return 0;
         }
         return 1;
         
     }
-    int fn( vector<vector<char>>&v,int col,int n,int &ans)
+    int fn(int row,vector<int>&v)
     {
-        if(col==n)
+        if(row>=v.size()) return 1;
+        
+        int ans{};
+        for(int col=0;col<v.size();col++)
         {
-         
-            // for(auto &i:v)
-            //     {
-            //         for(auto &j:i)
-            //         {
-            //             cout<<j<<" ";
-            //         }
-            //         cout<<endl;
-            //     }
-            // ans++;
-            return 1;
-        }
-        int g=0;
-        for(int row=0;row<n;row++)
-        {
-           
-            if(isvalid(v,row,col,n) and v[row][col]=='.')
+            if(isvalid(row,col,v))
             {
-                v[row][col]='Q';
+                v[row]=col;
+                ans+=fn(row+1,v);
+                v[row]=-1;
                 
-                g+=fn(v,col+1,n,ans);
-                v[row][col]='.';
+                
             }
         }
-        return g;
-        
+        return ans;
     }
     int totalNQueens(int n) {
-        vector<vector<char>>v(n,vector<char>(n,'.'));
-         
-        int ans{};
-        return fn(v,0,n,ans);
-        // return ans;
+        vector<int>v(n,-1);
+        
+        return fn(0,v);
     }
 };
