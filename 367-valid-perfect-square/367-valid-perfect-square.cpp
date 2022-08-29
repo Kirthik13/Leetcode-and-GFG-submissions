@@ -3,7 +3,7 @@ public:
     bool isPerfectSquare(int num) {
         long long int l=1,r=1<<31-1;
         
-        while(l<r)
+        while(l<=r)
         {
             long long int mid=l+((r-l)/2);
             
@@ -19,7 +19,7 @@ public:
                 l=mid+1;
             }
         }
-        if(l*l==num) return 1;
+        // if(l*l==num) return 1;
         return 0;
     }
 };
