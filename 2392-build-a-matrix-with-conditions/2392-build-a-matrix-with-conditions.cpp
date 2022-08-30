@@ -69,19 +69,19 @@ public:
         
         if(temp2.size()!=k or temp1.size()!=k) return {};
         
-        // reverse(begin(temp1),end(temp1));
-        // reverse(begin(temp2),end(temp2));
-        
+        map<int,int>m;
+        for(int i=0;i<temp2.size();i++)
+        {
+            m[temp2[i]]=i;
+        }
         
         for(int i=0;i<temp1.size();i++)
         {
-            for(int j=0;j<temp2.size();j++)
-            {
-                if(temp1[i]==temp2[j])
-                {
-                    totans[i][j]=temp1[i]+1;
-                }
-            }
+            
+                
+            totans[i][m[temp1[i]]]=temp1[i]+1;
+                
+            
             
             
         }
