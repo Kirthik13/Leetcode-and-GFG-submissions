@@ -1,9 +1,12 @@
 class Solution {
 public:
             // map<pair<pair<int,int>,int>,int>dp;
-                map<pair<int,int>,int>dp;
+                map<int,int>dp;
 
- 
+    int getx(int a,int c)
+    {
+        return a*1000+c;
+    }
     int fn(vector<vector<int>>& v,int idx,int n,int c) 
     {
         if(c==2) return 0;
@@ -18,12 +21,11 @@ public:
             return INT_MIN;
         }
         
-        if(dp.find({idx,c})!=dp.end()) return dp[{idx,c}];
+        if(dp.find(getx(idx,c))!=dp.end()) return dp[getx(idx,c)];
         
         
         vector<int>ans={v[idx][1],INT_MAX,INT_MAX};
         
-        //Searching the event whose starting time > ending time of previous event selected
         int nextidx=upper_bound(begin(v),end(v),ans)-begin(v);
         
         
@@ -33,7 +35,7 @@ public:
         
              call2=fn(v,idx+1,n,c);        
         
-        return dp[{idx,c}]=max(call1,call2);
+        return dp[getx(idx,c)]=max(call1,call2);
         
     }
     int maxTwoEvents(vector<vector<int>>& v) {
