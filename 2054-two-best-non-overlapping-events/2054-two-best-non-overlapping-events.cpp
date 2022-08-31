@@ -1,11 +1,11 @@
 class Solution {
 public:
             // map<pair<pair<int,int>,int>,int>dp;
-                map<int,int>dp;
+            int dp[10000005];
 
     int getx(int a,int c)
     {
-        return a*1000+c;
+        return a*100+c;
     }
     int fn(vector<vector<int>>& v,int idx,int n,int c) 
     {
@@ -21,7 +21,7 @@ public:
             return INT_MIN;
         }
         
-        if(dp.find(getx(idx,c))!=dp.end()) return dp[getx(idx,c)];
+        if(dp[getx(idx,c)]!=-1) return dp[getx(idx,c)];
         
         
         vector<int>ans={v[idx][1],INT_MAX,INT_MAX};
@@ -42,6 +42,7 @@ public:
         sort(begin(v),end(v));
         
        int n=v.size();
+        memset(dp,-1,sizeof(dp));
         return fn(v,0,n,0);
     }
 };
