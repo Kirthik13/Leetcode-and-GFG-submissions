@@ -1,48 +1,31 @@
 class Solution {
 public:
-    // long long dp[2501][2502];
-    int fn(vector<int>&v ,int idx,int n,int prev,vector<vector<int>>&dp)
+    long dp[ 2501];
+    int fn(vector<int>&v,int idx,int n)
     {
-        if(idx>=n)
+        if(idx<0) return 0;
+        
+        if(dp[idx]!=-1)    return dp[idx];
+        
+        int ans=1;
+        for(int prev=0;prev<idx;prev++)
         {
-            return 0;
-        }
-        
-        if(dp[idx][prev+1]!=-1) return dp[idx][prev+1];
-        
-        int call1{},call2{};
-        if(prev==-1 or v[prev]<v[idx])
-        {
-            call1=1+fn(v,idx+1,n,idx,dp);
-        }
-        call2=fn(v,idx+1,n,prev,dp);
-        
-        return dp[idx][prev+1]=max({call1,call2});
-        
-    }
-    int lengthOfLIS(vector<int>&v ) {
-        int n=v.size();
-        vector<int>dp(n+1,0);
-        
-        for(int idx=n-1;idx>=0;idx--)
-        {
-            for(int prev=n-1;prev>=-1;prev--)
-            {
-                int call1{},call2{};
-                if(prev==-1 or v[prev]<v[idx])
-                {
-                    call1=1+dp[idx+1];
-                }
-                
-                
-                call2=dp[prev+1];
-        
-                dp[prev+1]=max({call1,call2});
-        
+            if(v[prev]<v[idx]){
+                ans=max(ans,1+fn(v,prev,n));
             }
         }
+        return dp[idx]=ans;
+    }
+    int lengthOfLIS(vector<int>& v) {
+        memset(dp,-1,sizeof(dp));
+        int n=v.size();
+        int g=fn(v,0,n);
         
-        return dp[0];
-        // return fn(v,0,n,-1,dp);
+        int ans=1;
+        for(int i=0;i<n;i++)
+        {
+            ans=max(ans,fn(v,i,n));
+        }
+        return ans;
     }
 };
