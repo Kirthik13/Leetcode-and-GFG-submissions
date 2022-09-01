@@ -1,31 +1,21 @@
 class Solution {
 public:
-    long dp[ 2501];
-    int fn(vector<int>&v,int idx,int n)
-    {
-        if(idx<0) return 0;
+    int lengthOfLIS(vector<int>& v) {
+        int n=v.size();
+        vector<int>res;
         
-        if(dp[idx]!=-1)    return dp[idx];
-        
-        int ans=1;
-        for(int prev=0;prev<idx;prev++)
+        for(int i=0;i<v.size();i++)
         {
-            if(v[prev]<v[idx]){
-                ans=max(ans,1+fn(v,prev,n));
+            auto idx=lower_bound(begin(res),end(res),v[i])-begin(res);
+            if(idx==res.size())
+            {
+                res.push_back(v[i]);
+            }
+            else{
+                res[idx]=v[i];
             }
         }
-        return dp[idx]=ans;
-    }
-    int lengthOfLIS(vector<int>& v) {
-        memset(dp,-1,sizeof(dp));
-        int n=v.size();
-        int g=fn(v,0,n);
         
-        int ans=1;
-        for(int i=0;i<n;i++)
-        {
-            ans=max(ans,fn(v,i,n));
-        }
-        return ans;
+        return res.size();
     }
 };
