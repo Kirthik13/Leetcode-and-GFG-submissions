@@ -30,7 +30,8 @@ public:
         }
         
         // return maxsf-minsf;
-	return max(abs(maxsf), abs(minsf));        
+        cout<<maxsf<<" "<<minsf<<endl;
+	return max(maxsf, abs(minsf));        
     
     }
 };
