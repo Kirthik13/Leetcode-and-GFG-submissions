@@ -2,7 +2,7 @@ class Solution {
 public:
     int maxi = INT_MIN;
     void helper(vector<vector<int>> &mat , int m , int n , int cols , int idx , vector<int> &vis){
-        if(cols == 0 or idx==n){
+        if(cols == 0 ){
             int cnt = 0;
             for(int p = 0 ; p < m ; p++){
                 bool check = true;
@@ -19,7 +19,7 @@ public:
             return;
         }
         
-        // if(cols==0 or idx==n) return ;
+        if(cols==0 or idx==n) return ;
         
         // picking idx th column and marking column as visited
         vis[idx]=1;
