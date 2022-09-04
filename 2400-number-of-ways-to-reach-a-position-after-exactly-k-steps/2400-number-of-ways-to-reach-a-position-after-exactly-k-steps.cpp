@@ -12,7 +12,7 @@ public:
             return 0LL;
         }
         if(k<=0 || st+k < en || st-k > en) return 0;
-        if(dp[st].find(k)!=dp[st].end()) return dp[st][k];
+        if(dp[st].count(k)) return dp[st][k];
         
         ll int call1=fn(st+1,en,k-1)%mod;
         ll int call2=fn(st-1,en,k-1)%mod;
