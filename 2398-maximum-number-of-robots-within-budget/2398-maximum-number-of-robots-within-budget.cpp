@@ -23,7 +23,7 @@ public:
                 {
                     curcost-=rt[i];
                 
-                    while(pq.size() and pq.top().second<=i) pq.pop();
+                    if(pq.size() and pq.top().second<=i) pq.pop();
                 
                     i++;
                 
