@@ -3,21 +3,21 @@
 
 class Solution {
 public:
-    ll int fn(ll int st,ll int en,ll int k, map<pair<ll int,ll int>,ll int>&dp)
+     unordered_map<int, unordered_map<int,int>> dp;
+    ll int fn(ll int st,ll int en,ll int k)
     {
         if(k==0)
         {
             if(st==en) return 1LL;
             return 0LL;
         }
-        // if(st==en) return 0;
         if(k<=0 || st+k < en || st-k > en) return 0;
-        if(dp.find({st,k})!=dp.end()) return dp[{st,k}];
+        if(dp[st].find(k)!=dp[st].end()) return dp[st][k];
         
-        ll int call1=fn(st+1,en,k-1,dp)%mod;
-        ll int call2=fn(st-1,en,k-1,dp)%mod;
+        ll int call1=fn(st+1,en,k-1)%mod;
+        ll int call2=fn(st-1,en,k-1)%mod;
         
-        return dp[{st,k}]=(call1+call2)%mod;
+        return dp[st][k]=(call1+call2)%mod;
         
     }
     int numberOfWays(int st, int en, int k) {
@@ -48,8 +48,8 @@ public:
 //         }
         // return cnt;
         
-        map<pair<ll int,ll int>,ll int>dp;
-        return fn(st,en,k,dp);
+        // map<pair<ll int,ll int>,ll int>dp;
+        return fn(st,en,k);
         
     }
 };
