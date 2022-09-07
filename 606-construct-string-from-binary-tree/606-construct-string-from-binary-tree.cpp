@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    string fn(TreeNode* root,string &s) 
+    string fn(TreeNode* root) 
     {
         if(!root) return "";
 
@@ -21,32 +21,23 @@ public:
         
         if(root->left and root->right)
         {
-            // s.push_back('(');
-            ch+=('('+fn(root->left,s)+')');
-            // s.push_back(')');
-            // s.push_back('(');            
-            ch+=('('+fn(root->right,s)+')');
-            // s.push_back(')');
+            ch+=('('+fn(root->left)+')');
+
+            ch+=('('+fn(root->right)+')');
             
             
         }
         else if(root->left)
         {
-            // s.push_back('(');
-            ch+=('('+fn(root->left,s)+')');            
-            // s.push_back(')');
+            ch+=('('+fn(root->left)+')');            
             
         }
          else if(root->right)
         {
-            // s.push_back('(');
-            // s.push_back(')');
+            
                     ch+=("()");            
 
-            // s.push_back('(');
-            // fn(root->right,s);            
-            // s.push_back(')');
-            ch+=('('+fn(root->right,s)+')');
+            ch+=('('+fn(root->right)+')');
              
             
         }
@@ -56,8 +47,6 @@ public:
         
     }
     string tree2str(TreeNode* root) {
-        string s;
-    return fn(root,s);
-        // return s;
+    return fn(root);
     }
 };
