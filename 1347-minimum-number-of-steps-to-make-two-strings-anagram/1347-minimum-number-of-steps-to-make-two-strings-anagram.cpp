@@ -1,18 +1,28 @@
 class Solution {
 public:
     int minSteps(string s, string t) {
-        map<char,int>m1;
-        map<char,int>m2;
+        // map<char,int>m1;
+        // map<char,int>m2;
         
-        for(auto &i:s) m1[i]++;
-        for(auto &i:t) m2[i]++;
+        vector<int>freq(27);
+        
+        for(auto &i:s) freq[int(i)-'a']++;
+        for(auto &i:t)  freq[int(i)-'a']--;
         
         int cnt{};
-        for(auto &i:m1)
+        // for(auto &i:m1)
+        // {
+        //     if(m1[i.first]>m2[i.first])
+        //     {
+        //         cnt+=abs(m1[i.first]-m2[i.first]);
+        //     }
+        // }
+        
+        for(int i=0;i<freq.size();i++)
         {
-            if(m1[i.first]>m2[i.first])
+            if(freq[i]>0)
             {
-            cnt+=abs(m1[i.first]-m2[i.first]);
+                cnt+=freq[i];
             }
         }
         
