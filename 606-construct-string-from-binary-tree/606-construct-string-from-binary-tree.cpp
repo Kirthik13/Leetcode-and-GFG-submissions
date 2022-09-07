@@ -11,57 +11,53 @@
  */
 class Solution {
 public:
-    void fn(TreeNode* root,string &s) 
+    string fn(TreeNode* root,string &s) 
     {
-        if(!root) return ;
-//         if(!root->left and !root->right)
-//         {
-            
-//             return ;
-//         }
+        if(!root) return "";
+
         
         
-        // char ch=char(root->val)+'0';
-        
-        // stringstream ss();
         string ch=to_string(root->val);
-        // ss>>ch;
-        s+=ch;
         
         if(root->left and root->right)
         {
-            s.push_back('(');
-            fn(root->left,s);
-            s.push_back(')');
-            s.push_back('(');            
-            fn(root->right,s);
-            s.push_back(')');
+            // s.push_back('(');
+            ch+=('('+fn(root->left,s)+')');
+            // s.push_back(')');
+            // s.push_back('(');            
+            ch+=('('+fn(root->right,s)+')');
+            // s.push_back(')');
             
             
         }
         else if(root->left)
         {
-            s.push_back('(');
-            fn(root->left,s);            
-            s.push_back(')');
+            // s.push_back('(');
+            ch+=('('+fn(root->left,s)+')');            
+            // s.push_back(')');
             
         }
          else if(root->right)
         {
-            s.push_back('(');
-            s.push_back(')');
+            // s.push_back('(');
+            // s.push_back(')');
+                    ch+=("()");            
+
+            // s.push_back('(');
+            // fn(root->right,s);            
+            // s.push_back(')');
+            ch+=('('+fn(root->right,s)+')');
              
-            s.push_back('(');
-            fn(root->right,s);            
-            s.push_back(')');
             
         }
+        
+        return ch;
        
         
     }
     string tree2str(TreeNode* root) {
         string s;
-        fn(root,s);
-        return s;
+    return fn(root,s);
+        // return s;
     }
 };
