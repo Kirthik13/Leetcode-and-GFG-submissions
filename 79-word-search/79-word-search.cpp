@@ -39,11 +39,12 @@ public:
     bool exist(vector<vector<char>>& v, string s) {
         int sn=s.size();
         int m=v.size(),n=v[0].size();
+                        vector<vector<int>>vis(m,vector<int>(n));
+
         for(int i=0;i<m;i++)
         {
             for(int j=0;j<n;j++)
             {
-                vector<vector<int>>vis(m,vector<int>(n));
                 if(dfs(v,s,0,sn,i,j,m,n,vis)) return 1;
                 vis[i][j]=0;
             }
