@@ -8,22 +8,31 @@ public:
              });
        
         
-        vector<pair<int,int>>st;
+        // vector<pair<int,int>>st;
                     int cnt{};
 
-        for(int i=0;i<v.size();i++)
+//         for(int i=0;i<v.size();i++)
+//         {
+//             while(!st.empty() and (st.back().first<v[i][0] and st.back().second<v[i][1]))
+//             {
+//                 // cnt+=st.back().second;
+//                 cnt++;
+//                 st.pop_back();
+//             }
+            
+            
+//             st.push_back({v[i][0],v[i][1]});
+            
+            
+//         }
+        int premax=INT_MIN;
+        for(int i=v.size()-1;i>=0;i--)
         {
-            while(!st.empty() and (st.back().first<v[i][0] and st.back().second<v[i][1]))
+            if(v[i][1]<premax)
             {
-                // cnt+=st.back().second;
                 cnt++;
-                st.pop_back();
             }
-            
-            
-            st.push_back({v[i][0],v[i][1]});
-            
-            
+            premax=max(premax,v[i][1]);
         }
         
         return cnt;
