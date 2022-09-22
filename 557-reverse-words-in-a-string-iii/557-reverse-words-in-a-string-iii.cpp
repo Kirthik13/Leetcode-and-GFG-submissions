@@ -22,10 +22,7 @@ public:
                     totans+=cont[idx++];
                     totans.push_back(' ');
                 }
-                else{
-                    totans.push_back(' ');
-
-                }
+               
             }
         }
         totans+=cont[idx++];
