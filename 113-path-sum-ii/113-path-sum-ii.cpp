@@ -38,7 +38,7 @@ public:
     vector<vector<int>> pathSum(TreeNode* root, int k) {
         vector<int>v;
         fn(root,k,v,0);
-        vector<vector<int>>totan(begin(totans),end(totans));
-        return totan;
+        // vector<vector<int>>totan(begin(totans),end(totans));
+        return totans;
     }
 };
