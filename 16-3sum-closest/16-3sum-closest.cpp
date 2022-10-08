@@ -2,35 +2,35 @@ class Solution {
 public:
     int threeSumClosest(vector<int>& v, int target) {
         sort(begin(v),end(v));
-        int ans=1001;
-        for(int i=0;i<v.size();i++)
+        int leastdiff=INT_MAX;
+        int ans=INT_MAX;
+        for(int i=0;i<v.size()-2;i++)
         {
-            
-            int l=i+1,r=v.size()-1;
-            while(l<r)
+            int j=i+1;
+            int k=v.size()-1;
+            // int currsum=v[i]+v[j]+v[k];
+            while(j<k)
             {
-                int s=v[i]+v[l]+v[r];
-                if(s==target)
+                if(abs(v[i]+v[j]+v[k]-target)<=leastdiff)
                 {
-                    return s;
+                    leastdiff=abs(v[i]+v[j]+v[k]-target);
+                    ans=    v[i]+v[j]+v[k];
+                    
                 }
-                else if(s<target)
+                    
+               
+                if(v[i]+v[j]+v[k]>=target)
                 {
-                    if(abs(target-s)<abs(target-ans))
-                    {
-                        ans=s;
-                    }
-                    l++;
+                    k--;
+                    
                 }
-                else if(s>target)
+                else
                 {
-                    if(abs(target-s)<abs(target-ans))
-                    {
-                        ans=s;
-                    }
-                    r--;
+                    j++;
                 }
+                
             }
+            
         }
         return ans;
     }
