@@ -8,9 +8,12 @@ public:
         {
             int j=i+1;
             int k=v.size()-1;
-            // int currsum=v[i]+v[j]+v[k];
             while(j<k)
             {
+                if(v[i]+v[j]+v[k]==target)
+                {
+                    return target;
+                }
                 if(abs(v[i]+v[j]+v[k]-target)<=leastdiff)
                 {
                     leastdiff=abs(v[i]+v[j]+v[k]-target);
