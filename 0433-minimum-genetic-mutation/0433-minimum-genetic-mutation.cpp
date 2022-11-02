@@ -4,23 +4,54 @@ public:
         queue<pair<string,int>>q;
     
     vector<char>v2={'A','C','G','T'};
-    void fn(string &s,int mins)
+    void fn(string &cur,int mins)
     {
         
-        for(int i=0;i<v2.size();i++)
-        {
-            for(int j=0;j<s.size();j++)
-            {
-                string t=s;
-                s[j]=v2[i];
-                if(cont.find(s)!=cont.end())
+//             for(int j=0;j<s.size();j++)
+//             {
+//                 string t=s;
+//                 s[j]=v2[i];
+//                 if(cont.find(s)!=cont.end())
+//                 {
+//                     q.push({s,mins+1});
+//                     cont.erase(s);
+//                 }
+            
+               
+//             }
+        // }
+        string t;
+        
+        for(int i=0;i<8;i++){
+				t=cur;
+				t[i]='A';
+				if(cont.count(t))
                 {
-                    q.push({s,mins+1});
-                    cont.erase(s);
+                    q.push({t,mins+1});
+                    cont.erase(t);
+                    
                 }
-                s=t;
-            }
-        }
+				t[i]='C';
+				if(cont.count(t)) 
+                {
+                    q.push({t,mins+1});
+                    cont.erase(t);
+                    
+                }
+				t[i]='G';
+				if(cont.count(t)){
+                    q.push({t,mins+1});
+                    cont.erase(t);
+                    
+                }
+				t[i]='T';
+				if(cont.count(t))
+                {
+                    q.push({t,mins+1});
+                    cont.erase(t);
+                    
+                }
+			}
         
         
     }
