@@ -25,11 +25,7 @@ public:
     }
     
     double findMedian() {
-        if(maxheap.size()>minheap.size())
-        {
-            return maxheap.top()*1.0;
-        }
-        return (maxheap.top()+minheap.top())/2.0;
+          return ((maxheap.size()+minheap.size())%2)?maxheap.top():(maxheap.top()+minheap.top())/2.0;
     }
 };
 
