@@ -12,8 +12,9 @@ public:
             {
                 s[r]=s[i];
                 i++;
-                lastidx=r;
                 r++;
+                lastidx=r;
+                
                 
             }
             
@@ -25,7 +26,7 @@ public:
             
         }
         
-        s.resize(lastidx+1);
+        s.resize(lastidx);
         return s;
     }
 };
