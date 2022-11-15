@@ -16,7 +16,7 @@ public:
         queue<TreeNode*>q;
         
         q.push(root);
-        int cnt{};
+        int cnt=1;
         while(!q.empty())
         {
             int n=q.size();
@@ -25,16 +25,19 @@ public:
             {
                 auto node=q.front();
                 q.pop();
-                cnt++;
+                // cnt++;
                 
                 
                 if(node->left)
                 {
                     q.push(node->left);
+                    cnt++;
                 }
+                if(!node->left) return cnt;
                 if(node->right)
                 {
                     q.push(node->right);
+                    cnt++;
                 }                
             }
         }
