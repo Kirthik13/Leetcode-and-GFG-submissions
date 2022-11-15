@@ -11,37 +11,31 @@
  */
 class Solution {
 public:
-    int countNodes(TreeNode* root) {
-        if(!root) return 0;
-        queue<TreeNode*>q;
+    int fn(TreeNode* root) 
+    {
+        int cl{},cr{};
+        TreeNode* l=root;
+        TreeNode* r=root;
         
-        q.push(root);
-        int cnt=1;
-        while(!q.empty())
+        while(l)
         {
-            int n=q.size();
-            
-            for(int i=0;i<n;i++)
-            {
-                auto node=q.front();
-                q.pop();
-                // cnt++;
-                
-                
-                if(node->left)
-                {
-                    q.push(node->left);
-                    cnt++;
-                }
-                if(!node->left) return cnt;
-                if(node->right)
-                {
-                    q.push(node->right);
-                    cnt++;
-                }                
-            }
+            cl++;
+            l=l->left;
         }
         
-        return cnt;
+        while(r)
+        {
+            cr++;
+            r=r->right;
+        }
+        
+        if(cl==cr) return pow(2,cl)-1;
+        
+        return 1+fn(root->left)+fn(root->right);
+        
+        
+    }
+    int countNodes(TreeNode* root) {
+        return fn(root);
     }
 };
