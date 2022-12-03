@@ -2,16 +2,17 @@ class Solution {
 public:
     string frequencySort(string s) {
         map<char,int>m;
-        multimap<int,char,greater<int>>m2;
+        // multimap<int,char,greater<int>>m2;
+        priority_queue<pair<int,char>>m2;
         
         for(auto &i:s) m[i]++;
         
-        for(auto &i:m) m2.insert({i.second,i.first});
+        for(auto &i:m) m2.push({i.second,i.first});
 
         string res;
-        for(auto &i:m2) 
+        while(!m2.empty())
         {
-            
+            auto i=m2.top();
             int c=i.first;
 
             // while(c--)
@@ -19,6 +20,8 @@ public:
             //     res+=i.second;
             // }
             res.append(c,i.second);
+            
+            m2.pop();
         }
         
         return res;
