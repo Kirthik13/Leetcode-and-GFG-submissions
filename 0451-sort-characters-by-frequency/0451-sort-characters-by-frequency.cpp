@@ -14,10 +14,11 @@ public:
             
             int c=i.first;
 
-            while(c--)
-            {
-                res+=i.second;
-            }
+            // while(c--)
+            // {
+            //     res+=i.second;
+            // }
+            res.append(c,i.second);
         }
         
         return res;
