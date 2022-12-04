@@ -14,12 +14,14 @@ public:
         for(int i=1;i<n;i++)
         {
             pre[i]=pre[i-1]+v[i];
+            suf[n-i-1]=suf[n-i]+v[n-i-1];
+            
         }
         
-        for(int i=n-2;i>=0;i--)
-        {
-            suf[i]=suf[i+1]+v[i];
-        }        
+        // for(int i=n-2;i>=0;i--)
+        // {
+        //     suf[i]=suf[i+1]+v[i];
+        // }        
         
         suf.push_back(0);
         
@@ -30,24 +32,20 @@ public:
         {
             int a=floor(pre[i]/(1.0*i+1));
             
-            // cout<<"a : "<<a<<endl;
              int b=0;
             if(i!=n-1){
                  b=floor(suf[i+1]/(1.0*(n-i-1)));
             }
-            // cout<< a<<" "<<b<<endl;
             int ans=abs(a-b);
             
             if(ans<minval)
             {
                 minval=ans;
                 residx=i;
-                // residx=min(i,residx);
             }
             else if(ans==minval)
             {
-                // minval=ans;
-                // residx=i;
+               
                 residx=min(i,residx);
             }            
             
