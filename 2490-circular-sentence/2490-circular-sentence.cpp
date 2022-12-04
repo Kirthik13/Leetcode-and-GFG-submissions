@@ -1,21 +1,14 @@
 class Solution {
 public:
     bool isCircularSentence(string s) {
-        stringstream ss(s);
-        string t;
-        vector<string>v;
-        while(ss>>t)
+        
+        if(s[0]!=s.back()) return 0;
+        
+        
+        for(int i=0;i<s.size();i++)
         {
-            v.push_back(t);
+            if(s[i]==' ' and i+1<s.size() and s[i-1]!=s[i+1]) return 0;
         }
-        
-        for(int i=1;i<v.size();i++)
-        {
-            if(v[i-1].back()!=v[i].front()) return 0;
-        }
-        
-        
-        
-        return v[0].front()==v.back().back();
+        return 1;
     }
 };
