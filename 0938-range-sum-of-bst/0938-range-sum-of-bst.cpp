@@ -15,31 +15,26 @@ public:
     {
         if(!root) return ;
         
-//          if(!(root->val>=l and root->val<=h))
-//         {
-//              if(root->val<l)
-//              {
-//                 fn(root->right,l,h,ans);
-//              }
-//              else{
-//                  fn(root->left,l,h,ans);
-//              }
-//              return;
-//         }
+         if(!(root->val>=l and root->val<=h))
+        {
+             if(root->val<l)
+             {
+                fn(root->right,l,h,ans);
+             }
+             else{
+                 fn(root->left,l,h,ans);
+             }
+             return;
+        }
         
-//         else if(root->val>=l and root->val<=h)
-//         {
-//             ans+=root->val;
-//         }
-        
-//         fn(root->left,l,h,ans);
-//         fn(root->right,l,h,ans);
-        fn(root->left,l,h,ans);
-        if(root->val>=l and root->val<=h)
+        else if(root->val>=l and root->val<=h)
         {
             ans+=root->val;
         }
+        
+        fn(root->left,l,h,ans);
         fn(root->right,l,h,ans);
+       
         
         
     }
