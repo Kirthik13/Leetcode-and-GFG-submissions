@@ -1,6 +1,6 @@
 class Solution {
 public:
-    void dfs(vector<vector<int>>& v, string &s,int node, int cnt[],vector<int>&vis,  vector<int>&totans) 
+    void dfs(vector<vector<int>>& v, string &s,int node, vector<int>&cnt,vector<int>&vis,  vector<int>&totans) 
     {
         vis[node]=1;
         
@@ -9,7 +9,7 @@ public:
             if(!vis[i])
             {
                 // map<char,int>m1;
-                 int cnt1[26] = {};
+                 vector<int>cnt1(26);
                 dfs(v,s,i,cnt1,vis,totans);
                 for(int k=0;k<26;k++)
                 {
@@ -40,7 +40,7 @@ public:
         // map<char,int>m;
         vector<int>vis(n);
             vector<int>totans(n);
-        int cnt[26]={0};
+        vector<int>cnt(26);
         dfs(v,s,0,cnt,vis,totans);
         return totans;
     }
