@@ -20,7 +20,9 @@ public:
             }
             
             // cout<<st<<" "<<i-st+1<<endl;
+            if(m.size()<=2){
             ans=max(ans,i-st+1);
+            }
         }
                   
 
