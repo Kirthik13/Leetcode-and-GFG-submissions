@@ -3,10 +3,10 @@ class Solution {
 public:
     long long distinctNames(vector<string>& v) {
         ll ans{};
-        map<char,unordered_set<string>>m;
+        unordered_set<string>m[26];
         for(auto &i:v)
         {
-            m[i[0]].insert(i.substr(1));
+            m[i[0]-'a'].insert(i.substr(1));
         }
     
         for(int i=0;i<26;i++)
@@ -14,7 +14,7 @@ public:
             for(int j=i+1;j<26;j++)
             {
                 ll p1{},p2{};
-                char s=i+'a',t=j+'a';
+                int s=i,t=j;
                 
                 for(auto &part1:m[s])
                 {
