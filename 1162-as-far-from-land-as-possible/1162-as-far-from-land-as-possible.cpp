@@ -1,8 +1,8 @@
 class Solution {
 public:
-    bool check(int &x,int &y,int &m,int &n,vector<vector<int>>& vis)
+    bool check(int &x,int &y,int &m,int &n,vector<vector<int>>& vis,vector<vector<int>>& v)
     {
-        return x<0 or y<0 or x>=m or y>=n or vis[x][y]==1;
+        return x<0 or y<0 or x>=m or y>=n or vis[x][y]==1 or v[x][y]==1;
     }
     int maxDistance(vector<vector<int>>& v) {
         vector<pair<int,int>>dir={{-1,0},{1,0},{0,1},{0,-1}};
@@ -30,7 +30,7 @@ public:
                 int newx=x+i.first;
                 int newy=y+i.second;
                 
-                if(!check(newx,newy,m,n,vis))
+                if(!check(newx,newy,m,n,vis,v))
                 {
                     q.push({{newx,newy},dis+1});
                     vis[newx][newy]=1;
