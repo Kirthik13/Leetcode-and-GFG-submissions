@@ -12,21 +12,20 @@
 class Solution {
 public:
     int ans=INT_MAX;
-    vector<int>v;
-    void fn(TreeNode* root) 
+    void fn(TreeNode* root,int &prev) 
     {
         if(!root) return ;
-                fn(root->left);
+                fn(root->left,prev);
 
         int curr=root->val;
-        v.push_back(curr);
-        if(v.size()>=2)
-        {
-            // cout<<curr<<" "<<v[v.size()-2]<<endl;
-            ans=min(ans,curr-v[v.size()-2]);
-        }
+        // v.push_back(curr);
         
-       fn(root->right);
+        if(prev!=INT_MAX)
+        {
+            ans=min(ans,curr-prev);
+        }
+        prev=curr;
+       fn(root->right,prev);
         
         
        
@@ -35,7 +34,8 @@ public:
         
     }
     int minDiffInBST(TreeNode* root) {
-        fn(root);
+        int prev=INT_MAX;
+        fn(root,prev);
         return ans;
     }
 };
