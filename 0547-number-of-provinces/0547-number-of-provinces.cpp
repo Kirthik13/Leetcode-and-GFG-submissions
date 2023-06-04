@@ -3,12 +3,21 @@ public:
     void dfs(int node,vector<vector<int>>& v,  vector<int> &vis)
     {
         vis[node]=1;
+        queue<int>q;
+        q.push(node);
         
-        for(auto &i:v[node])
+        while(!q.empty())
         {
-            if(!vis[i])
+            int node1=q.front();
+            q.pop();
+            for(auto &i:v[node1])
             {
-                dfs(i,v,vis);
+                if(!vis[i])
+                {
+                    vis[i]=1;
+                    q.push(i);
+                    // dfs(i,v,vis);
+                }
             }
         }
     }
