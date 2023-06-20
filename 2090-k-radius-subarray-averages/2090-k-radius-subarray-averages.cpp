@@ -17,10 +17,10 @@ public:
         }
       
         
-        for(int i=k;i<n;i++)
+        for(int i=k;i<n-k;i++)
         {
            
-            if(i-k<0 or i+k>n-1) continue;
+            if(i-k<0 or i+k>n) continue;
            
             totans[i]= (pre[i+k+1]-pre[i-k])/(k*2+1);
         }
