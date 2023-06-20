@@ -17,7 +17,7 @@ public:
         }
       
         
-        for(int i=0;i<n;i++)
+        for(int i=k;i<n;i++)
         {
            
             if(i-k<0 or i+k>n-1) continue;
