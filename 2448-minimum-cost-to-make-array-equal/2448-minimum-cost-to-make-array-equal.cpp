@@ -23,7 +23,7 @@ public:
             totnos+=i.second;
         }
         int i{};
-        while(i<n and curr<=(totnos)/2)
+        while(i<n and curr<(totnos+1)/2)
         {
             curr+=v[i].second;
             i++;
