@@ -23,21 +23,18 @@ public:
             totnos+=i.second;
         }
         int i{};
-       // cout<<totnos<<" "<<(totnos+1)/2<<endl;
         if(totnos&1)
         {
             while(i<n and curr<(totnos+1)/2)
             {
                 curr+=v[i].second;
-                // cout<<curr<<endl;
                 i++;
             }
         }
         else{
-            while(i<n and curr<(totnos)/2)
+            while(i<n and curr<=(totnos)/2)
             {
                 curr+=v[i].second;
-                // cout<<curr<<endl;
                 i++;
             }
         }
