@@ -23,12 +23,24 @@ public:
             totnos+=i.second;
         }
         int i{};
-        while(i<n and curr<(totnos+1)/2)
+       // cout<<totnos<<" "<<(totnos+1)/2<<endl;
+        if(totnos&1)
         {
-            curr+=v[i].second;
-            i++;
+            while(i<n and curr<(totnos+1)/2)
+            {
+                curr+=v[i].second;
+                // cout<<curr<<endl;
+                i++;
+            }
         }
-        
+        else{
+            while(i<n and curr<(totnos)/2)
+            {
+                curr+=v[i].second;
+                // cout<<curr<<endl;
+                i++;
+            }
+        }
         return calculateans(v,cost,v[i-1].first);
 
     }
