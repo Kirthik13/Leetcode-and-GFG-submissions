@@ -21,7 +21,30 @@ public:
     int maxProfit(vector<int>& v, int fee) {
         bool canbuy=1;
         int n=v.size();
-        memset(dp,-1,sizeof(dp));
-        return fn(v,0,n,fee,canbuy);
+        memset(dp,0,sizeof(dp));
+        
+        
+            for(int idx=n-1;idx>=0;idx--)
+            {
+                for(int canbuy=0;canbuy<=1;canbuy++)
+                {
+                    int ans1=0,ans2{},ans3{};
+                    ans3=dp[idx+1][canbuy];
+
+                    if(canbuy)
+                    {
+                        ans1=dp[idx+1][0]-v[idx];
+                        dp[idx][canbuy]=max(ans1,ans3);
+                    }
+                    else{
+                        ans2=dp[idx+1][1]+(v[idx]-fee);
+
+                        dp[idx][canbuy]=max(ans2,ans3);
+                    }
+                }
+            }
+        
+        // return fn(v,0,n,fee,canbuy);
+        return dp[0][1];
     }
 };
