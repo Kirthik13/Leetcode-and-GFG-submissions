@@ -28,7 +28,7 @@ public:
             {
                 for(auto &i:m)
                 {
-                    if(i.second>1) return 1;
+                    if(i.second>=2) return 1;
                 }
             }
             return 0;
